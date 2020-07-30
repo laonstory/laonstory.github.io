@@ -17,12 +17,12 @@
       
       <guid>https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/javascript/javascript/</guid>
       <description>원문: https://github.com/airbnb/javascript &#39;&amp;rsquo;
-Laonstory JavaScript 스타일 가이드() { 대체로 합리적인 JavaScript 접근 방법
+Laonstory JavaScript 스타일 가이드() { #  대체로 합리적인 JavaScript 접근 방법
  참고: 이 가이드는 사용자가 Babel과 babel-preset-airbnb 또는 이와 동등한 것을 사용한다고 가정합니다. 또한 사용자가 어플리케이션에 airbnb-browser-shims와 함께 shims/polyfills 또는 이와 동등한 것을 설치했다고 가정합니다.
    
 이 스타일 가이드는 다른 언어로도 제공됩니다. Translation을 보세요.
 다른 스타일 가이드
- ES5 (구버전) React CSS-in-JavaScript CSS &amp;amp; Sass Ruby  목차  형 (Types) 참조 (References) 객체 (Objects) 배열 (Arrays) 비구조화 Destructuring 문자열 (Strings) 함수 (Functions) 화살표 함수 (Arrow Functions) 클래스 &amp;amp; 생성자 (Classes &amp;amp; Constructors) 모듈 (Modules) 이터레이터와 제너레이터 (Iterators and Generators) 속성 (Properties) 변수 (Variables) 호이스팅 (Hoisting) 비교 연산자 (Comparison Operators &amp;amp; Equality) 블록 (Blocks) 제어문 (Control Statements) 주석 (Comments) 공백 (Whitespace) 쉼표 (Commas) 세미콜론 (Semicolons) 형변환과 강제 (Type Casting &amp;amp; Coercion) 명명규칙 (Naming Conventions) 접근자 (Accessors) 이벤트 (Events) 제이쿼리 (jQuery) ES5 호환성 (ECMAScript 5 Compatibility) ECMAScript 6+ (ES 2015+) 스타일 표준 라이브러리 (Standard Library) 테스트 (Testing) 성능 (Performance) 자료 (Resources) In the Wild Translation The JavaScript Style Guide Guide Chat With Us About JavaScript Contributors License Amendments  형 (Types)   1.</description>
+ ES5 (구버전) React CSS-in-JavaScript CSS &amp;amp; Sass Ruby  목차 #   형 (Types) 참조 (References) 객체 (Objects) 배열 (Arrays) 비구조화 Destructuring 문자열 (Strings) 함수 (Functions) 화살표 함수 (Arrow Functions) 클래스 &amp;amp; 생성자 (Classes &amp;amp; Constructors) 모듈 (Modules) 이터레이터와 제너레이터 (Iterators and Generators) 속성 (Properties) 변수 (Variables) 호이스팅 (Hoisting) 비교 연산자 (Comparison Operators &amp;amp; Equality) 블록 (Blocks) 제어문 (Control Statements) 주석 (Comments) 공백 (Whitespace) 쉼표 (Commas) 세미콜론 (Semicolons) 형변환과 강제 (Type Casting &amp;amp; Coercion) 명명규칙 (Naming Conventions) 접근자 (Accessors) 이벤트 (Events) 제이쿼리 (jQuery) ES5 호환성 (ECMAScript 5 Compatibility) ECMAScript 6+ (ES 2015+) 스타일 표준 라이브러리 (Standard Library) 테스트 (Testing) 성능 (Performance) 자료 (Resources) In the Wild Translation The JavaScript Style Guide Guide Chat With Us About JavaScript Contributors License Amendments  형 (Types) #    1.</description>
     </item>
     
     <item>
@@ -31,9 +31,9 @@ Laonstory JavaScript 스타일 가이드() { 대체로 합리적인 JavaScript �
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/</guid>
-      <description>Laonstory React/JSX 스타일 가이드 A mostly reasonable approach to React and JSX
+      <description>Laonstory React/JSX 스타일 가이드 #  A mostly reasonable approach to React and JSX
 This style guide is mostly based on the standards that are currently prevalent in JavaScript, although some conventions (i.e async/await or static class fields) may still be included or prohibited on a case-by-case basis. Currently, anything prior to stage 3 is not included nor recommended in this guide.
-Table of Contents  Basic Rules Class vs React.createClass vs stateless Mixins Naming Declaration Alignment Quotes Spacing Props Refs Parentheses Tags Methods Ordering isMounted  Basic Rules  Only include one React component per file.</description>
+Table of Contents #   Basic Rules Class vs React.</description>
     </item>
     
   </channel>

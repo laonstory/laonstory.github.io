@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="로거 인터페이스 #  이 문서는 로깅 라이브러리에 대한 공통 인터페이스를 설명합니다.
+가장 중요한 목표는 라이브러리가 Psr\Log\LoggerInterface 객체를 받아서 간단하고 보편적인 방법으로 로그를 쓸 수있게하는 것입니다. 커스텀 할 필요가 있는 프레임워크와 CMS는 자체적인 목적을 위해 인터페이스를 확장 할 수 있지만 이 문서와 호환 가능해야합니다 (SHOULD). 이렇게하면 프로그램에서 사용하는 타사 라이브러리가 프로그램의 중앙 집중식 로그에 쓸 수 있습니다. 역자주: 타 벤더의 로그를 중앙집중형으로 모아서 남길 수 있다는 의미
+이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="로거 인터페이스 #  이 문서는 로깅 라이브러리에 대한 공통 인터페이스를 설명합니다.
+가장 중요한 목표는 라이브러리가 Psr\Log\LoggerInterface 객체를 받아서 간단하고 보편적인 방법으로 로그를 쓸 수있게하는 것입니다. 커스텀 할 필요가 있는 프레임워크와 CMS는 자체적인 목적을 위해 인터페이스를 확장 할 수 있지만 이 문서와 호환 가능해야합니다 (SHOULD). 이렇게하면 프로그램에서 사용하는 타사 라이브러리가 프로그램의 중앙 집중식 로그에 쓸 수 있습니다. 역자주: 타 벤더의 로그를 중앙집중형으로 모아서 남길 수 있다는 의미
+이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/02-psr-3/" />
+
+<title>02 P S R 3 | Laonstory GuideBook</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/en.search.min.3e383c83219ec4150ecf5a5f1b2c5854327af5ba771ae455be1680107223e7da.js" integrity="sha256-Pjg8gyGexBUOz1pfGyxYVDJ69bp3GuRVvhaAEHIj59o="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Laonstory GuideBook</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/" class="collapsed ">개발가이드</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/" class="collapsed ">Php</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/01-psr-1/" class="">01 P S R 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/02-psr-3/" class="active">02 P S R 3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/03-psr-4/" class="">03 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/04-psr-4/" class="">04 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/05-psr-6/" class="">05 P S R 6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/06-psr-7/" class="">06 P S R 7</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/07-psr-11/" class="">07 P S R 11</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/08-psr-12/" class="">08 P S R 12</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/09-psr-13/" class="">09 P S R 13</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/10-psr-14/" class="">10 P S R 14</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/11-psr-15/" class="">11 P S R 15</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/12-psr-16/" class="">12 P S R 16</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/13-psr-17/" class="">13 P S R 17</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/14-psr-18/" class="">14 P S R 18</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/javascript/javascript/" class="">Javascript</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/" class="">React Jsx</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>02 P S R 3</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-명세서">1. 명세서</a>
+      <ul>
+        <li><a href="#11-기본">1.1 기본</a></li>
+        <li><a href="#12-메세지">1.2 메세지</a></li>
+        <li><a href="#13-문맥context">1.3 문맥(Context)</a></li>
+        <li><a href="#14-헬퍼-클래스와-인터페이스">1.4 헬퍼 클래스와 인터페이스</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-package">2. Package</a></li>
+    <li><a href="#3-psrlogloggerinterface">3. <code>Psr\Log\LoggerInterface</code></a></li>
+    <li><a href="#4-psrlogloggerawareinterface">4. <code>Psr\Log\LoggerAwareInterface</code></a></li>
+    <li><a href="#5-psrlogloglevel">5. <code>Psr\Log\LogLevel</code></a></li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="로거-인터페이스">
+  로거 인터페이스
+  <a class="anchor" href="#%eb%a1%9c%ea%b1%b0-%ec%9d%b8%ed%84%b0%ed%8e%98%ec%9d%b4%ec%8a%a4">#</a>
+</h1>
+<p>이 문서는 로깅 라이브러리에 대한 공통 인터페이스를 설명합니다.</p>
+<p>가장 중요한 목표는 라이브러리가 <code>Psr\Log\LoggerInterface</code> 객체를 받아서 간단하고 보편적인 방법으로 로그를 쓸 수있게하는 것입니다.
+커스텀 할 필요가 있는 프레임워크와 CMS는 자체적인 목적을 위해 인터페이스를 확장 할 수 있지만 이 문서와 호환 가능해야합니다 (SHOULD).
+이렇게하면 프로그램에서 사용하는 타사 라이브러리가 프로그램의 중앙 집중식 로그에 쓸 수 있습니다. <code>역자주: 타 벤더의 로그를 중앙집중형으로 모아서 남길 수 있다는 의미</code></p>
+<p>이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다.
+이것은 <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>에 설명 된대로 해석해야 합니다.
+<code>역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다</code></p>
+<p>이 문서에서 <code>구현자(implementor)</code> 라는 단어는 로그 관련 라이브러리 또는 프레임워크에서 <code>LoggerInterface</code> 를 구현하는 누군가로 해석되어야합니다.
+로거 사용자는 <code>사용자(user)</code>라고합니다.</p>
+<h2 id="1-명세서">
+  1. 명세서
+  <a class="anchor" href="#1-%eb%aa%85%ec%84%b8%ec%84%9c">#</a>
+</h2>
+<h3 id="11-기본">
+  1.1 기본
+  <a class="anchor" href="#11-%ea%b8%b0%eb%b3%b8">#</a>
+</h3>
+<ul>
+<li>
+<p><code>LoggerInterface</code>는 로그를 8 개의 <a href="http://tools.ietf.org/html/rfc5424">RFC 5424</a> 레벨 (debug, info, notice, warning, error, critical, alert, emergency)에 맞게 쓸 수 있는 8 가지 method를 제공해야 합니다.</p>
+</li>
+<li>
+<p>9 번째 method 인<code>log</code>는 첫 번째 인자로 로그 수준(level)을 입력받습니다.
+로그 수준 상수 중 하나를 사용하여 이 메서드를 호출하면 수준별 메서드를 호출 할 때와 동일한 결과를 가져야합니다.
+  알지 못하는 수준(level)이거나 이 스펙에 정의되지 않은 수준(level)로 이 메소드를 호출하면 반드시 <code>Psr\Log\InvalidArgumentException</code> 을 던져야합니다 (MUST).
+  사용자는 현재 구현이 이를 지원하는지 모른 채 사용자 지정 수준(level)을 사용해서는 안됩니다(SHOULD NOT).</p>
+</li>
+</ul>
+<h3 id="12-메세지">
+  1.2 메세지
+  <a class="anchor" href="#12-%eb%a9%94%ec%84%b8%ec%a7%80">#</a>
+</h3>
+<ul>
+<li>
+<p>모든 method는 문자열을 메시지로 받거나 <code>__toString ()</code> method를 가진 객체를 받아들입니다.
+구현자는 전달 된 객체를 특별한 형태로 처리 할 수도있다 (MAY).
+그렇지 않은 경우, 구현자는 그것을 문자열로 변환해야한다 (MUST).</p>
+</li>
+<li>
+<p>메시지는 구현자가 문맥 배열의 값으로 대체 할 수 있는(MAY) Placeholder를 포함 할 수있습니다(MAY).
+ Placeholder 이름은 컨텍스트 배열의 키와 일치해야합니다.
+  Placeholder 이름은 하나의 여는 중괄호 <code>{</code> 와 하나의 닫는 중괄호 <code>}</code>로 구분해야합니다.
+ 구분 기호와 Placeholder 이름 사이에 공백이 없어야합니다 (MUST NOT).
+  Placeholder 이름은 <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, 밑줄 <code>_</code> 및 마침표 <code>.</code> 만으로 구성되어야합니다 (SHOULD).
+ 다른 문자의 사용은 Placeholder 사양(specification)의 향후 수정을 위해 예약됩니다.
+  구현자는 Placeholder를 사용하여 다양한 이스케이프 전략을 구현하고 표시를 위해 로그를 변환 할 수 있습니다 (MAY).
+  사용자는 데이터가 표시 될 컨텍스트를 알 수 없으므로 Placeholder 값을 미리 이스케이프해서는 안됩니다.</p>
+</li>
+</ul>
+<p>  다음은 참조용으로만 제공되는 Placeholder 보간법의 구현 예입니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Interpolates context values into the message placeholders.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">interpolate</span>($message, <span style="color:#66d9ef">array</span> $context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>())
+{
+    <span style="color:#75715e">// build a replacement array with braces around the context keys
+</span><span style="color:#75715e"></span>    $replace <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>();
+    <span style="color:#66d9ef">foreach</span> ($context <span style="color:#66d9ef">as</span> $key <span style="color:#f92672">=&gt;</span> $val) {
+        <span style="color:#75715e">// check that the value can be casted to string
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">is_array</span>($val) <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">is_object</span>($val) <span style="color:#f92672">||</span> <span style="color:#a6e22e">method_exists</span>($val, <span style="color:#e6db74">&#39;__toString&#39;</span>))) {
+            $replace[<span style="color:#e6db74">&#39;{&#39;</span> <span style="color:#f92672">.</span> $key <span style="color:#f92672">.</span> <span style="color:#e6db74">&#39;}&#39;</span>] <span style="color:#f92672">=</span> $val;
+        }
+    }
+
+    <span style="color:#75715e">// interpolate replacement values into the message and return
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">strtr</span>($message, $replace);
+}
+
+<span style="color:#75715e">// a message with brace-delimited placeholder names
+</span><span style="color:#75715e"></span>$message <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;User {username} created&#34;</span>;
+
+<span style="color:#75715e">// a context array of placeholder names =&gt; replacement values
+</span><span style="color:#75715e"></span>$context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(<span style="color:#e6db74">&#39;username&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;bolivar&#39;</span>);
+
+<span style="color:#75715e">// echoes &#34;User bolivar created&#34;
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">echo</span> <span style="color:#a6e22e">interpolate</span>($message, $context);
+</code></pre></div><h3 id="13-문맥context">
+  1.3 문맥(Context)
+  <a class="anchor" href="#13-%eb%ac%b8%eb%a7%a5context">#</a>
+</h3>
+<ul>
+<li>
+<p>모든 메소드는 배열을 컨텍스트 데이터로 허용합니다.
+이것은 문자열에 잘 맞지 않는 불필요한 정보를 보유하기위한 것입니다.
+배열은 무엇이든 포함 할 수 있습니다.
+구현자는 가능한 한 많은 관용으로 컨텍스트 데이터를 처리해야합니다 (MUST).
+문맥에서 주어진 값은 예외를 던지거나 PHP error, warning 또는 notice를 발생시켜서는 안됩니다(MUST NOT).</p>
+</li>
+<li>
+<p><code>Exception</code> 객체가 컨텍스트 데이터에 전달되면, 그것은 <code>'exception'</code> 키에 있어야합니다 (MUST).
+   로깅 예외(exceptios)는 일반적인 패턴이며, 이로 인해 구현자가 로그 백엔드가 지원할 때 예외에서 스택 추적을 추출 할 수 있습니다.
+   구현자들은 무엇이든 포함 할 수 있기 때문에<code>'exception'</code> 키가 실제로 그것을 사용하기 전에 실제로 <code>Exception</code> 인지를 반드시 확인해야합니다 (MUST).</p>
+</li>
+</ul>
+<h3 id="14-헬퍼-클래스와-인터페이스">
+  1.4 헬퍼 클래스와 인터페이스
+  <a class="anchor" href="#14-%ed%97%ac%ed%8d%bc-%ed%81%b4%eb%9e%98%ec%8a%a4%ec%99%80-%ec%9d%b8%ed%84%b0%ed%8e%98%ec%9d%b4%ec%8a%a4">#</a>
+</h3>
+<ul>
+<li>
+<p><code>Psr\Log\AbstractLogger</code> Class를 확장하고 일반적인 <code>log</code> 메소드를 구현함으로써 <code>LoggerInterface</code>를 매우 쉽게 구현할 수있게합니다.
+   다른 8 가지 method는 메시지와 컨텍스트를 전달하는 것입니다.</p>
+</li>
+<li>
+<p>마찬가지로 <code>Psr\Log\LoggerTrait</code> 만 사용하면 일반적으로 <code>log</code> 메소드를 구현해야합니다.
+  이 trait은 인터페이스를 구현하지 않으므로 이 경우에는 여전히 <code>LoggerInterface</code>를 구현해야합니다.</p>
+</li>
+<li>
+<p><code>Psr\Log\NullLogger</code>는 인터페이스와 함께 제공됩니다.
+  로거가 제공되지 않으면 폴백 (back-back) &ldquo;블랙홀&quot;구현을 제공하기 위해 인터페이스 사용자가 이를 사용할 수 있습니다 (MAY).
+  그러나 컨텍스트 데이터 작성 비용면에서 조건부 로깅이 더 나은 접근 방법 일 수 있습니다. <code>역자주: 아무것도 저장하지 않는 로거를 사용하는 것 보다 경우에 따라 로거를 호출 하도록 하는 편이 더 효율적</code></p>
+</li>
+<li>
+<p><code>Psr\Log\LoggerAwareInterface</code> 는 <code>setLogger(LoggerInterface $logger)</code> method만을 포함하고 있으며, 임의의 인스턴스를 로거로 자동으로 연결하기 위해 프레임워크에서 사용할 수 있습니다.</p>
+</li>
+<li>
+<p><code>Psr\Log\LoggerAwareTrait</code> trait은 모든 클래스에서 쉽게 동일한 인터페이스를 구현하는 데 사용할 수 있습니다.
+  <code>$this-&gt;logger</code>에 접근 할 수 있습니다.</p>
+</li>
+<li>
+<p><code>Psr\Log\LogLevel</code> 클래스는 8 개의 로그 레벨에 대한 상수를 가지고 있습니다.</p>
+</li>
+</ul>
+<h2 id="2-package">
+  2. Package
+  <a class="anchor" href="#2-package">#</a>
+</h2>
+<p>설명한 인터페이스와 클래스는 물론 관련 예외 클래스 및 구현을 확인하는 테스트가 <a href="https://packagist.org/packages/psr/log">psr/log</a> 패키지의 일부로 제공됩니다.</p>
+<h2 id="3-psrlogloggerinterface">
+  3. <code>Psr\Log\LoggerInterface</code>
+  <a class="anchor" href="#3-psrlogloggerinterface">#</a>
+</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Log</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Describes a logger instance.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * The message MUST be a string or object implementing __toString().
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * The message MAY contain placeholders in the form: {foo} where foo
+</span><span style="color:#e6db74"> * will be replaced by the context data in key &#34;foo&#34;.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * The context array can contain arbitrary data, the only assumption that
+</span><span style="color:#e6db74"> * can be made by implementors is that if an Exception instance is given
+</span><span style="color:#e6db74"> * to produce a stack trace, it MUST be in a key named &#34;exception&#34;.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * See https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
+</span><span style="color:#e6db74"> * for the full interface specification.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">LoggerInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * System is unusable.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $message
+</span><span style="color:#e6db74">     * @param array $context
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">emergency</span>($message, <span style="color:#66d9ef">array</span> $context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>());
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Action must be taken immediately.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Example: Entire website down, database unavailable, etc. This should
+</span><span style="color:#e6db74">     * trigger the SMS alerts and wake you up.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $message
+</span><span style="color:#e6db74">     * @param array $context
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">alert</span>($message, <span style="color:#66d9ef">array</span> $context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>());
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Critical conditions.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Example: Application component unavailable, unexpected exception.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $message
+</span><span style="color:#e6db74">     * @param array $context
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">critical</span>($message, <span style="color:#66d9ef">array</span> $context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>());
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Runtime errors that do not require immediate action but should typically
+</span><span style="color:#e6db74">     * be logged and monitored.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $message
+</span><span style="color:#e6db74">     * @param array $context
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">error</span>($message, <span style="color:#66d9ef">array</span> $context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>());
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Exceptional occurrences that are not errors.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Example: Use of deprecated APIs, poor use of an API, undesirable things
+</span><span style="color:#e6db74">     * that are not necessarily wrong.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $message
+</span><span style="color:#e6db74">     * @param array $context
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">warning</span>($message, <span style="color:#66d9ef">array</span> $context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>());
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Normal but significant events.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $message
+</span><span style="color:#e6db74">     * @param array $context
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">notice</span>($message, <span style="color:#66d9ef">array</span> $context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>());
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Interesting events.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Example: User logs in, SQL logs.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $message
+</span><span style="color:#e6db74">     * @param array $context
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">info</span>($message, <span style="color:#66d9ef">array</span> $context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>());
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Detailed debug information.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $message
+</span><span style="color:#e6db74">     * @param array $context
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">debug</span>($message, <span style="color:#66d9ef">array</span> $context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>());
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Logs with an arbitrary level.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param mixed $level
+</span><span style="color:#e6db74">     * @param string $message
+</span><span style="color:#e6db74">     * @param array $context
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">log</span>($level, $message, <span style="color:#66d9ef">array</span> $context <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>());
+}
+</code></pre></div><h2 id="4-psrlogloggerawareinterface">
+  4. <code>Psr\Log\LoggerAwareInterface</code>
+  <a class="anchor" href="#4-psrlogloggerawareinterface">#</a>
+</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Log</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Describes a logger-aware instance.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">LoggerAwareInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Sets a logger instance on the object.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param LoggerInterface $logger
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setLogger</span>(<span style="color:#a6e22e">LoggerInterface</span> $logger);
+}
+</code></pre></div><h2 id="5-psrlogloglevel">
+  5. <code>Psr\Log\LogLevel</code>
+  <a class="anchor" href="#5-psrlogloglevel">#</a>
+</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Log</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Describes log levels.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LogLevel</span>
+{
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">EMERGENCY</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;emergency&#39;</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">ALERT</span>     <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;alert&#39;</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">CRITICAL</span>  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;critical&#39;</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">ERROR</span>     <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;error&#39;</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">WARNING</span>   <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;warning&#39;</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">NOTICE</span>    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;notice&#39;</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">INFO</span>      <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;info&#39;</span>;
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">DEBUG</span>     <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;debug&#39;</span>;
+}
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-명세서">1. 명세서</a>
+      <ul>
+        <li><a href="#11-기본">1.1 기본</a></li>
+        <li><a href="#12-메세지">1.2 메세지</a></li>
+        <li><a href="#13-문맥context">1.3 문맥(Context)</a></li>
+        <li><a href="#14-헬퍼-클래스와-인터페이스">1.4 헬퍼 클래스와 인터페이스</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-package">2. Package</a></li>
+    <li><a href="#3-psrlogloggerinterface">3. <code>Psr\Log\LoggerInterface</code></a></li>
+    <li><a href="#4-psrlogloggerawareinterface">4. <code>Psr\Log\LoggerAwareInterface</code></a></li>
+    <li><a href="#5-psrlogloglevel">5. <code>Psr\Log\LogLevel</code></a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

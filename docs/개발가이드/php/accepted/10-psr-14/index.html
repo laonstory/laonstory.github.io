@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Event Dispatcher #  Event Dispatching은 개발자가 어플리케이션에 로직을 쉽고 일관되게 주입 할 수있게 해주는 일반적이며 잘 테스트 된 메커니즘입니다.
+이 PSR의 목표는 라이브러리와 컴포넌트가가 다양한 어플리케이션과 프레임워크간에 보다 자유롭게 재사용 될 수 있도록 Event 기반 확장 및 협업을 위한 공통 메커니즘을 확립하는 것입니다.
+이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다. 이것은 RFC 2119에 설명 된대로 해석해야 합니다. 역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="Event Dispatcher #  Event Dispatching은 개발자가 어플리케이션에 로직을 쉽고 일관되게 주입 할 수있게 해주는 일반적이며 잘 테스트 된 메커니즘입니다.
+이 PSR의 목표는 라이브러리와 컴포넌트가가 다양한 어플리케이션과 프레임워크간에 보다 자유롭게 재사용 될 수 있도록 Event 기반 확장 및 협업을 위한 공통 메커니즘을 확립하는 것입니다.
+이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다. 이것은 RFC 2119에 설명 된대로 해석해야 합니다. 역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/10-psr-14/" />
+
+<title>10 P S R 14 | Laonstory GuideBook</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/en.search.min.3e383c83219ec4150ecf5a5f1b2c5854327af5ba771ae455be1680107223e7da.js" integrity="sha256-Pjg8gyGexBUOz1pfGyxYVDJ69bp3GuRVvhaAEHIj59o="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Laonstory GuideBook</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/" class="collapsed ">개발가이드</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/" class="collapsed ">Php</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/01-psr-1/" class="">01 P S R 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/02-psr-3/" class="">02 P S R 3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/03-psr-4/" class="">03 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/04-psr-4/" class="">04 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/05-psr-6/" class="">05 P S R 6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/06-psr-7/" class="">06 P S R 7</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/07-psr-11/" class="">07 P S R 11</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/08-psr-12/" class="">08 P S R 12</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/09-psr-13/" class="">09 P S R 13</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/10-psr-14/" class="active">10 P S R 14</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/11-psr-15/" class="">11 P S R 15</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/12-psr-16/" class="">12 P S R 16</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/13-psr-17/" class="">13 P S R 17</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/14-psr-18/" class="">14 P S R 18</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/javascript/javascript/" class="">Javascript</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/" class="">React Jsx</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>10 P S R 14</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#목표">목표</a></li>
+    <li><a href="#정의">정의</a></li>
+    <li><a href="#이벤트">이벤트</a></li>
+    <li><a href="#멈출수-있는-event-stoppable-event">멈출수 있는 Event-Stoppable Event</a></li>
+    <li><a href="#리스너-listener">리스너-Listener</a></li>
+    <li><a href="#발송자-dispatcher">발송자-Dispatcher</a>
+      <ul>
+        <li><a href="#error-handling">Error handling</a></li>
+      </ul>
+    </li>
+    <li><a href="#listener-provider">Listener Provider</a></li>
+    <li><a href="#오브젝트-구성-object-composition">오브젝트 구성-Object composition</a></li>
+    <li><a href="#interfaces">Interfaces</a></li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="event-dispatcher">
+  Event Dispatcher
+  <a class="anchor" href="#event-dispatcher">#</a>
+</h1>
+<p>Event Dispatching은 개발자가 어플리케이션에 로직을 쉽고 일관되게 주입 할 수있게 해주는 일반적이며 잘 테스트 된 메커니즘입니다.</p>
+<p>이 PSR의 목표는 라이브러리와 컴포넌트가가 다양한 어플리케이션과 프레임워크간에 보다 자유롭게 재사용 될 수 있도록 Event 기반 확장 및 협업을 위한 공통 메커니즘을 확립하는 것입니다.</p>
+<p>이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다.
+이것은 <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>에 설명 된대로 해석해야 합니다.
+<code>역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다</code></p>
+<h2 id="목표">
+  목표
+  <a class="anchor" href="#%eb%aa%a9%ed%91%9c">#</a>
+</h2>
+<p>Event 발송 및 처리를 위한 공통 인터페이스를 사용하면 개발자가 공통된 방식으로 여러 프레임워크 및 기타 라이브러리와 상호 작용할 수 있는 라이브러리를 만들 수 있습니다.</p>
+<p>몇 가지 예 :</p>
+<ul>
+<li>사용자가 권한이 없을 때 데이터에 저장/액세스를 방지하는 보안 프레임워크.</li>
+<li>일반적인 전체 페이지 캐싱 시스템.</li>
+<li>다른 라이브러리를 확장하는 라이브러리. 프레임워크가 둘 다 통합되어 있는지 여부와 관계 없음.</li>
+<li>어플리케이션 내에서 수행 된 모든 작업을 추적하는 로깅 패키지</li>
+</ul>
+<h2 id="정의">
+  정의
+  <a class="anchor" href="#%ec%a0%95%ec%9d%98">#</a>
+</h2>
+<ul>
+<li><strong>Event</strong> - Event는 <em>Emitter</em>가 생성 한 메시지입니다. 임의의 PHP 객체 일 수 있습니다.</li>
+<li><strong>Listener</strong> - Listener는 Event를 전달할 실행가능한 어떠한 PHP 입니다. 동일한 Event를 0 개 이상의 Listener에 전달할 수 있습니다. Listener는 원할 경우 다른 비동기 동작을 큐에 넣을 수 있습니다 (MAY).</li>
+<li><strong>Emitter</strong> - Emitter는 Event를 보내고자 하는 임의의 코드입니다. 이것은 &ldquo;호출 코드&quot;라고도합니다. 이것은 특정 데이터 구조로 표현되지 않고 유스케이스를 가르킵니다.</li>
+<li><strong>Dispatcher</strong> - Dispatcher는 Emitter에 의해 Event 객체를 전달하는 서비스 객체입니다. Dispatcher는 Event가 관련된 모든 Listener에게 전달되도록 보장하지만, 실행할 Listener를 결정하는 것은 Listener Provider에게 위임해야합니다.(MUST)</li>
+<li><strong>Listener Provider</strong> - Listener Provider는 주어진 Event와 관련이있는 Listener를 결정할 책임이 있지만 Listener 자신을 호출해서는 안됩니다(MUST NOT). Listener Provider는 0 개 이상의 관련 Listener를 지정할 수 있습니다.</li>
+</ul>
+<h2 id="이벤트">
+  이벤트
+  <a class="anchor" href="#%ec%9d%b4%eb%b2%a4%ed%8a%b8">#</a>
+</h2>
+<p>Event는 Emitter와 해당하는 Listener 간의 통신 단위 역할을 하는 객체입니다.</p>
+<p>Emitter에 정보를 다시 돌려주는 Listener를 호출하는 경우 Event 객체는 변경 될 수 있습니다(MAY).</p>
+<p>그러나 그러한 양방향 통신이 필요하지 않은 경우 Event는 변경 불가능한 것으로 정의하는 것이 좋습니다(RECOMMENDED). 즉, 뮤 테이터 (mutator) 메소드가 존재하지 않도록 정의합니다.</p>
+<p>구현체는 동일한 객체가 모든 Listener에게 반드시 전달된다고 가정해야합니다 (MUST).</p>
+<p>Event 객체가 무손실 직렬화 및 비 직렬화를 지원한다는 것이 권장되지만(RECOMMENDED) 필수적이지는 않습니다(NOT REQUIRED). <code>$event == unserialize(serialize($event))</code>는 참이어야합니다 (SHOULD). 객체는 PHP의 <code>Serializable</code> 인터페이스, <code>__sleep()</code> 또는 <code>__wakeup()</code> 매직 메소드 또는 적절한 경우 언어(PHP) 내 유사한 기능을 활용 할 수 있습니다 (MAY).</p>
+<h2 id="멈출수-있는-event-stoppable-event">
+  멈출수 있는 Event-Stoppable Event
+  <a class="anchor" href="#%eb%a9%88%ec%b6%9c%ec%88%98-%ec%9e%88%eb%8a%94-event-stoppable-event">#</a>
+</h2>
+<p><strong>Stoppable Event</strong>는 더 많은 Listener가 호출되는 것을 방지하는 방법을 추가한, Event의 특별한 케이스입니다. 이것은 <code>StoppableEventInterface</code>를 구현하여 표현합니다.</p>
+<p><code>StoppableEventInterface</code>를 구현 한 Event는 해당하는 Event가 완료되면 <code>isPropagationStopped()</code>로부터 <code>true</code>를 리턴해야합니다 (MUST). 그것이 언제인지를 결정하는 것은 클래스를 구현하는 자의 몫입니다. 예를 들어, PSR-7의 <code>RequestInterface</code> 객체가 대응하는 <code>ResponseInterface</code> 객체와 일치하도록 요청하는 Event는 Listener가 호출 할 <code>setResponse(ResponseInterface $res)</code>메소드를 가질 수 있습니다. 이것은 <code>isPropagationStopped()</code> 가 <code>true</code>를 반환합니다.</p>
+<h2 id="리스너-listener">
+  리스너-Listener
+  <a class="anchor" href="#%eb%a6%ac%ec%8a%a4%eb%84%88-listener">#</a>
+</h2>
+<p>Listener는 실행가능한 어떤 PHP 일 것입니다. Listener는 하나의 매개 변수만을 가져야하며(MUST), 이것은 리스너가 반응해야하는 Event입니다.</p>
+<p>Listener는 해당 유즈 케이스와 관련하여 파라메터에 구체적으로 타입 힌트를 입력해야합니다 (SHOULD).</p>
+<p>즉, Listener는 인터페이스에 대해 타입 힌트를 입력하여 해당 인터페이스를 구현하는 모든 Event 유형 또는 해당 인터페이스의 특정 구현과 호환 가능하다는 것을 표현합니다.</p>
+<p>Listener는 <code>void</code>리턴을 가져야하고 (SHOULD), 명시 적으로 리턴하는 타입 힌트를 입력해야합니다 (SHOULD). Dispatcher는 Listener의 리턴 값을 무시해야합니다 (MUST).</p>
+<p>Listener는 다른 코드에 행동을 위임 할 수 있습니다(MAY). 이것은 실제 비즈니스 로직을 실행하는 객체 둘러싼 얇은 래퍼(wrapper) 인 Listener가 포함됩니다.</p>
+<p>Listener는 cron, 큐 서버 또는 유사한 기술을 사용하는 보조 프로세스를 통해 나중에 처리하기 위해 Event로부터 정보를 큐에 넣을 수 있습니다(MAY).
+그러기 위해 Event 객체 자체를 직렬화 할 수있습니다. 그러나 모든 Event 객체가 안전하게 직렬화 될 수 있는 것은 아니므로주의해야합니다.
+보조 프로세스는 Event 객체에 대한 모든 변경 사항이 다른 Listener에 전파되지 않는다고 가정해야합니다 (MUST).</p>
+<h2 id="발송자-dispatcher">
+  발송자-Dispatcher
+  <a class="anchor" href="#%eb%b0%9c%ec%86%a1%ec%9e%90-dispatcher">#</a>
+</h2>
+<p>Dispatcher는 <code>EventDispatcherInterface</code>를 구현 한 서비스 객체입니다. Listener Provider로부터 전달 된 Event에 대한 Listener를 찾아서 해당 Event와 함께 각 Listener를 호출합니다.</p>
+<p>Dispatcher는 :</p>
+<ul>
+<li>ListenerProvider에서 반환 된 순서대로 Listener를 동기적으로 호출해야합니다(MUST).</li>
+<li>Listener를 호출 한 후 전달 된 것과 동일한 Event 객체를 반환해야합니다(MUST).</li>
+<li>모든 Listener가 실행완료될 때까지 Emitter로 돌아 가지 않아야합니다(MUST NOT).</li>
+</ul>
+<p>Dispatcher는 Stoppable Event가 전달되면</p>
+<ul>
+<li>각 Listener가 호출되기 전에 Event에 대해 반드시 <code>isPropagationStopped()</code>를 호출해야합니다 (MUST). 그 메소드가 <code>true</code>를 리턴하면, 반드시 Event를 Emitter에게 즉시 반환해야하고 더 이상의 Listener를 호출해서는 안됩니다. 이것은 <code>isPropagationStopped()</code>에서 항상 <code>true</code>를 반환하는 Event가 Dispatcher에 전달되면 0개의 Listener가 호출됨을 의미합니다.</li>
+</ul>
+<p>Dispatcher는 Listener 제공자로부터 리턴 된 Listener가 type-safe하다고 가정해야합니다 (SHOULD). 즉, Dispatcher는 <code>$listener($event)</code>호출이 <code>TypeError</code>를 생성하지 않아야한다고 가정해야합니다 (SHOULD).</p>
+<h3 id="error-handling">
+  Error handling
+  <a class="anchor" href="#error-handling">#</a>
+</h3>
+<p>Listener가 던진 예외 또는 오류는 이후의 모든 Listener의 실행을 차단해야합니다(MUST). Listener에 의해 던져진 오류 또는 예외는 Emitter로 전달 되야합니다(MUST).</p>
+<p>Dispatcher는 던져진 객체를 잡아서 기록 할 수 있고(MAY), 추가적인 조치가 행동을 하도록 허용하지만 반드시 원래의 Throwable을 다시 던져야합니다 (MUST).</p>
+<h2 id="listener-provider">
+  Listener Provider
+  <a class="anchor" href="#listener-provider">#</a>
+</h2>
+<p>Listener Provider는, Listener가 어느 Event에 관련이 있는지, 어떤 Listener가 호출되어야 하는지를 결정하는 서비스 객체입니다. Listener가 무엇을 의미하는지 그리고 Listener가 선택하는 방법에 따라 Listener를 돌려주는 순서를 결정할 수 있습니다. 다음이 포함될 수 있습니다(MAY):</p>
+<ul>
+<li>구현자가 고정 된 순서로 Event에 Listener를 할당 할 수 있도록 일부 등록 메커니즘을 허용합니다.</li>
+<li>Event 유형 과 구현 된 인터페이스를 기반으로 리플렉션을 통해 해당 Listener 목록을 만듭니다.</li>
+<li>런타임에 참조 될 수 있는 미리 컴파일 된 Listener의 목록 생성합니다.</li>
+<li>현재 사용자에게 특정 권한이 있는 경우에만 특정 Listener가 호출되도록 액세스 제어 형식을 구현합니다.</li>
+<li>엔티티와 같이 Event에 의해 참조되는 객체에서 일부 정보를 추출하고 해당 객체에 대해 미리 정의 된 라이프 사이클 메소드를 호출합니다.</li>
+<li>임의의 로직를 사용하여 하나 이상의 다른 Listener Provider에게 책임을 위임합니다.</li>
+</ul>
+<p>위의 메커니즘이나 다른 메커니즘을 원하는대로 사용할 수 있습니다(MAY).</p>
+<p>Listener Provider는 Event의 클래스 이름을 사용하여 Event를 다른 Event와 구별해야합니다 (SHOULD). 또한 Event에 대한 다른 정보를 적절하게 고려할 수 있습니다(MAY).</p>
+<p>Listener Provider는 Listener 적용 가능 여부를 결정할 때 부모 유형을 Event의 자체 유형과 동일하게 처리해야합니다(MUST).</p>
+<p>다음과 같은 경우 :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">class A {}
+
+class B extends A {}
+
+$b = new B();
+
+function listener(A $event): void {};
+</code></pre></div><p>Listener Provider는 리스너의 다른 조건에 의해 타입이 호환되지 않는 한 호환성이 유효하므로, <code>$b</code>의 Listener로서 <code>listener()</code>를 처리 해야합니다 (MUST).</p>
+<h2 id="오브젝트-구성-object-composition">
+  오브젝트 구성-Object composition
+  <a class="anchor" href="#%ec%98%a4%eb%b8%8c%ec%a0%9d%ed%8a%b8-%ea%b5%ac%ec%84%b1-object-composition">#</a>
+</h2>
+<p>Dispatcher는 관련된 Listener를 판별하기 위해 Listener Provider를 구성해야합니다 (SHOULD). Listener Provider가 Dispatcher와는 별개의 오브젝트로 구현되지만 반드시 요구되지는 않는 것이 좋습니다 (RECOMMENDED).</p>
+<h2 id="interfaces">
+  Interfaces
+  <a class="anchor" href="#interfaces">#</a>
+</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace Psr\EventDispatcher;
+
+/**
+ * Defines a dispatcher for events.
+ */
+interface EventDispatcherInterface
+{
+    /**
+     * Provide all relevant listeners with an event to process.
+     *
+     * @param object $event
+     *   The object to process.
+     *
+     * @return object
+     *   The Event that was passed, now modified by listeners.
+     */
+    public function dispatch(object $event);
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace Psr\EventDispatcher;
+
+/**
+ * Mapper from an event to the listeners that are applicable to that event.
+ */
+interface ListenerProviderInterface
+{
+    /**
+     * @param object $event
+     *   An event for which to return the relevant listeners.
+     * @return iterable[callable]
+     *   An iterable (array, iterator, or generator) of callables.  Each
+     *   callable MUST be type-compatible with $event.
+     */
+    public function getListenersForEvent(object $event) : iterable;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace Psr\EventDispatcher;
+
+/**
+ * An Event whose processing may be interrupted when the event has been handled.
+ *
+ * A Dispatcher implementation MUST check to determine if an Event
+ * is marked as stopped after each listener is called.  If it is then it should
+ * return immediately without calling any further Listeners.
+ */
+interface StoppableEventInterface
+{
+    /**
+     * Is propagation stopped?
+     *
+     * This will typically only be used by the Dispatcher to determine if the
+     * previous listener halted propagation.
+     *
+     * @return bool
+     *   True if the Event is complete and no further listeners should be called.
+     *   False to continue calling listeners.
+     */
+    public function isPropagationStopped() : bool;
+}
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#목표">목표</a></li>
+    <li><a href="#정의">정의</a></li>
+    <li><a href="#이벤트">이벤트</a></li>
+    <li><a href="#멈출수-있는-event-stoppable-event">멈출수 있는 Event-Stoppable Event</a></li>
+    <li><a href="#리스너-listener">리스너-Listener</a></li>
+    <li><a href="#발송자-dispatcher">발송자-Dispatcher</a>
+      <ul>
+        <li><a href="#error-handling">Error handling</a></li>
+      </ul>
+    </li>
+    <li><a href="#listener-provider">Listener Provider</a></li>
+    <li><a href="#오브젝트-구성-object-composition">오브젝트 구성-Object composition</a></li>
+    <li><a href="#interfaces">Interfaces</a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

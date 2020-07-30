@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Laonstory React/JSX 스타일 가이드 #  A mostly reasonable approach to React and JSX
+This style guide is mostly based on the standards that are currently prevalent in JavaScript, although some conventions (i.e async/await or static class fields) may still be included or prohibited on a case-by-case basis. Currently, anything prior to stage 3 is not included nor recommended in this guide.
+Table of Contents #   Basic Rules Class vs React.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="Laonstory React/JSX 스타일 가이드 #  A mostly reasonable approach to React and JSX
+This style guide is mostly based on the standards that are currently prevalent in JavaScript, although some conventions (i.e async/await or static class fields) may still be included or prohibited on a case-by-case basis. Currently, anything prior to stage 3 is not included nor recommended in this guide.
+Table of Contents #   Basic Rules Class vs React." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/" />
+
+<title>React Jsx | Laonstory GuideBook</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/en.search.min.3e383c83219ec4150ecf5a5f1b2c5854327af5ba771ae455be1680107223e7da.js" integrity="sha256-Pjg8gyGexBUOz1pfGyxYVDJ69bp3GuRVvhaAEHIj59o="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Laonstory GuideBook</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/" class="collapsed ">개발가이드</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/" class="collapsed ">Php</a>
+  
+
+          
+  
+  
+  
+
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/javascript/javascript/" class="">Javascript</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/" class="active">React Jsx</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>React Jsx</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#table-of-contents">Table of Contents</a></li>
+    <li><a href="#basic-rules">Basic Rules</a></li>
+    <li><a href="#class-vs-reactcreateclass-vs-stateless">Class vs <code>React.createClass</code> vs stateless</a></li>
+    <li><a href="#mixins">Mixins</a></li>
+    <li><a href="#naming">Naming</a></li>
+    <li><a href="#declaration">Declaration</a></li>
+    <li><a href="#alignment">Alignment</a></li>
+    <li><a href="#quotes">Quotes</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+    <li><a href="#props">Props</a></li>
+    <li><a href="#refs">Refs</a></li>
+    <li><a href="#parentheses">Parentheses</a></li>
+    <li><a href="#tags">Tags</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#ordering">Ordering</a></li>
+    <li><a href="#ismounted"><code>isMounted</code></a></li>
+    <li><a href="#translation">Translation</a></li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="laonstory-reactjsx-스타일-가이드">
+  Laonstory React/JSX 스타일 가이드
+  <a class="anchor" href="#laonstory-reactjsx-%ec%8a%a4%ed%83%80%ec%9d%bc-%ea%b0%80%ec%9d%b4%eb%93%9c">#</a>
+</h1>
+<p><em>A mostly reasonable approach to React and JSX</em></p>
+<p>This style guide is mostly based on the standards that are currently prevalent in JavaScript, although some conventions (i.e async/await or static class fields) may still be included or prohibited on a case-by-case basis. Currently, anything prior to stage 3 is not included nor recommended in this guide.</p>
+<h2 id="table-of-contents">
+  Table of Contents
+  <a class="anchor" href="#table-of-contents">#</a>
+</h2>
+<ol>
+<li><a href="#basic-rules">Basic Rules</a></li>
+<li><a href="#class-vs-reactcreateclass-vs-stateless">Class vs <code>React.createClass</code> vs stateless</a></li>
+<li><a href="#mixins">Mixins</a></li>
+<li><a href="#naming">Naming</a></li>
+<li><a href="#declaration">Declaration</a></li>
+<li><a href="#alignment">Alignment</a></li>
+<li><a href="#quotes">Quotes</a></li>
+<li><a href="#spacing">Spacing</a></li>
+<li><a href="#props">Props</a></li>
+<li><a href="#refs">Refs</a></li>
+<li><a href="#parentheses">Parentheses</a></li>
+<li><a href="#tags">Tags</a></li>
+<li><a href="#methods">Methods</a></li>
+<li><a href="#ordering">Ordering</a></li>
+<li><a href="#ismounted"><code>isMounted</code></a></li>
+</ol>
+<h2 id="basic-rules">
+  Basic Rules
+  <a class="anchor" href="#basic-rules">#</a>
+</h2>
+<ul>
+<li>Only include one React component per file.
+<ul>
+<li>However, multiple <a href="https://facebook.github.io/react/docs/reusable-components.html#stateless-functions">Stateless, or Pure, Components</a> are allowed per file. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-multi-comp.md#ignorestateless"><code>react/no-multi-comp</code></a>.</li>
+</ul>
+</li>
+<li>Always use JSX syntax.</li>
+<li>Do not use <code>React.createElement</code> unless you’re initializing the app from a file that is not JSX.</li>
+<li><a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/forbid-prop-types.md"><code>react/forbid-prop-types</code></a> will allow <code>arrays</code> and <code>objects</code> only if it is explicitly noted what <code>array</code> and <code>object</code> contains, using <code>arrayOf</code>, <code>objectOf</code>, or <code>shape</code>.</li>
+</ul>
+<h2 id="class-vs-reactcreateclass-vs-stateless">
+  Class vs <code>React.createClass</code> vs stateless
+  <a class="anchor" href="#class-vs-reactcreateclass-vs-stateless">#</a>
+</h2>
+<ul>
+<li>
+<p>If you have internal state and/or refs, prefer <code>class extends React.Component</code> over <code>React.createClass</code>. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-es6-class.md"><code>react/prefer-es6-class</code></a> <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md"><code>react/prefer-stateless-function</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Listing</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">createClass</span>({
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span>&gt;{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">hello</span>}&lt;/<span style="color:#f92672">div</span>&gt;;
+  }
+});
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Listing</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span>&gt;{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">state</span>.<span style="color:#a6e22e">hello</span>}&lt;/<span style="color:#f92672">div</span>&gt;;
+  }
+}
+</code></pre></div><p>And if you don’t have state or refs, prefer normal functions (not arrow functions) over classes:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Listing</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span>&gt;{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">hello</span>}&lt;/<span style="color:#f92672">div</span>&gt;;
+  }
+}
+
+<span style="color:#75715e">// bad (relying on function name inference is discouraged)
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">Listing</span> <span style="color:#f92672">=</span> ({ <span style="color:#a6e22e">hello</span> }) =&gt; (
+  &lt;<span style="color:#f92672">div</span>&gt;{<span style="color:#a6e22e">hello</span>}&lt;/<span style="color:#f92672">div</span>&gt;
+);
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Listing</span>({ <span style="color:#a6e22e">hello</span> }) {
+  <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span>&gt;{<span style="color:#a6e22e">hello</span>}&lt;/<span style="color:#f92672">div</span>&gt;;
+}
+</code></pre></div></li>
+</ul>
+<h2 id="mixins">
+  Mixins
+  <a class="anchor" href="#mixins">#</a>
+</h2>
+<ul>
+<li><a href="https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html">Do not use mixins</a>.</li>
+</ul>
+<blockquote>
+<p>Why? Mixins introduce implicit dependencies, cause name clashes, and cause snowballing complexity. Most use cases for mixins can be accomplished in better ways via components, higher-order components, or utility modules.</p>
+</blockquote>
+<h2 id="naming">
+  Naming
+  <a class="anchor" href="#naming">#</a>
+</h2>
+<ul>
+<li>
+<p><strong>Extensions</strong>: Use <code>.jsx</code> extension for React components. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-filename-extension.md"><code>react/jsx-filename-extension</code></a></p>
+</li>
+<li>
+<p><strong>Filename</strong>: Use PascalCase for filenames. E.g., <code>ReservationCard.jsx</code>.</p>
+</li>
+<li>
+<p><strong>Reference Naming</strong>: Use PascalCase for React components and camelCase for their instances. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-pascal-case.md"><code>react/jsx-pascal-case</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">reservationCard</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./ReservationCard&#39;</span>;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">ReservationCard</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./ReservationCard&#39;</span>;
+
+<span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">ReservationItem</span> <span style="color:#f92672">=</span> &lt;<span style="color:#f92672">ReservationCard</span> /&gt;;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">reservationItem</span> <span style="color:#f92672">=</span> &lt;<span style="color:#f92672">ReservationCard</span> /&gt;;
+</code></pre></div></li>
+<li>
+<p><strong>Component Naming</strong>: Use the filename as the component name. For example, <code>ReservationCard.jsx</code> should have a reference name of <code>ReservationCard</code>. However, for root components of a directory, use <code>index.jsx</code> as the filename and use the directory name as the component name:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Footer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Footer/Footer&#39;</span>;
+
+<span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Footer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Footer/index&#39;</span>;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">Footer</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;./Footer&#39;</span>;
+</code></pre></div></li>
+<li>
+<p><strong>Higher-order Component Naming</strong>: Use a composite of the higher-order component’s name and the passed-in component’s name as the <code>displayName</code> on the generated component. For example, the higher-order component <code>withFoo()</code>, when passed a component <code>Bar</code> should produce a component with a <code>displayName</code> of <code>withFoo(Bar)</code>.</p>
+<blockquote>
+<p>Why? A component’s <code>displayName</code> may be used by developer tools or in error messages, and having a value that clearly expresses this relationship helps people understand what is happening.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withFoo</span>(<span style="color:#a6e22e">WrappedComponent</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">WithFoo</span>(<span style="color:#a6e22e">props</span>) {
+    <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">WrappedComponent</span> {<span style="color:#a6e22e">...props</span>} <span style="color:#a6e22e">foo</span> /&gt;;
+  }
+}
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withFoo</span>(<span style="color:#a6e22e">WrappedComponent</span>) {
+  <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">WithFoo</span>(<span style="color:#a6e22e">props</span>) {
+    <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">WrappedComponent</span> {<span style="color:#a6e22e">...props</span>} <span style="color:#a6e22e">foo</span> /&gt;;
+  }
+
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">wrappedComponentName</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">WrappedComponent</span>.<span style="color:#a6e22e">displayName</span>
+    <span style="color:#f92672">||</span> <span style="color:#a6e22e">WrappedComponent</span>.<span style="color:#a6e22e">name</span>
+    <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;Component&#39;</span>;
+
+  <span style="color:#a6e22e">WithFoo</span>.<span style="color:#a6e22e">displayName</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">`withFoo(</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">wrappedComponentName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">)`</span>;
+  <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">WithFoo</span>;
+}
+</code></pre></div></li>
+<li>
+<p><strong>Props Naming</strong>: Avoid using DOM component prop names for different purposes.</p>
+<blockquote>
+<p>Why? People expect props like <code>style</code> and <code>className</code> to mean one specific thing. Varying this API for a subset of your app makes the code less readable and less maintainable, and may cause bugs.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">MyComponent</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fancy&#34;</span> /&gt;
+
+<span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">MyComponent</span> <span style="color:#a6e22e">className</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fancy&#34;</span> /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">MyComponent</span> <span style="color:#a6e22e">variant</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;fancy&#34;</span> /&gt;
+</code></pre></div></li>
+</ul>
+<h2 id="declaration">
+  Declaration
+  <a class="anchor" href="#declaration">#</a>
+</h2>
+<ul>
+<li>
+<p>Do not use <code>displayName</code> for naming components. Instead, name the component by reference.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">createClass</span>({
+  <span style="color:#a6e22e">displayName</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;ReservationCard&#39;</span>,
+  <span style="color:#75715e">// stuff goes here
+</span><span style="color:#75715e"></span>});
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReservationCard</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+}
+</code></pre></div></li>
+</ul>
+<h2 id="alignment">
+  Alignment
+  <a class="anchor" href="#alignment">#</a>
+</h2>
+<ul>
+<li>
+<p>Follow these alignment styles for JSX syntax. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md"><code>react/jsx-closing-bracket-location</code></a> <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-tag-location.md"><code>react/jsx-closing-tag-location</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">superLongParam</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span>
+     <span style="color:#a6e22e">anotherSuperLongParam</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;baz&#34;</span> /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+  <span style="color:#a6e22e">superLongParam</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span>
+  <span style="color:#a6e22e">anotherSuperLongParam</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;baz&#34;</span>
+/&gt;
+
+<span style="color:#75715e">// if props fit in one line then keep it on the same line
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">bar</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span> /&gt;
+
+<span style="color:#75715e">// children get indented normally
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+  <span style="color:#a6e22e">superLongParam</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span>
+  <span style="color:#a6e22e">anotherSuperLongParam</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;baz&#34;</span>
+&gt;
+  &lt;<span style="color:#f92672">Quux</span> /&gt;
+&lt;/<span style="color:#f92672">Foo</span>&gt;
+
+<span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>{<span style="color:#a6e22e">showButton</span> <span style="color:#f92672">&amp;&amp;</span>
+  &lt;<span style="color:#f92672">Button</span> /&gt;
+}
+
+<span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>{
+  <span style="color:#a6e22e">showButton</span> <span style="color:#f92672">&amp;&amp;</span>
+    &lt;<span style="color:#f92672">Button</span> /&gt;
+}
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>{<span style="color:#a6e22e">showButton</span> <span style="color:#f92672">&amp;&amp;</span> (
+  &lt;<span style="color:#f92672">Button</span> /&gt;
+)}
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>{<span style="color:#a6e22e">showButton</span> <span style="color:#f92672">&amp;&amp;</span> &lt;<span style="color:#f92672">Button</span> /&gt;}
+</code></pre></div></li>
+</ul>
+<h2 id="quotes">
+  Quotes
+  <a class="anchor" href="#quotes">#</a>
+</h2>
+<ul>
+<li>
+<p>Always use double quotes (<code>&quot;</code>) for JSX attributes, but single quotes (<code>'</code>) for all other JS. eslint: <a href="https://eslint.org/docs/rules/jsx-quotes"><code>jsx-quotes</code></a></p>
+<blockquote>
+<p>Why? Regular HTML attributes also typically use double quotes instead of single, so JSX attributes mirror this convention.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">bar</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;bar&#39;</span> /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">bar</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span> /&gt;
+
+<span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">left</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;20px&#34;</span> }} /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">style</span><span style="color:#f92672">=</span>{{ <span style="color:#a6e22e">left</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;20px&#39;</span> }} /&gt;
+</code></pre></div></li>
+</ul>
+<h2 id="spacing">
+  Spacing
+  <a class="anchor" href="#spacing">#</a>
+</h2>
+<ul>
+<li>
+<p>Always include a single space in your self-closing tag. eslint: <a href="https://eslint.org/docs/rules/no-multi-spaces"><code>no-multi-spaces</code></a>, <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-tag-spacing.md"><code>react/jsx-tag-spacing</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>/&gt;
+
+<span style="color:#75715e">// very bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>                 /&gt;
+
+<span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+ /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> /&gt;
+</code></pre></div></li>
+<li>
+<p>Do not pad JSX curly braces with spaces. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-curly-spacing.md"><code>react/jsx-curly-spacing</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">bar</span><span style="color:#f92672">=</span>{ <span style="color:#a6e22e">baz</span> } /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">bar</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">baz</span>} /&gt;
+</code></pre></div></li>
+</ul>
+<h2 id="props">
+  Props
+  <a class="anchor" href="#props">#</a>
+</h2>
+<ul>
+<li>
+<p>Always use camelCase for prop names.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+  <span style="color:#a6e22e">UserName</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello&#34;</span>
+  <span style="color:#a6e22e">phone_number</span><span style="color:#f92672">=</span>{<span style="color:#ae81ff">12345678</span>}
+/&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+  <span style="color:#a6e22e">userName</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello&#34;</span>
+  <span style="color:#a6e22e">phoneNumber</span><span style="color:#f92672">=</span>{<span style="color:#ae81ff">12345678</span>}
+/&gt;
+</code></pre></div></li>
+<li>
+<p>Omit the value of the prop when it is explicitly <code>true</code>. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-boolean-value.md"><code>react/jsx-boolean-value</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+  <span style="color:#a6e22e">hidden</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">true</span>}
+/&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+  <span style="color:#a6e22e">hidden</span>
+/&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">hidden</span> /&gt;
+</code></pre></div></li>
+<li>
+<p>Always include an <code>alt</code> prop on <code>&lt;img&gt;</code> tags. If the image is presentational, <code>alt</code> can be an empty string or the <code>&lt;img&gt;</code> must have <code>role=&quot;presentation&quot;</code>. eslint: <a href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/alt-text.md"><code>jsx-a11y/alt-text</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello.jpg&#34;</span> /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello.jpg&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Me waving hello&#34;</span> /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello.jpg&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span> /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello.jpg&#34;</span> <span style="color:#a6e22e">role</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;presentation&#34;</span> /&gt;
+</code></pre></div></li>
+<li>
+<p>Do not use words like &ldquo;image&rdquo;, &ldquo;photo&rdquo;, or &ldquo;picture&rdquo; in <code>&lt;img&gt;</code> <code>alt</code> props. eslint: <a href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/img-redundant-alt.md"><code>jsx-a11y/img-redundant-alt</code></a></p>
+<blockquote>
+<p>Why? Screenreaders already announce <code>img</code> elements as images, so there is no need to include this information in the alt text.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello.jpg&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Picture of me waving hello&#34;</span> /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;hello.jpg&#34;</span> <span style="color:#a6e22e">alt</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Me waving hello&#34;</span> /&gt;
+</code></pre></div></li>
+<li>
+<p>Use only valid, non-abstract <a href="https://www.w3.org/TR/wai-aria/#usage_intro">ARIA roles</a>. eslint: <a href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/aria-role.md"><code>jsx-a11y/aria-role</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad - not an ARIA role
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">role</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;datepicker&#34;</span> /&gt;
+
+<span style="color:#75715e">// bad - abstract ARIA role
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">role</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;range&#34;</span> /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">role</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;button&#34;</span> /&gt;
+</code></pre></div></li>
+<li>
+<p>Do not use <code>accessKey</code> on elements. eslint: <a href="https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-access-key.md"><code>jsx-a11y/no-access-key</code></a></p>
+</li>
+</ul>
+<blockquote>
+<p>Why? Inconsistencies between keyboard shortcuts and keyboard commands used by people using screenreaders and keyboards complicate accessibility.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">accessKey</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;h&#34;</span> /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">div</span> /&gt;
+</code></pre></div><ul>
+<li>Avoid using an array index as <code>key</code> prop, prefer a stable ID. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-array-index-key.md"><code>react/no-array-index-key</code></a></li>
+</ul>
+<blockquote>
+<p>Why? Not using a stable ID <a href="https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318">is an anti-pattern</a> because it can negatively impact performance and cause issues with component state.</p>
+</blockquote>
+<p>We don’t recommend using indexes for keys if the order of items may change.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>{<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">todo</span>, <span style="color:#a6e22e">index</span>) =&gt;
+  &lt;<span style="color:#f92672">Todo</span>
+    {<span style="color:#a6e22e">...todo</span>}
+    <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">index</span>}
+  /&gt;
+)}
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>{<span style="color:#a6e22e">todos</span>.<span style="color:#a6e22e">map</span>(<span style="color:#a6e22e">todo</span> =&gt; (
+  &lt;<span style="color:#f92672">Todo</span>
+    {<span style="color:#a6e22e">...todo</span>}
+    <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">todo</span>.<span style="color:#a6e22e">id</span>}
+  /&gt;
+))}
+</code></pre></div><ul>
+<li>Always define explicit defaultProps for all non-required props.</li>
+</ul>
+<blockquote>
+<p>Why? propTypes are a form of documentation, and providing defaultProps means the reader of your code doesn’t have to assume as much. In addition, it can mean that your code can omit certain type checks.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">SFC</span>({ <span style="color:#a6e22e">foo</span>, <span style="color:#a6e22e">bar</span>, <span style="color:#a6e22e">children</span> }) {
+  <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span>&gt;{<span style="color:#a6e22e">foo</span>}{<span style="color:#a6e22e">bar</span>}{<span style="color:#a6e22e">children</span>}&lt;/<span style="color:#f92672">div</span>&gt;;
+}
+<span style="color:#a6e22e">SFC</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">foo</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">number</span>.<span style="color:#a6e22e">isRequired</span>,
+  <span style="color:#a6e22e">bar</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>,
+  <span style="color:#a6e22e">children</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">node</span>,
+};
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">SFC</span>({ <span style="color:#a6e22e">foo</span>, <span style="color:#a6e22e">bar</span>, <span style="color:#a6e22e">children</span> }) {
+  <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span>&gt;{<span style="color:#a6e22e">foo</span>}{<span style="color:#a6e22e">bar</span>}{<span style="color:#a6e22e">children</span>}&lt;/<span style="color:#f92672">div</span>&gt;;
+}
+<span style="color:#a6e22e">SFC</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">foo</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">number</span>.<span style="color:#a6e22e">isRequired</span>,
+  <span style="color:#a6e22e">bar</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>,
+  <span style="color:#a6e22e">children</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">node</span>,
+};
+<span style="color:#a6e22e">SFC</span>.<span style="color:#a6e22e">defaultProps</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">bar</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>,
+  <span style="color:#a6e22e">children</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">null</span>,
+};
+</code></pre></div><ul>
+<li>Use spread props sparingly.</li>
+</ul>
+<blockquote>
+<p>Why? Otherwise you’re more likely to pass unnecessary props down to components. And for React v15.6.1 and older, you could <a href="https://reactjs.org/blog/2017/09/08/dom-attributes-in-react-16.html">pass invalid HTML attributes to the DOM</a>.</p>
+</blockquote>
+<p>Exceptions:</p>
+<ul>
+<li>HOCs that proxy down props and hoist propTypes</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">HOC</span>(<span style="color:#a6e22e">WrappedComponent</span>) {
+  <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">class</span> Proxy <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+    Proxy.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+      <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>,
+      <span style="color:#a6e22e">isLoading</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">bool</span>
+    };
+
+    <span style="color:#a6e22e">render</span>() {
+      <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">WrappedComponent</span> {<span style="color:#a6e22e">...this.props</span>} /&gt;
+    }
+  }
+}
+</code></pre></div><ul>
+<li>Spreading objects with known, explicit props. This can be particularly useful when testing React components with Mocha’s beforeEach construct.</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Foo</span> {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">props</span> <span style="color:#f92672">=</span> {
+    <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>,
+    <span style="color:#a6e22e">isPublished</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>
+  }
+
+  <span style="color:#66d9ef">return</span> (&lt;<span style="color:#f92672">div</span> {<span style="color:#a6e22e">...props</span>} /&gt;);
+}
+</code></pre></div><p>Notes for use:
+Filter out unnecessary props when possible. Also, use <a href="https://www.npmjs.com/package/prop-types-exact">prop-types-exact</a> to help prevent bugs.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">render</span>() {
+  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">irrelevantProp</span>, ...<span style="color:#a6e22e">relevantProps</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>;
+  <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">WrappedComponent</span> {<span style="color:#a6e22e">...this.props</span>} /&gt;
+}
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">render</span>() {
+  <span style="color:#66d9ef">const</span> { <span style="color:#a6e22e">irrelevantProp</span>, ...<span style="color:#a6e22e">relevantProps</span> } <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>;
+  <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">WrappedComponent</span> {<span style="color:#a6e22e">...relevantProps</span>} /&gt;
+}
+</code></pre></div><h2 id="refs">
+  Refs
+  <a class="anchor" href="#refs">#</a>
+</h2>
+<ul>
+<li>
+<p>Always use ref callbacks. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md"><code>react/no-string-refs</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+  <span style="color:#a6e22e">ref</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;myRef&#34;</span>
+/&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+  <span style="color:#a6e22e">ref</span><span style="color:#f92672">=</span>{(<span style="color:#a6e22e">ref</span>) =&gt; { <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">myRef</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ref</span>; }}
+/&gt;
+</code></pre></div></li>
+</ul>
+<h2 id="parentheses">
+  Parentheses
+  <a class="anchor" href="#parentheses">#</a>
+</h2>
+<ul>
+<li>
+<p>Wrap JSX tags in parentheses when they span more than one line. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-wrap-multilines.md"><code>react/jsx-wrap-multilines</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">render</span>() {
+  <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">MyComponent</span> <span style="color:#a6e22e">variant</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;long body&#34;</span> <span style="color:#a6e22e">foo</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span>&gt;
+           &lt;<span style="color:#f92672">MyChild</span> /&gt;
+         &lt;/<span style="color:#f92672">MyComponent</span>&gt;;
+}
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">render</span>() {
+  <span style="color:#66d9ef">return</span> (
+    &lt;<span style="color:#f92672">MyComponent</span> <span style="color:#a6e22e">variant</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;long body&#34;</span> <span style="color:#a6e22e">foo</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span>&gt;
+      &lt;<span style="color:#f92672">MyChild</span> /&gt;
+    &lt;/<span style="color:#f92672">MyComponent</span>&gt;
+  );
+}
+
+<span style="color:#75715e">// good, when single line
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">render</span>() {
+  <span style="color:#66d9ef">const</span> <span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> &lt;<span style="color:#f92672">div</span>&gt;<span style="color:#a6e22e">hello</span>&lt;/<span style="color:#f92672">div</span>&gt;;
+  <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">MyComponent</span>&gt;{<span style="color:#a6e22e">body</span>}&lt;/<span style="color:#f92672">MyComponent</span>&gt;;
+}
+</code></pre></div></li>
+</ul>
+<h2 id="tags">
+  Tags
+  <a class="anchor" href="#tags">#</a>
+</h2>
+<ul>
+<li>
+<p>Always self-close tags that have no children. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/self-closing-comp.md"><code>react/self-closing-comp</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">variant</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stuff&#34;</span>&gt;&lt;/<span style="color:#f92672">Foo</span>&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span> <span style="color:#a6e22e">variant</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stuff&#34;</span> /&gt;
+</code></pre></div></li>
+<li>
+<p>If your component has multiline properties, close its tag on a new line. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-closing-bracket-location.md"><code>react/jsx-closing-bracket-location</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+  <span style="color:#a6e22e">bar</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span>
+  <span style="color:#a6e22e">baz</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;baz&#34;</span> /&gt;
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span>&lt;<span style="color:#f92672">Foo</span>
+  <span style="color:#a6e22e">bar</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;bar&#34;</span>
+  <span style="color:#a6e22e">baz</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;baz&#34;</span>
+/&gt;
+</code></pre></div></li>
+</ul>
+<h2 id="methods">
+  Methods
+  <a class="anchor" href="#methods">#</a>
+</h2>
+<ul>
+<li>
+<p>Use arrow functions to close over local variables. It is handy when you need to pass additional data to an event handler. Although, make sure they <a href="https://www.bignerdranch.com/blog/choosing-the-best-approach-for-react-event-handlers/">do not massively hurt performance</a>, in particular when passed to custom components that might be PureComponents, because they will trigger a possibly needless rerender every time.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">ItemList</span>(<span style="color:#a6e22e">props</span>) {
+  <span style="color:#66d9ef">return</span> (
+    &lt;<span style="color:#f92672">ul</span>&gt;
+      {<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">items</span>.<span style="color:#a6e22e">map</span>((<span style="color:#a6e22e">item</span>, <span style="color:#a6e22e">index</span>) =&gt; (
+        &lt;<span style="color:#f92672">Item</span>
+          <span style="color:#a6e22e">key</span><span style="color:#f92672">=</span>{<span style="color:#a6e22e">item</span>.<span style="color:#a6e22e">key</span>}
+          <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{(<span style="color:#a6e22e">event</span>) =&gt; { <span style="color:#a6e22e">doSomethingWith</span>(<span style="color:#a6e22e">event</span>, <span style="color:#a6e22e">item</span>.<span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">index</span>); }}
+        /&gt;
+      ))}
+    &lt;/<span style="color:#f92672">ul</span>&gt;
+  );
+}
+</code></pre></div></li>
+<li>
+<p>Bind event handlers for the render method in the constructor. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md"><code>react/jsx-no-bind</code></a></p>
+<blockquote>
+<p>Why? A bind call in the render path creates a brand new function on every single render. Do not use arrow functions in class fields, because it makes them <a href="https://medium.com/@charpeni/arrow-functions-in-class-properties-might-not-be-as-great-as-we-think-3b3551c440b1">challenging to test and debug, and can negatively impact performance</a>, and because conceptually, class fields are for data, not logic.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">onClickDiv</span>() {
+    <span style="color:#75715e">// do stuff
+</span><span style="color:#75715e"></span>  }
+
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickDiv</span>.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>)} /&gt;;
+  }
+}
+
+<span style="color:#75715e">// very bad
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">onClickDiv</span> <span style="color:#f92672">=</span> () =&gt; {
+    <span style="color:#75715e">// do stuff
+</span><span style="color:#75715e"></span>  }
+
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickDiv</span>} /&gt;
+  }
+}
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">props</span>) {
+    <span style="color:#66d9ef">super</span>(<span style="color:#a6e22e">props</span>);
+
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickDiv</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickDiv</span>.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>);
+  }
+
+  <span style="color:#a6e22e">onClickDiv</span>() {
+    <span style="color:#75715e">// do stuff
+</span><span style="color:#75715e"></span>  }
+
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">onClick</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">onClickDiv</span>} /&gt;;
+  }
+}
+</code></pre></div></li>
+<li>
+<p>Do not use underscore prefix for internal methods of a React component.</p>
+<blockquote>
+<p>Why? Underscore prefixes are sometimes used as a convention in other languages to denote privacy. But, unlike those languages, there is no native support for privacy in JavaScript, everything is public. Regardless of your intentions, adding underscore prefixes to your properties does not actually make them private, and any property (underscore-prefixed or not) should be treated as being public. See issues <a href="https://github.com/airbnb/javascript/issues/1024">#1024</a>, and <a href="https://github.com/airbnb/javascript/issues/490">#490</a> for a more in-depth discussion.</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">createClass</span>({
+  <span style="color:#a6e22e">_onClickSubmit</span>() {
+    <span style="color:#75715e">// do stuff
+</span><span style="color:#75715e"></span>  },
+
+  <span style="color:#75715e">// other stuff
+</span><span style="color:#75715e"></span>});
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#a6e22e">onClickSubmit</span>() {
+    <span style="color:#75715e">// do stuff
+</span><span style="color:#75715e"></span>  }
+
+  <span style="color:#75715e">// other stuff
+</span><span style="color:#75715e"></span>}
+</code></pre></div></li>
+<li>
+<p>Be sure to return a value in your <code>render</code> methods. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-render-return.md"><code>react/require-render-return</code></a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#75715e">// bad
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">render</span>() {
+  (&lt;<span style="color:#f92672">div</span> /&gt;);
+}
+
+<span style="color:#75715e">// good
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">render</span>() {
+  <span style="color:#66d9ef">return</span> (&lt;<span style="color:#f92672">div</span> /&gt;);
+}
+</code></pre></div></li>
+</ul>
+<h2 id="ordering">
+  Ordering
+  <a class="anchor" href="#ordering">#</a>
+</h2>
+<ul>
+<li>Ordering for <code>class extends React.Component</code>:</li>
+</ul>
+<ol>
+<li>optional <code>static</code> methods</li>
+<li><code>constructor</code></li>
+<li><code>getChildContext</code></li>
+<li><code>componentWillMount</code></li>
+<li><code>componentDidMount</code></li>
+<li><code>componentWillReceiveProps</code></li>
+<li><code>shouldComponentUpdate</code></li>
+<li><code>componentWillUpdate</code></li>
+<li><code>componentDidUpdate</code></li>
+<li><code>componentWillUnmount</code></li>
+<li><em>clickHandlers or eventHandlers</em> like <code>onClickSubmit()</code> or <code>onChangeDescription()</code></li>
+<li><em>getter methods for <code>render</code></em> like <code>getSelectReason()</code> or <code>getFooterContent()</code></li>
+<li><em>optional render methods</em> like <code>renderNavigation()</code> or <code>renderProfilePicture()</code></li>
+<li><code>render</code></li>
+</ol>
+<ul>
+<li>
+<p>How to define <code>propTypes</code>, <code>defaultProps</code>, <code>contextTypes</code>, etc&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#66d9ef">import</span> <span style="color:#a6e22e">React</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;react&#39;</span>;
+<span style="color:#66d9ef">import</span> <span style="color:#a6e22e">PropTypes</span> <span style="color:#a6e22e">from</span> <span style="color:#e6db74">&#39;prop-types&#39;</span>;
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">number</span>.<span style="color:#a6e22e">isRequired</span>,
+  <span style="color:#a6e22e">url</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>.<span style="color:#a6e22e">isRequired</span>,
+  <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">PropTypes</span>.<span style="color:#a6e22e">string</span>,
+};
+
+<span style="color:#66d9ef">const</span> <span style="color:#a6e22e">defaultProps</span> <span style="color:#f92672">=</span> {
+  <span style="color:#a6e22e">text</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;Hello World&#39;</span>,
+};
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Link</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">React</span>.<span style="color:#a6e22e">Component</span> {
+  <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">methodsAreOk</span>() {
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+  }
+
+  <span style="color:#a6e22e">render</span>() {
+    <span style="color:#66d9ef">return</span> &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">url</span>} <span style="color:#a6e22e">data</span><span style="color:#960050;background-color:#1e0010">-</span><span style="color:#a6e22e">id</span><span style="color:#f92672">=</span>{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">id</span>}&gt;{<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">props</span>.<span style="color:#a6e22e">text</span>}&lt;/<span style="color:#f92672">a</span>&gt;;
+  }
+}
+
+<span style="color:#a6e22e">Link</span>.<span style="color:#a6e22e">propTypes</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">propTypes</span>;
+<span style="color:#a6e22e">Link</span>.<span style="color:#a6e22e">defaultProps</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">defaultProps</span>;
+
+<span style="color:#66d9ef">export</span> <span style="color:#66d9ef">default</span> <span style="color:#a6e22e">Link</span>;
+</code></pre></div></li>
+<li>
+<p>Ordering for <code>React.createClass</code>: eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/sort-comp.md"><code>react/sort-comp</code></a></p>
+</li>
+</ul>
+<ol>
+<li><code>displayName</code></li>
+<li><code>propTypes</code></li>
+<li><code>contextTypes</code></li>
+<li><code>childContextTypes</code></li>
+<li><code>mixins</code></li>
+<li><code>statics</code></li>
+<li><code>defaultProps</code></li>
+<li><code>getDefaultProps</code></li>
+<li><code>getInitialState</code></li>
+<li><code>getChildContext</code></li>
+<li><code>componentWillMount</code></li>
+<li><code>componentDidMount</code></li>
+<li><code>componentWillReceiveProps</code></li>
+<li><code>shouldComponentUpdate</code></li>
+<li><code>componentWillUpdate</code></li>
+<li><code>componentDidUpdate</code></li>
+<li><code>componentWillUnmount</code></li>
+<li><em>clickHandlers or eventHandlers</em> like <code>onClickSubmit()</code> or <code>onChangeDescription()</code></li>
+<li><em>getter methods for <code>render</code></em> like <code>getSelectReason()</code> or <code>getFooterContent()</code></li>
+<li><em>optional render methods</em> like <code>renderNavigation()</code> or <code>renderProfilePicture()</code></li>
+<li><code>render</code></li>
+</ol>
+<h2 id="ismounted">
+  <code>isMounted</code>
+  <a class="anchor" href="#ismounted">#</a>
+</h2>
+<ul>
+<li>Do not use <code>isMounted</code>. eslint: <a href="https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md"><code>react/no-is-mounted</code></a></li>
+</ul>
+<blockquote>
+<p>Why? <a href="https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html"><code>isMounted</code> is an anti-pattern</a>, is not available when using ES6 classes, and is on its way to being officially deprecated.</p>
+</blockquote>
+<h2 id="translation">
+  Translation
+  <a class="anchor" href="#translation">#</a>
+</h2>
+<p>This JSX/React style guide is also available in other languages:</p>
+<ul>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png" alt="cn" /> <strong>Chinese (Simplified)</strong>: <a href="https://github.com/jhcccc/javascript/tree/master/react">jhcccc/javascript</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Taiwan.png" alt="tw" /> <strong>Chinese (Traditional)</strong>: <a href="https://github.com/jigsawye/javascript/tree/master/react">jigsawye/javascript</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png" alt="es" /> <strong>Español</strong>: <a href="https://github.com/agrcrobles/javascript/tree/master/react">agrcrobles/javascript</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Japan.png" alt="jp" /> <strong>Japanese</strong>: <a href="https://github.com/mitsuruog/javascript-style-guide/tree/master/react">mitsuruog/javascript-style-guide</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png" alt="kr" /> <strong>Korean</strong>: <a href="https://github.com/apple77y/javascript/tree/master/react">apple77y/javascript</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Poland.png" alt="pl" /> <strong>Polish</strong>: <a href="https://github.com/pietraszekl/javascript/tree/master/react">pietraszekl/javascript</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Brazil.png" alt="Br" /> <strong>Portuguese</strong>: <a href="https://github.com/ronal2do/airbnb-react-styleguide">ronal2do/javascript</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Russia.png" alt="ru" /> <strong>Russian</strong>: <a href="https://github.com/leonidlebedev/javascript-airbnb/tree/master/react">leonidlebedev/javascript-airbnb</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Thailand.png" alt="th" /> <strong>Thai</strong>: <a href="https://github.com/lvarayut/javascript-style-guide/tree/master/react">lvarayut/javascript-style-guide</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Turkey.png" alt="tr" /> <strong>Turkish</strong>: <a href="https://github.com/alioguzhan/react-style-guide">alioguzhan/react-style-guide</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Ukraine.png" alt="ua" /> <strong>Ukrainian</strong>: <a href="https://github.com/ivanzusko/javascript/tree/master/react">ivanzusko/javascript</a></li>
+<li><img src="https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Vietnam.png" alt="vn" /> <strong>Vietnam</strong>: <a href="https://github.com/UETCodeCamp/jsx-style-guide">uetcodecamp/jsx-style-guide</a></li>
+</ul>
+<p><strong><a href="#table-of-contents">⬆ back to top</a></strong></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#table-of-contents">Table of Contents</a></li>
+    <li><a href="#basic-rules">Basic Rules</a></li>
+    <li><a href="#class-vs-reactcreateclass-vs-stateless">Class vs <code>React.createClass</code> vs stateless</a></li>
+    <li><a href="#mixins">Mixins</a></li>
+    <li><a href="#naming">Naming</a></li>
+    <li><a href="#declaration">Declaration</a></li>
+    <li><a href="#alignment">Alignment</a></li>
+    <li><a href="#quotes">Quotes</a></li>
+    <li><a href="#spacing">Spacing</a></li>
+    <li><a href="#props">Props</a></li>
+    <li><a href="#refs">Refs</a></li>
+    <li><a href="#parentheses">Parentheses</a></li>
+    <li><a href="#tags">Tags</a></li>
+    <li><a href="#methods">Methods</a></li>
+    <li><a href="#ordering">Ordering</a></li>
+    <li><a href="#ismounted"><code>isMounted</code></a></li>
+    <li><a href="#translation">Translation</a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

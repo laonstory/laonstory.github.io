@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Container interface #  이 문서는 의존성 주입 컨테이너에 대한 공통 인터페이스를 설명합니다.
+ContainerInterface에 의해 설정된 목표는 프레임 워크와 라이브러리가 컨테이너를 사용하여 객체와 매개 변수 (이 문서의 나머지 부분에서 항목이라고 함)를 얻는 방법을 표준화하는 것입니다.
+이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다. 이것은 RFC 2119에 설명 된대로 해석해야 합니다. 역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다
+이 문서에서 implementor 라는 단어는 의존성 삽입 관련 라이브러리나 프레임워크에서 ContainerInterface를 구현하는 누군가로 해석되어야합니다.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="Container interface #  이 문서는 의존성 주입 컨테이너에 대한 공통 인터페이스를 설명합니다.
+ContainerInterface에 의해 설정된 목표는 프레임 워크와 라이브러리가 컨테이너를 사용하여 객체와 매개 변수 (이 문서의 나머지 부분에서 항목이라고 함)를 얻는 방법을 표준화하는 것입니다.
+이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다. 이것은 RFC 2119에 설명 된대로 해석해야 합니다. 역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다
+이 문서에서 implementor 라는 단어는 의존성 삽입 관련 라이브러리나 프레임워크에서 ContainerInterface를 구현하는 누군가로 해석되어야합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/07-psr-11/" />
+
+<title>07 P S R 11 | Laonstory GuideBook</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/en.search.min.3e383c83219ec4150ecf5a5f1b2c5854327af5ba771ae455be1680107223e7da.js" integrity="sha256-Pjg8gyGexBUOz1pfGyxYVDJ69bp3GuRVvhaAEHIj59o="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Laonstory GuideBook</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/" class="collapsed ">개발가이드</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/" class="collapsed ">Php</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/01-psr-1/" class="">01 P S R 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/02-psr-3/" class="">02 P S R 3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/03-psr-4/" class="">03 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/04-psr-4/" class="">04 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/05-psr-6/" class="">05 P S R 6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/06-psr-7/" class="">06 P S R 7</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/07-psr-11/" class="active">07 P S R 11</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/08-psr-12/" class="">08 P S R 12</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/09-psr-13/" class="">09 P S R 13</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/10-psr-14/" class="">10 P S R 14</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/11-psr-15/" class="">11 P S R 15</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/12-psr-16/" class="">12 P S R 16</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/13-psr-17/" class="">13 P S R 17</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/14-psr-18/" class="">14 P S R 18</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/javascript/javascript/" class="">Javascript</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/" class="">React Jsx</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>07 P S R 11</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-명세서">1. 명세서</a>
+      <ul>
+        <li><a href="#11-기본">1.1 기본</a></li>
+        <li><a href="#12-exceptions">1.2 Exceptions</a></li>
+        <li><a href="#13-권장-사용법">1.3 권장 사용법</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-package">2. Package</a></li>
+    <li><a href="#3-interfaces">3. Interfaces</a>
+      <ul>
+        <li><a href="#31-psrcontainercontainerinterface">3.1. <code>Psr\Container\ContainerInterface</code></a></li>
+        <li><a href="#32-psrcontainercontainerexceptioninterface">3.2. <code>Psr\Container\ContainerExceptionInterface</code></a></li>
+        <li><a href="#33-psrcontainernotfoundexceptioninterface">3.3. <code>Psr\Container\NotFoundExceptionInterface</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="container-interface">
+  Container interface
+  <a class="anchor" href="#container-interface">#</a>
+</h1>
+<p>이 문서는 의존성 주입 컨테이너에 대한 공통 인터페이스를 설명합니다.</p>
+<p><code>ContainerInterface</code>에 의해 설정된 목표는 프레임 워크와 라이브러리가 컨테이너를 사용하여 객체와 매개 변수 (이 문서의 나머지 부분에서 <em>항목</em>이라고 함)를 얻는 방법을 표준화하는 것입니다.</p>
+<p>이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다.
+이것은 <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>에 설명 된대로 해석해야 합니다.
+<code>역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다</code></p>
+<p>이 문서에서 <code>implementor</code> 라는 단어는 의존성 삽입 관련 라이브러리나 프레임워크에서 <code>ContainerInterface</code>를 구현하는 누군가로 해석되어야합니다.
+의존성 주입 컨테이너 (DIC)의 사용자는 <code>사용자</code>라고합니다.</p>
+<h2 id="1-명세서">
+  1. 명세서
+  <a class="anchor" href="#1-%eb%aa%85%ec%84%b8%ec%84%9c">#</a>
+</h2>
+<h3 id="11-기본">
+  1.1 기본
+  <a class="anchor" href="#11-%ea%b8%b0%eb%b3%b8">#</a>
+</h3>
+<h4 id="111-엔트리-식별자">
+  1.1.1 엔트리 식별자
+  <a class="anchor" href="#111-%ec%97%94%ed%8a%b8%eb%a6%ac-%ec%8b%9d%eb%b3%84%ec%9e%90">#</a>
+</h4>
+<p>엔트리 식별자는 컨테이너 내의 항목을 고유하게 식별하는 적어도 하나의 문자로 구성된 PHP에서 유효한 문자열입니다.
+엔트리 식별자는 불투명 한 문자열이므로 호출자는 문자열의 구조가 의미를 전달한다고 가정해서는 안됩니다(SHOULD NOT).</p>
+<h4 id="112-컨테이너에서-읽어오기">
+  1.1.2 컨테이너에서 읽어오기
+  <a class="anchor" href="#112-%ec%bb%a8%ed%85%8c%ec%9d%b4%eb%84%88%ec%97%90%ec%84%9c-%ec%9d%bd%ec%96%b4%ec%98%a4%ea%b8%b0">#</a>
+</h4>
+<ul>
+<li>
+<p><code>Psr\Container\ContainerInterface</code>는 <code>get</code>과 <code>has</code> 두가지 메서드를 제공합니다.</p>
+</li>
+<li>
+<p><code>get</code> 은 하나의 필수 매개 변수를 가집니다. 엔트리 식별자는 반드시 문자열이어야 합니다 (MUST).
+<code>get</code> 은 어떤 값이든 (하나의 <em>mixed</em> 값) 반환 할 수 있고 식별자가 컨테이너에 알려지지 않은 경우에는 <code>NotFoundExceptionInterface</code> 예외를 던집니다.
+  동일한 식별자를 가진 <code>get</code> 에 대한 두 번의 연속적인 호출은 동일한 값을 반환해야합니다 (SHOULD).
+그러나 <code>implementor</code> 디자인 또는 <code>user</code> 설정에 따라 다른 값들이 반환 될 수 있습니다. 그래서 <code>user</code>는 2번의 연속적인 호출에서 같은 값을 얻는 것에 의존하지 않아야합니다 (SHOULD NOT).</p>
+</li>
+<li>
+<p><code>has</code> 는 하나의 고유 한 매개 변수를 가집니다. 엔트리 식별자는 반드시 문자열이어야 합니다(MUST).
+<code>has</code> 는 엔트리 식별자가 컨테이너에 알려지면 <code>true</code> 를 리턴하고 그렇지 않으면 <code>false</code> 를 리턴해야합니다 (MUST).
+<code>has($id)</code> 가 false 를 반환하면 <code>get($id)</code> 는 <code>NotFoundExceptionInterface</code> 예외를 던져야합니다.</p>
+</li>
+</ul>
+<h3 id="12-exceptions">
+  1.2 Exceptions
+  <a class="anchor" href="#12-exceptions">#</a>
+</h3>
+<p>컨테이너에 의해 직접 던져진 예외는
+<a href="#container-exception"><code>Psr\Container\ContainerExceptionInterface</code></a>을 상속해야한다(SHOULD).</p>
+<p>존재하지 않는 id를 가진 <code>get</code> 메서드에 대한 호출은
+<a href="#not-found-exception"><code>Psr\Container\NotFoundExceptionInterface</code></a> 예외를 던져야 한다(MUST).</p>
+<h3 id="13-권장-사용법">
+  1.3 권장 사용법
+  <a class="anchor" href="#13-%ea%b6%8c%ec%9e%a5-%ec%82%ac%ec%9a%a9%eb%b2%95">#</a>
+</h3>
+<p>사용자는 객체가 <em>자신의 의존성</em>을 검색 할 수 있도록 컨테이너에 객체를 넘겨서는 안됩니다(SHOULD NOT).
+즉, 컨테이너는 <a href="https://en.wikipedia.org/wiki/Service_locator_pattern">Service Locator</a>로 사용됩니다.
+이런 행동은 일반적으로 방해가 됩니다</p>
+<p>자세한 내용은 META 문서의 섹션 4를 참조하십시오.</p>
+<h2 id="2-package">
+  2. Package
+  <a class="anchor" href="#2-package">#</a>
+</h2>
+<p>설명한 인터페이스와 클래스 및 예외 사항은 <a href="https://packagist.org/packages/psr/container">psr/container</a> 패키지의 일부로 제공됩니다.</p>
+<p>PSR 컨테이너 구현체를 제공하는 패키지는 <code>psr/container-implementation</code> 을 제공한다고 선언해야합니다.</p>
+<p>구현이 필요한 프로젝트에는 <code>psr/container-implementation</code>의 <code>1.0.0</code> 을 요구합니다.</p>
+<h2 id="3-interfaces">
+  3. Interfaces
+  <a class="anchor" href="#3-interfaces">#</a>
+</h2>
+<p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="31-psrcontainercontainerinterface">
+  3.1. <code>Psr\Container\ContainerInterface</code>
+  <a class="anchor" href="#31-psrcontainercontainerinterface">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Container</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Describes the interface of a container that exposes methods to read its entries.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Finds an entry of the container by its identifier and returns it.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $id Identifier of the entry to look for.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @throws NotFoundExceptionInterface  No entry was found for **this** identifier.
+</span><span style="color:#e6db74">     * @throws ContainerExceptionInterface Error while retrieving the entry.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return mixed Entry.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">get</span>($id);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns true if the container can return an entry for the given identifier.
+</span><span style="color:#e6db74">     * Returns false otherwise.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * `has($id)` returning true does not mean that `get($id)` will not throw an exception.
+</span><span style="color:#e6db74">     * It does however mean that `get($id)` will not throw a `NotFoundExceptionInterface`.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $id Identifier of the entry to look for.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">has</span>($id);
+}
+</code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="32-psrcontainercontainerexceptioninterface">
+  3.2. <code>Psr\Container\ContainerExceptionInterface</code>
+  <a class="anchor" href="#32-psrcontainercontainerexceptioninterface">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Container</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Base interface representing a generic exception in a container.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ContainerExceptionInterface</span>
+{
+}
+</code></pre></div><p><!-- raw HTML omitted --><!-- raw HTML omitted --></p>
+<h3 id="33-psrcontainernotfoundexceptioninterface">
+  3.3. <code>Psr\Container\NotFoundExceptionInterface</code>
+  <a class="anchor" href="#33-psrcontainernotfoundexceptioninterface">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Container</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * No entry was found in the container.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">NotFoundExceptionInterface</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">ContainerExceptionInterface</span>
+{
+}
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-명세서">1. 명세서</a>
+      <ul>
+        <li><a href="#11-기본">1.1 기본</a></li>
+        <li><a href="#12-exceptions">1.2 Exceptions</a></li>
+        <li><a href="#13-권장-사용법">1.3 권장 사용법</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-package">2. Package</a></li>
+    <li><a href="#3-interfaces">3. Interfaces</a>
+      <ul>
+        <li><a href="#31-psrcontainercontainerinterface">3.1. <code>Psr\Container\ContainerInterface</code></a></li>
+        <li><a href="#32-psrcontainercontainerexceptioninterface">3.2. <code>Psr\Container\ContainerExceptionInterface</code></a></li>
+        <li><a href="#33-psrcontainernotfoundexceptioninterface">3.3. <code>Psr\Container\NotFoundExceptionInterface</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

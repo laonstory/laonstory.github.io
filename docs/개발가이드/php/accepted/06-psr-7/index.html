@@ -1,0 +1,2177 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="HTTP message interfaces #  이 문서는 RFC 7230 및 RFC 7231에 설명한 대로 HTTP 메시지를 처리하는 일반적인 인터페이스 및 RFC 3986에 설명한 대로 HTTP 메시지와 함께 사용할 URI에 관한 내용을 설명합니다
+HTTP 메시지는 웹 개발의 기반(foundation)입니다. 웹 브라우저와 cURL과 같은 HTTP 클라이언트는 HTTP 요청 메시지를 작성하여 HTTP 응답 메시지를 제공하는 웹 서버로 전송합니다. 서버 측 코드는 HTTP 요청 메시지를 수신하고 HTTP 응답 메시지를 반환합니다.
+HTTP 메시지는 일반적으로 최종 사용자로부터 요청(abstracted)되지만 개발자들은 일반적으로 HTTP API에 요청을 하거나 들어오는 요청을 처리하는 등의 작업을 수행하기 위해 구조화 방법과 이를 액세스하거나 조작하는 방법을 알아야합니다.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="HTTP message interfaces #  이 문서는 RFC 7230 및 RFC 7231에 설명한 대로 HTTP 메시지를 처리하는 일반적인 인터페이스 및 RFC 3986에 설명한 대로 HTTP 메시지와 함께 사용할 URI에 관한 내용을 설명합니다
+HTTP 메시지는 웹 개발의 기반(foundation)입니다. 웹 브라우저와 cURL과 같은 HTTP 클라이언트는 HTTP 요청 메시지를 작성하여 HTTP 응답 메시지를 제공하는 웹 서버로 전송합니다. 서버 측 코드는 HTTP 요청 메시지를 수신하고 HTTP 응답 메시지를 반환합니다.
+HTTP 메시지는 일반적으로 최종 사용자로부터 요청(abstracted)되지만 개발자들은 일반적으로 HTTP API에 요청을 하거나 들어오는 요청을 처리하는 등의 작업을 수행하기 위해 구조화 방법과 이를 액세스하거나 조작하는 방법을 알아야합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/06-psr-7/" />
+
+<title>06 P S R 7 | Laonstory GuideBook</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/en.search.min.3e383c83219ec4150ecf5a5f1b2c5854327af5ba771ae455be1680107223e7da.js" integrity="sha256-Pjg8gyGexBUOz1pfGyxYVDJ69bp3GuRVvhaAEHIj59o="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Laonstory GuideBook</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/" class="collapsed ">개발가이드</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/" class="collapsed ">Php</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/01-psr-1/" class="">01 P S R 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/02-psr-3/" class="">02 P S R 3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/03-psr-4/" class="">03 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/04-psr-4/" class="">04 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/05-psr-6/" class="">05 P S R 6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/06-psr-7/" class="active">06 P S R 7</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/07-psr-11/" class="">07 P S R 11</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/08-psr-12/" class="">08 P S R 12</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/09-psr-13/" class="">09 P S R 13</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/10-psr-14/" class="">10 P S R 14</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/11-psr-15/" class="">11 P S R 15</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/12-psr-16/" class="">12 P S R 16</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/13-psr-17/" class="">13 P S R 17</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/14-psr-18/" class="">14 P S R 18</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/javascript/javascript/" class="">Javascript</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/" class="">React Jsx</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>06 P S R 7</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-명세서">1. 명세서</a>
+      <ul>
+        <li><a href="#11-messages">1.1 Messages</a></li>
+        <li><a href="#12-http-headers">1.2 HTTP Headers</a></li>
+        <li><a href="#13-streams">1.3 Streams</a></li>
+        <li><a href="#14-request-targets-and-uris">1.4 Request Targets and URIs</a></li>
+        <li><a href="#15-server-side-requests">1.5 Server-side Requests</a></li>
+        <li><a href="#16-uploaded-files">1.6 Uploaded files</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-package">2. Package</a></li>
+    <li><a href="#3-interfaces">3. Interfaces</a>
+      <ul>
+        <li><a href="#31-psrhttpmessagemessageinterface">3.1 <code>Psr\Http\Message\MessageInterface</code></a></li>
+        <li><a href="#32-psrhttpmessagerequestinterface">3.2 <code>Psr\Http\Message\RequestInterface</code></a></li>
+        <li><a href="#33-psrhttpmessageresponseinterface">3.3 <code>Psr\Http\Message\ResponseInterface</code></a></li>
+        <li><a href="#34-psrhttpmessagestreaminterface">3.4 <code>Psr\Http\Message\StreamInterface</code></a></li>
+        <li><a href="#35-psrhttpmessageuriinterface">3.5 <code>Psr\Http\Message\UriInterface</code></a></li>
+        <li><a href="#36-psrhttpmessageuploadedfileinterface">3.6 <code>Psr\Http\Message\UploadedFileInterface</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="http-message-interfaces">
+  HTTP message interfaces
+  <a class="anchor" href="#http-message-interfaces">#</a>
+</h1>
+<p>이 문서는 <a href="http://tools.ietf.org/html/rfc7230">RFC 7230</a> 및 <a href="http://tools.ietf.org/html/rfc7231">RFC 7231</a>에 설명한 대로
+HTTP 메시지를 처리하는 일반적인 인터페이스 및 <a href="http://tools.ietf.org/html/rfc3986">RFC 3986</a>에 설명한 대로 HTTP 메시지와 함께 사용할 URI에 관한 내용을 설명합니다</p>
+<p>HTTP 메시지는 웹 개발의 기반(foundation)입니다.
+웹 브라우저와 cURL과 같은 HTTP 클라이언트는 HTTP 요청 메시지를 작성하여 HTTP 응답 메시지를 제공하는 웹 서버로 전송합니다.
+서버 측 코드는 HTTP 요청 메시지를 수신하고 HTTP 응답 메시지를 반환합니다.</p>
+<p>HTTP 메시지는 일반적으로 최종 사용자로부터 요청(abstracted)되지만 개발자들은 일반적으로 HTTP API에 요청을 하거나 들어오는 요청을 처리하는 등의 작업을 수행하기 위해 구조화 방법과 이를 액세스하거나 조작하는 방법을 알아야합니다.</p>
+<p>모든 HTTP 요청 메시지에는 다음과 같은 특정 형식이 있습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="http"><span style="color:#a6e22e">POST</span> /path <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
+Host<span style="color:#f92672">:</span> <span style="color:#ae81ff">example.com</span>
+
+foo=bar&amp;baz=bat
+</code></pre></div><p>첫 번째 요청 줄은 &ldquo;요청 줄(request line)&ldquo;이며 HTTP 요청 방법(request method), 요청 대상 (일반적으로 URI의 절대값 또는 웹 서버의 경로) 및 HTTP 프로토콜 버전을 순서대로 포함합니다.
+그 뒤에는 하나 이상의 HTTP 헤더, 빈 행 및 메시지 본문이옵니다.</p>
+<p>HTTP 응답 메시지는 다음과 유사한 구조를 가집니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="http"><span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span> <span style="color:#ae81ff">200</span> <span style="color:#a6e22e">OK</span>
+Content-Type<span style="color:#f92672">:</span> <span style="color:#ae81ff">text/plain</span>
+
+<span style="color:#960050;background-color:#1e0010">This</span> <span style="color:#960050;background-color:#1e0010">is</span> <span style="color:#960050;background-color:#1e0010">the</span> <span style="color:#960050;background-color:#1e0010">response</span> <span style="color:#960050;background-color:#1e0010">body</span>
+</code></pre></div><p>첫 번째 줄은 &ldquo;상태 줄&quot;이며 HTTP 프로토콜 버전, HTTP 상태 코드 및 사람이 읽을 수 있는 상태 코드 설명 인 &ldquo;이유 구문&quot;을 순서대로 포함합니다.
+HTTP 요청 메시지와 마찬가지로 하나 이상의 HTTP 헤더, 빈 행 및 메시지 본문이옵니다.</p>
+<p>이 문서에서 설명하는 인터페이스는 HTTP 메시지 및 HTTP 메시지를 구성하는 요소를 추상화 한 것입니다.</p>
+<p>이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다.
+이것은 <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>에 설명 된대로 해석해야 합니다.
+<code>역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다</code></p>
+<h3 id="references">
+  References
+  <a class="anchor" href="#references">#</a>
+</h3>
+<ul>
+<li><a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a></li>
+<li><a href="http://tools.ietf.org/html/rfc3986">RFC 3986</a></li>
+<li><a href="http://tools.ietf.org/html/rfc7230">RFC 7230</a></li>
+<li><a href="http://tools.ietf.org/html/rfc7231">RFC 7231</a></li>
+</ul>
+<h2 id="1-명세서">
+  1. 명세서
+  <a class="anchor" href="#1-%eb%aa%85%ec%84%b8%ec%84%9c">#</a>
+</h2>
+<h3 id="11-messages">
+  1.1 Messages
+  <a class="anchor" href="#11-messages">#</a>
+</h3>
+<p>HTTP 메시지는 클라이언트에서 서버로의 요청 또는 서버에서 클라이언트로의 응답을 의미합니다.
+이 사양은 HTTP 메시지 <code>Psr\Http\Message\RequestInterface</code> 와 <code>Psr\Http\Message\ResponseInterface</code> 에 대한 인터페이스를 각각 정의합니다.</p>
+<p><code>Psr\Http\Message\RequestInterface</code> 와 <code>Psr\Http\Message\ResponseInterface</code> 는 모두 <code>Psr\Http\Message\MessageInterface</code>를 상속받습니다(extend).
+<code>Psr\Http\Message\MessageInterface</code> 는 직접 구현 해도 되지만(MAY), 구현자는 <code>Psr\Http\Message\RequestInterface</code> 와 <code>Psr\Http\Message\ResponseInterface</code> 를 구현해야합니다 (SHOULD).</p>
+<p>앞으로 이 인터페이스들을 말 할 때 <code>Psr\Http\Message</code> 네임 스페이스는 생략 할 것입니다.</p>
+<h3 id="12-http-headers">
+  1.2 HTTP Headers
+  <a class="anchor" href="#12-http-headers">#</a>
+</h3>
+<h4 id="대소문자를-구분하지-않는-헤더-필드-이름">
+  대소문자를 구분하지 않는 헤더 필드 이름
+  <a class="anchor" href="#%eb%8c%80%ec%86%8c%eb%ac%b8%ec%9e%90%eb%a5%bc-%ea%b5%ac%eb%b6%84%ed%95%98%ec%a7%80-%ec%95%8a%eb%8a%94-%ed%97%a4%eb%8d%94-%ed%95%84%eb%93%9c-%ec%9d%b4%eb%a6%84">#</a>
+</h4>
+<p>HTTP 메시지에는 대소문자를 구분하지 않는 헤더 필드 이름을 포함합니다.
+<code>MessageInterface</code> 를 구현하는 클래스에서 헤더를 대문자와 소문자를 구분하지 않는 이름으로 검색합니다.
+예를 들어 <code>foo</code> 헤더를 검색하는 것은 <code>FoO</code> 헤더를 검색하는 것과 같은 결과를 반환합니다.
+비슷하게 <code>Foo</code> 헤더를 설정하면 이전에 설정된 <code>foo</code> 헤더 값을 덮어 씁니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$message = $message-&gt;withHeader(&#39;foo&#39;, &#39;bar&#39;);
+
+echo $message-&gt;getHeaderLine(&#39;foo&#39;);
+// Outputs: bar
+
+echo $message-&gt;getHeaderLine(&#39;FOO&#39;);
+// Outputs: bar
+
+$message = $message-&gt;withHeader(&#39;fOO&#39;, &#39;baz&#39;);
+echo $message-&gt;getHeaderLine(&#39;foo&#39;);
+// Outputs: baz
+</code></pre></div><p>헤더는 대소문자의 구분 없이 검색할 수 있지만, <code>getHeaders()</code> 로 가져올 경우는 원래의 대소문자가 유지되어야만 합니다 (MUST).</p>
+<p>부적합한 HTTP 프로그램은 특정 경우에 따라 달라질 수 있으므로 사용자가 요청이나 응답을 만들 때 HTTP 헤더의 대소문자를 지정할 수 있는 것이 좋습니다.</p>
+<h4 id="여러개의-값을-가진-헤더">
+  여러개의 값을 가진 헤더
+  <a class="anchor" href="#%ec%97%ac%eb%9f%ac%ea%b0%9c%ec%9d%98-%ea%b0%92%ec%9d%84-%ea%b0%80%ec%a7%84-%ed%97%a4%eb%8d%94">#</a>
+</h4>
+<p>여러개의 값을 가진 헤더를 수용하면서도 헤더로 문자열 작업을 할 수 있는 편리함을 제공하기 위해, 배열이나 문자열로 <code>MessageInterface</code> 의 인스턴스에서 헤더를 검색 할 수 있습니다.
+<code>getHeaderLine()</code> 메서드를 사용하여, 대소문자를 구분하지 않는 헤더의 이름으로 검색한 결과 값을 모두 쉼표로 연결한 문자열을 가져옵니다.
+대문자와 소문자를 구분하지 않는 헤더의 모든 헤더 값의 배열을 이름으로 검색하려면 <code>getHeader()</code>를 사용하십시오.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$message = $message
+    -&gt;withHeader(&#39;foo&#39;, &#39;bar&#39;)
+    -&gt;withAddedHeader(&#39;foo&#39;, &#39;baz&#39;);
+
+$header = $message-&gt;getHeaderLine(&#39;foo&#39;);
+// $header contains: &#39;bar, baz&#39;
+
+$header = $message-&gt;getHeader(&#39;foo&#39;);
+// [&#39;bar&#39;, &#39;baz&#39;]
+</code></pre></div><p>참고 : 모든 헤더 값을 쉼표 (예 :<code>Set-Cookie</code>)를 사용하여 연결할 수 있는 것은 아닙니다.
+이러한 헤더로 작업 할 때 <code>MessageInterface</code> 기반의 클래스는 이러한 다중 값 헤더를 검색하기 위해 <code>getHeader()</code> 메소드에 의존해야합니다 (SHOULD).</p>
+<h4 id="host-헤더">
+  Host 헤더
+  <a class="anchor" href="#host-%ed%97%a4%eb%8d%94">#</a>
+</h4>
+<p>요청에서 <code>Host</code> 헤더는 일반적으로 URI의 호스트 구성 부분만 아니라 TCP 연결 할 때 사용하는 호스트를 포함합니다.
+그러나 HTTP 사양(specification)에서는 <code>Host</code> 헤더가 각각 다른 것을 허용하고 있습니다. <code>역자주: TCP 연결에 사용된 URI와 Http Requeser의 Host Header의 값이 다른 것을 허용합니다</code></p>
+<p>그래서 구현시 <code>Host</code> 헤더가 제공되지 않으면 제공된 URI에서 <code>Host</code> 헤더를 가져와야 합니다 (MUST).</p>
+<p>기본적으로 <code>RequestInterface::withUri()</code>은 요청의 <code>Host</code> 헤더의 값을 전달 된 <code>UriInterface</code> 의 호스트 구성 요소와 일치하는 <code>Host</code> 헤더로 대체합니다.</p>
+<p>두 번째 인수(<code>$preserveHost</code>)에 <code>true</code> 를 전달하여 <code>Host</code> 헤더의 원래 상태를 보존하도록 선택할 수 있습니다.
+이 인수를 <code>true</code> 로 설정하면 반환 하는 메시지의 <code>Host</code> 헤더를 업데이트하지 않습니다.
+단, 메시지에 <code>Host</code> 헤더가 포함되어 있지 않으면 예외입니다.</p>
+<p>이 테이블은 다양한 초기 요청과 URI에 대해 <code>$preserveHost</code> 인자가 <code>true</code> 로 설정된 <code>withUri()</code> 에 의해 반환 된 요청에 대해 <code>getHeaderLine('Host')</code> 가 반환하는 것을 보여줍니다.</p>
+<table>
+<thead>
+<tr>
+<th>Request Host header<!-- raw HTML omitted --><a href="#rhh">1</a><!-- raw HTML omitted --></th>
+<th>Request host component<!-- raw HTML omitted --><a href="#rhc">2</a><!-- raw HTML omitted --></th>
+<th>URI host component<!-- raw HTML omitted --><a href="#uhc">3</a><!-- raw HTML omitted --></th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>'&rsquo;</td>
+<td>'&rsquo;</td>
+<td>'&rsquo;</td>
+<td>'&rsquo;</td>
+</tr>
+<tr>
+<td>'&rsquo;</td>
+<td>foo.com</td>
+<td>'&rsquo;</td>
+<td>foo.com</td>
+</tr>
+<tr>
+<td>'&rsquo;</td>
+<td>foo.com</td>
+<td>bar.com</td>
+<td>foo.com</td>
+</tr>
+<tr>
+<td>foo.com</td>
+<td>'&rsquo;</td>
+<td>bar.com</td>
+<td>foo.com</td>
+</tr>
+<tr>
+<td>foo.com</td>
+<td>bar.com</td>
+<td>baz.com</td>
+<td>foo.com</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><!-- raw HTML omitted -->1<!-- raw HTML omitted --> 변경이 일어나기 전의 <code>Host</code> 헤더 값</li>
+<li><!-- raw HTML omitted -->2<!-- raw HTML omitted --> 변경 전에 요청으로 작성된 URI의 Host 구성 요소.</li>
+<li><!-- raw HTML omitted -->3<!-- raw HTML omitted --> <code>withUri()</code> 를 통해 주입되는 URI의 Host 구성 요소.</li>
+</ul>
+<h3 id="13-streams">
+  1.3 Streams
+  <a class="anchor" href="#13-streams">#</a>
+</h3>
+<p>HTTP 메시지는 시작 줄, 헤더 및 본문으로 구성됩니다.
+HTTP 메시지 본문은 매우 작거나 매우 클 수 있습니다.
+본문의 메시지를 문자열로 변환하려고하면 본문이 완전히 메모리에 저장되어야하기 때문에 의도 한 것보다 많은 메모리를 쉽게 써버릴 수 있습니다.
+요청이나 응답의 본문을 메모리에 저장하려고 하면 배제되어 해당 구현을 사용하여 큰 메시지 본문을 처리 할 수 있게됩니다. <code>역자주: 자연스럽게 번역하려면 배제된다는 표현을 다른 것으로 바꾸는게 좋아보이지만 답을 못찾았습니다</code>
+<code>StreamInterface</code>는 데이터 스트림을 읽거나 쓸 때 구현 세부 사항을 감추기 위해 사용합니다.
+문자열이 적절한 메시지 구현이된다면, <code>php://memory</code> 와 <code>php://temp</code>와 같은 내장 스트림을 사용할 수 있습니다.</p>
+<p><code>StreamInterface</code>는 스트림을 효율적으로 읽고, 쓰고, 지나갈 수 있게 해주는 몇가지 메소드를 제공줍니다.</p>
+<p>스트림은 <code>isReadable()</code>, <code>isWritable()</code> 및 <code>isSeekable()</code>의 세 가지 메소드를 사용합니다
+이 메소드는 스트림 작업자가 스트림이 자신의 요구 사항을 충족하는지 확인하는 데 사용할 수 있습니다.</p>
+<p>각 스트림 인스턴스에는 읽기 전용, 쓰기 전용 또는 읽기 / 쓰기가 가능한 다양한 기능이 있습니다.
+또한 임의의 임의 액세스 (모든 위치를 앞뒤로 검색) 또는 순차 액세스 (예 : 소켓, 파이프 또는 콜백 기반 스트림의 경우) 만 허용 할 수 있습니다.</p>
+<p>마지막으로, <code>StreamInterface</code> 는 전체 본문 내용을 즉시 검색하거나 내보내는 것을 단순화하는 <code>__toString ()</code> 메소드를 제공합니다.</p>
+<p>요청과 응답 인터페이스와 달리,<code>StreamInterface</code>는 불변성을 모델링하지 않습니다.
+실제 PHP 스트림이 래핑 된 상황에서는 자원과 상호 작용하는 모든 코드가 커서 상태, 내용 등을 포함하여 상태를 변경시킬 수 있으므로 변경이 불가능합니다.
+구현시 서버 측 요청 및 클라이언트 측 응답에 읽기 전용 스트림을 사용하는 것이 좋습니다.
+사용자는 스트림 인스턴스가 변경 될 수 있으며 메시지 상태를 변경할 수 있다는 사실을 알고 있어야합니다. 의심스럽다면 새 스트림 인스턴스를 만들어 메시지에 첨부하여 상태를 적용합니다.</p>
+<h3 id="14-request-targets-and-uris">
+  1.4 Request Targets and URIs
+  <a class="anchor" href="#14-request-targets-and-uris">#</a>
+</h3>
+<p>RFC 7230에 따라 요청 메시지에는 요청 줄의 두 번째 세그먼트로 &ldquo;요청 대상&quot;이 포함됩니다.
+요청 대상은 다음 형식 중 하나 일 수 있습니다.</p>
+<ul>
+<li><strong>origin-form</strong> : 경로와 쿼리스트링 (있을 경우)으로 구성됩니다. 이를 보통 상대 URL이라고 합니다.
+TCP를 통해 전송되는 메시지는 일반적으로 <strong>origin-form</strong>입니다. 스키마(scheme) 및 권한 데이터는 일반적으로 CGI 변수를 통해서만 표현합니다.</li>
+<li><strong>absolute-form</strong> : (&quot;[user-info@]호스트[:port]&rdquo;, 대괄호 안의 항목은 선택 사항), 경로 (있는 경우), 쿼리스트링 (있는 경우) 및 fragment (있는 경우)으로 구성됩니다. <code>역자주: fragment는 URI의 #(hash) 문자열로 생각하시면 됩니다</code>
+이것은 절대 URI라고도하며 RFC 3986에서 지정하는 유일한 URI 형식입니다.
+이 양식은 HTTP 프록시에 요청할 때 일반적으로 사용됩니다.</li>
+<li><strong>authority-form</strong> : 권한으로만 구성되어있습니다. 이것은 일반적으로 HTTP 클라이언트와 프록시 서버 사이의 연결을 설정하기 위한 CONNECT 요청에만 사용됩니다.</li>
+<li><strong>asterisk-form</strong> : 이것은 문자열 <code>*</code> 로만 구성되며 웹 서버의 일반적인 기능을 결정하기 위해 OPTIONS 메서드와 함께 사용됩니다.</li>
+</ul>
+<p>이러한 요청 대상 외에도 요청 대상과는 별도로 &lsquo;유효한(effective) URL&rsquo;이 있는 경우가 종종 있습니다.
+유효한(effective) URL은 HTTP 메시지 내에서 전송되지 않지만 요청을 하기위한 프로토콜 (http/https), 포트 및 호스트 이름을 결정하는 데 사용됩니다.</p>
+<p>유효한(effective) URL은 <code>UriInterface</code> 에 의해 표현됩니다.
+<code>UriInterface</code> 는 RFC 3986 (첫번째 사용 사례)에 명시된대로 HTTP와 HTTPS URI를 모델링합니다.
+이 인터페이스는 다양한 URI 부분과 상호 작용하기위한 메소드를 제공하여 URI의 반복 구문 분석의 필요성을 없애줍니다.
+또한 모델링 된 URI를 문자열 표현으로 변환하기위한 <code>__toString()</code> 메소드를 제공합니다.</p>
+<p><code>getRequestTarget()</code>으로 request-target을 검색 할 때, 이 메소드는 기본적으로 URI 객체를 사용하고 <strong>origin-form</strong>을 구성하는 데 필요한 모든 구성 요소를 추출합니다.
+<strong>origin-form</strong>은 가장 일반적인 요청 대상입니다.</p>
+<p>최종 사용자가 다른 세 가지 형식 중 하나를 사용하기를 원하거나 사용자가 명시적으로 요청 대상을 덮어쓰고 싶다면 <code>withRequestTarget()</code>을 사용하여 이를 처리 할 수 있습니다. <code>역자주: 세가지 형식이란 위에 나오는 네가지 형식 중 **origin-form**을 제외한 세가지를 말합니다</code></p>
+<p>이 메소드를 호출하면 <code>getUri()</code>로부터 반환받는 URI에 영향을 주지 않습니다.</p>
+<p>예를 들어, 사용자는 아래와 같이 서버에 <strong>asterisk-form</strong> 요청을 할 수 있습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$request = $request
+    -&gt;withMethod(&#39;OPTIONS&#39;)
+    -&gt;withRequestTarget(&#39;*&#39;)
+    -&gt;withUri(new Uri(&#39;https://example.org/&#39;));
+</code></pre></div><p>이 예제는 최종적으로 다음과 같은 결과를 얻을 수 있습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-http" data-lang="http"><span style="color:#a6e22e">OPTIONS</span> * <span style="color:#66d9ef">HTTP</span><span style="color:#f92672">/</span><span style="color:#ae81ff">1.1</span>
+</code></pre></div><p>하지만 HTTP 클라이언트는 유효한(effective) URL (<code>getUri()</code>로부터)을 사용하여 프로토콜, 호스트 이름 및 TCP 포트를 결정할 수 있습니다.</p>
+<p>HTTP 클라이언트는 반드시 <code>Uri::getPath()</code> 와 <code>Uri::getQuery()</code> 의 값을 무시해야하며(MUST), 대신 <code>getRequestTarget()</code> 에 의해 반환 된 값을 사용해야합니다. 기본값은 이 두 값을 연결한 것입니다.</p>
+<p>네 개의 요청 대상 폼 중 하나 이상을 구현하지 않기로 결정한 클라이언트는 여전히 <code>getRequestTarget()</code> 을 사용해야한다(MUST).
+이들 클라이언트는 지원하지 않는 요청 대상을 거부해야하며(MUST) 반드시 <code>getUri()</code> 의 값으로 폴백해서는 안된다(MUST NOT).</p>
+<p><code>RequestInterface</code>는 요청 대상을 검색하거나 제공된 요청 대상으로 새로운 인스턴스를 생성하기위한 메소드를 제공합니다.
+기본적으로 요청 대상이 인스턴스에서 특별히 구성되지 않으면, <code>getRequestTarget()</code>은 구성된 URI의 <strong>origin-form</strong>을 반환할 것입니다. (URI가 구성되지 않으면 &ldquo;/&quot;).
+<code>withRequestTarget($requestTarget)</code> 은 지정된 요청 대상으로 새로운 인스턴스를 생성하고, 개발자가 다른 3 개의 요청 대상 형식 (absolute-form, authority-form 및 asterisk-form)을 나타내는 요청 메시지를 생성 할 수 있도록합니다.
+사용되는 경우 구성된 URI 인스턴스는 여전히 클라이언트에서 사용할 수 있습니다.이 인스턴스는 서버에 대한 연결을 만드는 데 사용될 수 있습니다.</p>
+<h3 id="15-server-side-requests">
+  1.5 Server-side Requests
+  <a class="anchor" href="#15-server-side-requests">#</a>
+</h3>
+<p><code>RequestInterface</code> 는 HTTP 요청 메시지의 일반적인 표현을 제공합니다.
+그러나 서버 측 요청의 경우 서버 측 환경의 특성상 추가 처리가 필요합니다.
+서버 측 프로세싱은 CGI (Common Gateway Interface)를 고려해야하며 PHP의 SAPI(Server APIs)를 통한 CGI의 추상화 및 확장이 필요합니다.
+PHP는 다음과 같은 슈퍼 전역 변수를 통해 입력을 정렬하고 단순화했습니다.</p>
+<ul>
+<li><code>$ _COOKIE</code> : 역직렬화된 HTTP 쿠키에 대한 단순화 된 접근을 제공합니다.</li>
+<li><code>$ _GET</code> : 역직렬화된 쿼리스트링 인수에 대한 단순화 된 접근을 제공합니다.</li>
+<li><code>$ _POST</code> : 역직렬화된 HTTP POST를 통해 제출 된 urlencoded 매개 변수에 대해 단순화 된 액세스를 제공합니다. 일반적으로 메시지 본문을 파싱 한 결과로 간주 될 수 있습니다.</li>
+<li><code>$ _FILES</code> : 파일 업로드와 관련된 일련의 메타 데이터를 제공합니다.</li>
+<li><code>$ _SERVER</code> : CGI / SAPI 환경 변수에 대한 액세스를 제공합니다. 일반적으로 요청 메소드, 요청 스킴, 요청 URI 및 헤더가 포함됩니다.</li>
+</ul>
+<p><code>ServerRequestInterface</code> 는 <code>RequestInterface</code> 를 확장하여 이러한 다양한 슈퍼 전역 변수를 추상화합니다.
+이 방법은 사용자가 슈퍼 전역변수에 연결(coupling)하는 것을 줄이고 요청 사용자가 테스트하는 것을 권장하고 도와줍니다.
+서버 요청은 &ldquo;속성(attributes)&ldquo;이라는 추가 속성 하나를 제공하여 소비자가 응용 프로그램 관련 규칙 (예 : 경로(path) 일치, scheme 일치, 호스트 일치 등)에 대한 인트로스펙트(introspect), 분해(decompose) 및 일치(match) 기능을 제공합니다.
+따라서 서버 요청은 여러 요청자간에 메시징을 제공 할 수도 있습니다.</p>
+<h3 id="16-uploaded-files">
+  1.6 Uploaded files
+  <a class="anchor" href="#16-uploaded-files">#</a>
+</h3>
+<p><code>ServerRequestInterface</code> 는 각 가지(leaf)가 <code>UploadedFileInterface</code> 인스턴스로 정규화 된 구조로 업로드 파일 트리를 검색하는 메소드를 제공합니다.</p>
+<p>As an example, if you have a form that submits an array of files — e.g., the input name &ldquo;files&rdquo;, submitting <code>files[0]</code> and <code>files[1]</code> — PHP will represent this as:
+<code>$_FILES</code> 슈퍼 전역변수는 파일 입력 배열을 다룰 때 잘 알려진 문제점을 가지고 있습니다.
+예를 들어, 파일의 배열 (예 : 입력 이름이 &ldquo;files&quot;인 경우, <code>files[0]</code> 및 <code>files[1]</code>)을 제출하는 폼이 있는 경우 PHP는 다음과 같이 표현합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">array(
+    &#39;files&#39; =&gt; array(
+        &#39;name&#39; =&gt; array(
+            0 =&gt; &#39;file0.txt&#39;,
+            1 =&gt; &#39;file1.html&#39;,
+        ),
+        &#39;type&#39; =&gt; array(
+            0 =&gt; &#39;text/plain&#39;,
+            1 =&gt; &#39;text/html&#39;,
+        ),
+        /* etc. */
+    ),
+)
+</code></pre></div><p>아래와 같이 예상되는 것 대신 말이죠</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">array(
+    &#39;files&#39; =&gt; array(
+        0 =&gt; array(
+            &#39;name&#39; =&gt; &#39;file0.txt&#39;,
+            &#39;type&#39; =&gt; &#39;text/plain&#39;,
+            /* etc. */
+        ),
+        1 =&gt; array(
+            &#39;name&#39; =&gt; &#39;file1.html&#39;,
+            &#39;type&#39; =&gt; &#39;text/html&#39;,
+            /* etc. */
+        ),
+    ),
+)
+</code></pre></div><p>결과적으로 사용자는 이 언어 구현 세부 사항을 알아야하고 주어진 업로드에 대한 데이터를 수집하기위한 코드를 작성해야합니다.</p>
+<p>또한 아래와 같은 파일 업로드를 했을 때 <code>$ _FILES</code> 가 비어있는 경우가 있습니다</p>
+<ul>
+<li>HTTP method가 <code>POST</code> 아닐 때.</li>
+<li>유닛 테스팅 중일 때.</li>
+<li><a href="http://reactphp.org">ReactPHP</a>와 같은 SAPI가 아닌 환경에서 작동 할 때.</li>
+</ul>
+<p>이 경우 데이터를 다르게 시드해야합니다.
+예를 들면 다음과 같습니다.</p>
+<ul>
+<li>프로세스가 메시지 본문을 구문 분석하여 파일 업로드를 발견 할 수 있습니다.
+이 경우 구현은 파일 업로드를 파일 시스템에 쓰지 <em>않고</em> 대신 메모리, I/O 및 저장소 오버 헤드를 줄이기 위해 스트림으로 래핑하도록 선택할 수 있습니다.</li>
+<li>단위 테스트 시나리오에서 개발자는 다른 시나리오의 유효성을 검사하고 검증하기 위해 파일 업로드 메타 데이터를 스텁(stub) 또는 모의(mock) 할 수 있어야합니다.</li>
+</ul>
+<p><code>getUploadedFiles ()</code>는 사용자를 위해 정규화 된 구조를 제공합니다.
+구현은 다음을 기대 합니다.</p>
+<ul>
+<li>주어진 파일 업로드에 대한 모든 정보를 모아서 <code>Psr\Http\Message\UploadedFileInterface</code> 인스턴스를 채웁니다.</li>
+<li>전송된 트리 구조를 재작성합니다. 각 리프는 트리의 주어진 위치에 대한 적절한 <code>Psr\Http\Message\UploadedFileInterface</code> 인스턴스입니다.</li>
+</ul>
+<p>참조 된 트리 구조는 파일이 제출 된 명명 구조를 모방해야합니다.</p>
+<p>가장 단순한 예를 들어서, 이것은 다음과 같이 제출 된 단일 명명 된 양식 요소(form element) 일 수 있습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;file&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;avatar&#34;</span> /&gt;
+</code></pre></div><p>이 경우, <code>$_FILES</code>의 구조는 다음과 같습니다</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">array(
+    &#39;avatar&#39; =&gt; array(
+        &#39;tmp_name&#39; =&gt; &#39;phpUxcOty&#39;,
+        &#39;name&#39; =&gt; &#39;my-avatar.png&#39;,
+        &#39;size&#39; =&gt; 90996,
+        &#39;type&#39; =&gt; &#39;image/png&#39;,
+        &#39;error&#39; =&gt; 0,
+    ),
+)
+</code></pre></div><p><code>getUploadedFiles()</code> 에 의해 반환된 정규화된 양식은 다음과 같습니다</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">array(
+    &#39;avatar&#39; =&gt; /* UploadedFileInterface instance */
+)
+</code></pre></div><p>이름에 배열 표기법을 사용하는 입력의 경우</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;file&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my-form[details][avatar]&#34;</span> /&gt;
+</code></pre></div><p><code>$_FILES</code>은 다음과 같이 보입니다</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">array (
+    &#39;my-form&#39; =&gt; array (
+        &#39;name&#39; =&gt; array (
+            &#39;details&#39; =&gt; array (
+                &#39;avatar&#39; =&gt; &#39;my-avatar.png&#39;,
+            ),
+        ),
+        &#39;type&#39; =&gt; array (
+            &#39;details&#39; =&gt; array (
+                &#39;avatar&#39; =&gt; &#39;image/png&#39;,
+            ),
+        ),
+        &#39;tmp_name&#39; =&gt; array (
+            &#39;details&#39; =&gt; array (
+                &#39;avatar&#39; =&gt; &#39;phpmFLrzD&#39;,
+            ),
+        ),
+        &#39;error&#39; =&gt; array (
+            &#39;details&#39; =&gt; array (
+                &#39;avatar&#39; =&gt; 0,
+            ),
+        ),
+        &#39;size&#39; =&gt; array (
+            &#39;details&#39; =&gt; array (
+                &#39;avatar&#39; =&gt; 90996,
+            ),
+        ),
+    ),
+)
+</code></pre></div><p>그리고 <code>getUploadedFiles()</code> 에 의해 반환 된 트리는 다음과 같아야합니다</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">array(
+    &#39;my-form&#39; =&gt; array(
+        &#39;details&#39; =&gt; array(
+            &#39;avatar&#39; =&gt; /* UploadedFileInterface instance */
+        ),
+    ),
+)
+</code></pre></div><p>경우에 따라 다음과 같이 파일 배열을 지정할 수 있습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">Upload an avatar: &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;file&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my-form[details][avatars][]&#34;</span> /&gt;
+Upload an avatar: &lt;<span style="color:#f92672">input</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;file&#34;</span> <span style="color:#a6e22e">name</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;my-form[details][avatars][]&#34;</span> /&gt;
+</code></pre></div><p>(예를 들어 자바스크립트를 사용해 추가 파일 업로드 인풋을 생성하여 한 번에 여러 파일을 업로드 할 수 있습니다.)</p>
+<p>이 경우, 스펙 구현은 주어진 인덱스에있는 파일과 관련된 모든 정보를 집계해야합니다.
+왜냐하면 <code>$_FILES</code> 는 다음과 같은 경우 정상적인 구조에서 벗어났기 때문입니다</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">array (
+    &#39;my-form&#39; =&gt; array (
+        &#39;name&#39; =&gt; array (
+            &#39;details&#39; =&gt; array (
+                &#39;avatar&#39; =&gt; array (
+                    0 =&gt; &#39;my-avatar.png&#39;,
+                    1 =&gt; &#39;my-avatar2.png&#39;,
+                    2 =&gt; &#39;my-avatar3.png&#39;,
+                ),
+            ),
+        ),
+        &#39;type&#39; =&gt; array (
+            &#39;details&#39; =&gt; array (
+                &#39;avatar&#39; =&gt; array (
+                    0 =&gt; &#39;image/png&#39;,
+                    1 =&gt; &#39;image/png&#39;,
+                    2 =&gt; &#39;image/png&#39;,
+                ),
+            ),
+        ),
+        &#39;tmp_name&#39; =&gt; array (
+            &#39;details&#39; =&gt; array (
+                &#39;avatar&#39; =&gt; array (
+                    0 =&gt; &#39;phpmFLrzD&#39;,
+                    1 =&gt; &#39;phpV2pBil&#39;,
+                    2 =&gt; &#39;php8RUG8v&#39;,
+                ),
+            ),
+        ),
+        &#39;error&#39; =&gt; array (
+            &#39;details&#39; =&gt; array (
+                &#39;avatar&#39; =&gt; array (
+                    0 =&gt; 0,
+                    1 =&gt; 0,
+                    2 =&gt; 0,
+                ),
+            ),
+        ),
+        &#39;size&#39; =&gt; array (
+            &#39;details&#39; =&gt; array (
+                &#39;avatar&#39; =&gt; array (
+                    0 =&gt; 90996,
+                    1 =&gt; 90996,
+                    3 =&gt; 90996,
+                ),
+            ),
+        ),
+    ),
+)
+</code></pre></div><p>위의 <code>$_FILES</code> 배열은 <code>getUploadedFiles()</code> 에 의해 반환 될 경우 다음 구조체에 해당합니다</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">array(
+    &#39;my-form&#39; =&gt; array(
+        &#39;details&#39; =&gt; array(
+            &#39;avatars&#39; =&gt; array(
+                0 =&gt; /* UploadedFileInterface instance */,
+                1 =&gt; /* UploadedFileInterface instance */,
+                2 =&gt; /* UploadedFileInterface instance */,
+            ),
+        ),
+    ),
+)
+</code></pre></div><p>사용자는 다음을 사용하여 중첩 배열의 인덱스 <code>1</code>에 접근합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$request-&gt;getUploadedFiles()[&#39;my-form&#39;][&#39;details&#39;][&#39;avatars&#39;][1];
+</code></pre></div><p>업로드 된 파일 데이터는 파생물이므로 ( <code>$_FILES</code> 또는 요청 본문에서 파생 된), mutator 메소드 인 <code>withUploadedFiles()</code> 또한 인터페이스에 존재하므로 다른 프로세스에 대한 정규화를 위임 할 수 있습니다.</p>
+<p>원래 예제의 경우 사용은 다음과 유사합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$file0 = $request-&gt;getUploadedFiles()[&#39;files&#39;][0];
+$file1 = $request-&gt;getUploadedFiles()[&#39;files&#39;][1];
+
+printf(
+    &#34;Received the files %s and %s&#34;,
+    $file0-&gt;getClientFilename(),
+    $file1-&gt;getClientFilename()
+);
+
+// &#34;Received the files file0.txt and file1.html&#34;
+</code></pre></div><p>이 제안은 또한 구현이 비 SAPI 환경에서 작동 할 수 있음을 보장(recognizes)합니다.
+따라서 <code>UploadedFileInterface</code> 는 환경에 관계없이 작동이 작동 할 수 있도록 보장하는 메소드를 제공합니다.
+특히</p>
+<ul>
+<li><code>moveTo($targetPath)</code> 는 임시 업로드 파일에 직접 <code>move_uploaded_file()</code>을 호출하는 안전하고 권장되는 대안으로 제공됩니다.
+구현체는 환경에 따라 사용할 올바른 작업을 감지합니다.</li>
+<li><code>getStream()</code> 은 <code>StreamInterface</code> 인스턴스를 리턴합니다.
+비 SAPI 환경에서 개별 업로드 파일을 직접 파일 대신에 <code>php://temp</code> 스트림으로 파싱하는 것이 제안되었습니다. 이 경우 업로드 파일이 없습니다.
+<code>getStream()</code>은 환경에 관계없이 작동하도록 보장됩니다.</li>
+</ul>
+<p>예를 들면 다음과 같습니다.</p>
+<pre><code>// Move a file to an upload directory
+$filename = sprintf(
+    '%s.%s',
+    create_uuid(),
+    pathinfo($file0-&gt;getClientFilename(), PATHINFO_EXTENSION)
+);
+$file0-&gt;moveTo(DATA_DIR . '/' . $filename);
+
+// Stream a file to Amazon S3.
+// Assume $s3wrapper is a PHP stream that will write to S3, and that
+// Psr7StreamWrapper is a class that will decorate a StreamInterface as a PHP
+// StreamWrapper.
+$stream = new Psr7StreamWrapper($file1-&gt;getStream());
+stream_copy_to_stream($stream, $s3wrapper);
+</code></pre><h2 id="2-package">
+  2. Package
+  <a class="anchor" href="#2-package">#</a>
+</h2>
+<p>설명 된 인터페이스와 클래스는 <a href="https://packagist.org/packages/psr/http-message">psr/http-message</a> 패키지의 일부로 제공됩니다.</p>
+<h2 id="3-interfaces">
+  3. Interfaces
+  <a class="anchor" href="#3-interfaces">#</a>
+</h2>
+<h3 id="31-psrhttpmessagemessageinterface">
+  3.1 <code>Psr\Http\Message\MessageInterface</code>
+  <a class="anchor" href="#31-psrhttpmessagemessageinterface">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Http\Message</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * HTTP messages consist of requests from a client to a server and responses
+</span><span style="color:#e6db74"> * from a server to a client. This interface defines the methods common to
+</span><span style="color:#e6db74"> * each.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Messages are considered immutable; all methods that might change state MUST
+</span><span style="color:#e6db74"> * be implemented such that they retain the internal state of the current
+</span><span style="color:#e6db74"> * message and return an instance that contains the changed state.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * @see http://www.ietf.org/rfc/rfc7230.txt
+</span><span style="color:#e6db74"> * @see http://www.ietf.org/rfc/rfc7231.txt
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">MessageInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieves the HTTP protocol version as a string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The string MUST contain only the HTTP version number (e.g., &#34;1.1&#34;, &#34;1.0&#34;).
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return string HTTP protocol version.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getProtocolVersion</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified HTTP protocol version.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The version string MUST contain only the HTTP version number (e.g.,
+</span><span style="color:#e6db74">     * &#34;1.1&#34;, &#34;1.0&#34;).
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * new protocol version.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $version HTTP protocol version
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withProtocolVersion</span>($version);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieves all message header values.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The keys represent the header name as it will be sent over the wire, and
+</span><span style="color:#e6db74">     * each value is an array of strings associated with the header.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     *     // Represent the headers as a string
+</span><span style="color:#e6db74">     *     foreach ($message-&gt;getHeaders() as $name =&gt; $values) {
+</span><span style="color:#e6db74">     *         echo $name . &#39;: &#39; . implode(&#39;, &#39;, $values);
+</span><span style="color:#e6db74">     *     }
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     *     // Emit headers iteratively:
+</span><span style="color:#e6db74">     *     foreach ($message-&gt;getHeaders() as $name =&gt; $values) {
+</span><span style="color:#e6db74">     *         foreach ($values as $value) {
+</span><span style="color:#e6db74">     *             header(sprintf(&#39;%s: %s&#39;, $name, $value), false);
+</span><span style="color:#e6db74">     *         }
+</span><span style="color:#e6db74">     *     }
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * While header names are not case-sensitive, getHeaders() will preserve the
+</span><span style="color:#e6db74">     * exact case in which headers were originally specified.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return string[][] Returns an associative array of the message&#39;s headers.
+</span><span style="color:#e6db74">     *     Each key MUST be a header name, and each value MUST be an array of
+</span><span style="color:#e6db74">     *     strings for that header.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getHeaders</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Checks if a header exists by the given case-insensitive name.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $name Case-insensitive header field name.
+</span><span style="color:#e6db74">     * @return bool Returns true if any header names match the given header
+</span><span style="color:#e6db74">     *     name using a case-insensitive string comparison. Returns false if
+</span><span style="color:#e6db74">     *     no matching header name is found in the message.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hasHeader</span>($name);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieves a message header value by the given case-insensitive name.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method returns an array of all the header values of the given
+</span><span style="color:#e6db74">     * case-insensitive header name.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If the header does not appear in the message, this method MUST return an
+</span><span style="color:#e6db74">     * empty array.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $name Case-insensitive header field name.
+</span><span style="color:#e6db74">     * @return string[] An array of string values as provided for the given
+</span><span style="color:#e6db74">     *    header. If the header does not appear in the message, this method MUST
+</span><span style="color:#e6db74">     *    return an empty array.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getHeader</span>($name);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieves a comma-separated string of the values for a single header.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method returns all of the header values of the given
+</span><span style="color:#e6db74">     * case-insensitive header name as a string concatenated together using
+</span><span style="color:#e6db74">     * a comma.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * NOTE: Not all header values may be appropriately represented using
+</span><span style="color:#e6db74">     * comma concatenation. For such headers, use getHeader() instead
+</span><span style="color:#e6db74">     * and supply your own delimiter when concatenating.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If the header does not appear in the message, this method MUST return
+</span><span style="color:#e6db74">     * an empty string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $name Case-insensitive header field name.
+</span><span style="color:#e6db74">     * @return string A string of values as provided for the given header
+</span><span style="color:#e6db74">     *    concatenated together using a comma. If the header does not appear in
+</span><span style="color:#e6db74">     *    the message, this method MUST return an empty string.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getHeaderLine</span>($name);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the provided value replacing the specified header.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * While header names are case-insensitive, the casing of the header will
+</span><span style="color:#e6db74">     * be preserved by this function, and returned from getHeaders().
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * new and/or updated header and value.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $name Case-insensitive header field name.
+</span><span style="color:#e6db74">     * @param string|string[] $value Header value(s).
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException for invalid header names or values.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withHeader</span>($name, $value);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified header appended with the given value.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Existing values for the specified header will be maintained. The new
+</span><span style="color:#e6db74">     * value(s) will be appended to the existing list. If the header did not
+</span><span style="color:#e6db74">     * exist previously, it will be added.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * new header and/or value.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $name Case-insensitive header field name to add.
+</span><span style="color:#e6db74">     * @param string|string[] $value Header value(s).
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException for invalid header names.
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException for invalid header values.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withAddedHeader</span>($name, $value);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance without the specified header.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Header resolution MUST be done without case-sensitivity.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that removes
+</span><span style="color:#e6db74">     * the named header.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $name Case-insensitive header field name to remove.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withoutHeader</span>($name);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Gets the body of the message.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return StreamInterface Returns the body as a stream.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getBody</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified message body.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The body MUST be a StreamInterface object.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return a new instance that has the
+</span><span style="color:#e6db74">     * new body stream.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param StreamInterface $body Body.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException When the body is not valid.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withBody</span>(<span style="color:#a6e22e">StreamInterface</span> $body);
+}
+</code></pre></div><h3 id="32-psrhttpmessagerequestinterface">
+  3.2 <code>Psr\Http\Message\RequestInterface</code>
+  <a class="anchor" href="#32-psrhttpmessagerequestinterface">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Http\Message</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Representation of an outgoing, client-side request.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Per the HTTP specification, this interface includes properties for
+</span><span style="color:#e6db74"> * each of the following:
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * - Protocol version
+</span><span style="color:#e6db74"> * - HTTP method
+</span><span style="color:#e6db74"> * - URI
+</span><span style="color:#e6db74"> * - Headers
+</span><span style="color:#e6db74"> * - Message body
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * During construction, implementations MUST attempt to set the Host header from
+</span><span style="color:#e6db74"> * a provided URI if no Host header is provided.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Requests are considered immutable; all methods that might change state MUST
+</span><span style="color:#e6db74"> * be implemented such that they retain the internal state of the current
+</span><span style="color:#e6db74"> * message and return an instance that contains the changed state.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">RequestInterface</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">MessageInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieves the message&#39;s request target.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Retrieves the message&#39;s request-target either as it will appear (for
+</span><span style="color:#e6db74">     * clients), as it appeared at request (for servers), or as it was
+</span><span style="color:#e6db74">     * specified for the instance (see withRequestTarget()).
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * In most cases, this will be the origin-form of the composed URI,
+</span><span style="color:#e6db74">     * unless a value was provided to the concrete implementation (see
+</span><span style="color:#e6db74">     * withRequestTarget() below).
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If no URI is available, and no request-target has been specifically
+</span><span style="color:#e6db74">     * provided, this method MUST return the string &#34;/&#34;.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return string
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getRequestTarget</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specific request-target.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If the request needs a non-origin-form request-target — e.g., for
+</span><span style="color:#e6db74">     * specifying an absolute-form, authority-form, or asterisk-form —
+</span><span style="color:#e6db74">     * this method may be used to create an instance with the specified
+</span><span style="color:#e6db74">     * request-target, verbatim.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * changed request target.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://tools.ietf.org/html/rfc7230#section-5.3 (for the various
+</span><span style="color:#e6db74">     *     request-target forms allowed in request messages)
+</span><span style="color:#e6db74">     * @param mixed $requestTarget
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withRequestTarget</span>($requestTarget);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieves the HTTP method of the request.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return string Returns the request method.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getMethod</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the provided HTTP method.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * While HTTP method names are typically all uppercase characters, HTTP
+</span><span style="color:#e6db74">     * method names are case-sensitive and thus implementations SHOULD NOT
+</span><span style="color:#e6db74">     * modify the given string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * changed request method.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $method Case-sensitive method.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException for invalid HTTP methods.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withMethod</span>($method);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieves the URI instance.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST return a UriInterface instance.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://tools.ietf.org/html/rfc3986#section-4.3
+</span><span style="color:#e6db74">     * @return UriInterface Returns a UriInterface instance
+</span><span style="color:#e6db74">     *     representing the URI of the request.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getUri</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns an instance with the provided URI.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST update the Host header of the returned request by
+</span><span style="color:#e6db74">     * default if the URI contains a host component. If the URI does not
+</span><span style="color:#e6db74">     * contain a host component, any pre-existing Host header MUST be carried
+</span><span style="color:#e6db74">     * over to the returned request.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * You can opt-in to preserving the original state of the Host header by
+</span><span style="color:#e6db74">     * setting `$preserveHost` to `true`. When `$preserveHost` is set to
+</span><span style="color:#e6db74">     * `true`, this method interacts with the Host header in the following ways:
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * - If the Host header is missing or empty, and the new URI contains
+</span><span style="color:#e6db74">     *   a host component, this method MUST update the Host header in the returned
+</span><span style="color:#e6db74">     *   request.
+</span><span style="color:#e6db74">     * - If the Host header is missing or empty, and the new URI does not contain a
+</span><span style="color:#e6db74">     *   host component, this method MUST NOT update the Host header in the returned
+</span><span style="color:#e6db74">     *   request.
+</span><span style="color:#e6db74">     * - If a Host header is present and non-empty, this method MUST NOT update
+</span><span style="color:#e6db74">     *   the Host header in the returned request.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * new UriInterface instance.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://tools.ietf.org/html/rfc3986#section-4.3
+</span><span style="color:#e6db74">     * @param UriInterface $uri New request URI to use.
+</span><span style="color:#e6db74">     * @param bool $preserveHost Preserve the original state of the Host header.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withUri</span>(<span style="color:#a6e22e">UriInterface</span> $uri, $preserveHost <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>);
+}
+</code></pre></div><h4 id="321-psrhttpmessageserverrequestinterface">
+  3.2.1 <code>Psr\Http\Message\ServerRequestInterface</code>
+  <a class="anchor" href="#321-psrhttpmessageserverrequestinterface">#</a>
+</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Http\Message</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Representation of an incoming, server-side HTTP request.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Per the HTTP specification, this interface includes properties for
+</span><span style="color:#e6db74"> * each of the following:
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * - Protocol version
+</span><span style="color:#e6db74"> * - HTTP method
+</span><span style="color:#e6db74"> * - URI
+</span><span style="color:#e6db74"> * - Headers
+</span><span style="color:#e6db74"> * - Message body
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Additionally, it encapsulates all data as it has arrived at the
+</span><span style="color:#e6db74"> * application from the CGI and/or PHP environment, including:
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * - The values represented in $_SERVER.
+</span><span style="color:#e6db74"> * - Any cookies provided (generally via $_COOKIE)
+</span><span style="color:#e6db74"> * - Query string arguments (generally via $_GET, or as parsed via parse_str())
+</span><span style="color:#e6db74"> * - Upload files, if any (as represented by $_FILES)
+</span><span style="color:#e6db74"> * - Deserialized body parameters (generally from $_POST)
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * $_SERVER values MUST be treated as immutable, as they represent application
+</span><span style="color:#e6db74"> * state at the time of request; as such, no methods are provided to allow
+</span><span style="color:#e6db74"> * modification of those values. The other values provide such methods, as they
+</span><span style="color:#e6db74"> * can be restored from $_SERVER or the request body, and may need treatment
+</span><span style="color:#e6db74"> * during the application (e.g., body parameters may be deserialized based on
+</span><span style="color:#e6db74"> * content type).
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Additionally, this interface recognizes the utility of introspecting a
+</span><span style="color:#e6db74"> * request to derive and match additional parameters (e.g., via URI path
+</span><span style="color:#e6db74"> * matching, decrypting cookie values, deserializing non-form-encoded body
+</span><span style="color:#e6db74"> * content, matching authorization headers to users, etc). These parameters
+</span><span style="color:#e6db74"> * are stored in an &#34;attributes&#34; property.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Requests are considered immutable; all methods that might change state MUST
+</span><span style="color:#e6db74"> * be implemented such that they retain the internal state of the current
+</span><span style="color:#e6db74"> * message and return an instance that contains the changed state.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ServerRequestInterface</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">RequestInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve server parameters.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Retrieves data related to the incoming request environment,
+</span><span style="color:#e6db74">     * typically derived from PHP&#39;s $_SERVER superglobal. The data IS NOT
+</span><span style="color:#e6db74">     * REQUIRED to originate from $_SERVER.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return array
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getServerParams</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve cookies.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Retrieves cookies sent by the client to the server.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The data MUST be compatible with the structure of the $_COOKIE
+</span><span style="color:#e6db74">     * superglobal.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return array
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getCookieParams</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified cookies.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The data IS NOT REQUIRED to come from the $_COOKIE superglobal, but MUST
+</span><span style="color:#e6db74">     * be compatible with the structure of $_COOKIE. Typically, this data will
+</span><span style="color:#e6db74">     * be injected at instantiation.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST NOT update the related Cookie header of the request
+</span><span style="color:#e6db74">     * instance, nor related values in the server params.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * updated cookie values.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param array $cookies Array of key/value pairs representing cookies.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withCookieParams</span>(<span style="color:#66d9ef">array</span> $cookies);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve query string arguments.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Retrieves the deserialized query string arguments, if any.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Note: the query params might not be in sync with the URI or server
+</span><span style="color:#e6db74">     * params. If you need to ensure you are only getting the original
+</span><span style="color:#e6db74">     * values, you may need to parse the query string from `getUri()-&gt;getQuery()`
+</span><span style="color:#e6db74">     * or from the `QUERY_STRING` server param.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return array
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getQueryParams</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified query string arguments.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * These values SHOULD remain immutable over the course of the incoming
+</span><span style="color:#e6db74">     * request. They MAY be injected during instantiation, such as from PHP&#39;s
+</span><span style="color:#e6db74">     * $_GET superglobal, or MAY be derived from some other value such as the
+</span><span style="color:#e6db74">     * URI. In cases where the arguments are parsed from the URI, the data
+</span><span style="color:#e6db74">     * MUST be compatible with what PHP&#39;s parse_str() would return for
+</span><span style="color:#e6db74">     * purposes of how duplicate query parameters are handled, and how nested
+</span><span style="color:#e6db74">     * sets are handled.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Setting query string arguments MUST NOT change the URI stored by the
+</span><span style="color:#e6db74">     * request, nor the values in the server params.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * updated query string arguments.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param array $query Array of query string arguments, typically from
+</span><span style="color:#e6db74">     *     $_GET.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withQueryParams</span>(<span style="color:#66d9ef">array</span> $query);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve normalized file upload data.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method returns upload metadata in a normalized tree, with each leaf
+</span><span style="color:#e6db74">     * an instance of Psr\Http\Message\UploadedFileInterface.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * These values MAY be prepared from $_FILES or the message body during
+</span><span style="color:#e6db74">     * instantiation, or MAY be injected via withUploadedFiles().
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return array An array tree of UploadedFileInterface instances; an empty
+</span><span style="color:#e6db74">     *     array MUST be returned if no data is present.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getUploadedFiles</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Create a new instance with the specified uploaded files.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * updated body parameters.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param array $uploadedFiles An array tree of UploadedFileInterface instances.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException if an invalid structure is provided.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withUploadedFiles</span>(<span style="color:#66d9ef">array</span> $uploadedFiles);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve any parameters provided in the request body.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If the request Content-Type is either application/x-www-form-urlencoded
+</span><span style="color:#e6db74">     * or multipart/form-data, and the request method is POST, this method MUST
+</span><span style="color:#e6db74">     * return the contents of $_POST.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Otherwise, this method may return any results of deserializing
+</span><span style="color:#e6db74">     * the request body content; as parsing returns structured content, the
+</span><span style="color:#e6db74">     * potential types MUST be arrays or objects only. A null value indicates
+</span><span style="color:#e6db74">     * the absence of body content.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return null|array|object The deserialized body parameters, if any.
+</span><span style="color:#e6db74">     *     These will typically be an array or object.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getParsedBody</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified body parameters.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * These MAY be injected during instantiation.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If the request Content-Type is either application/x-www-form-urlencoded
+</span><span style="color:#e6db74">     * or multipart/form-data, and the request method is POST, use this method
+</span><span style="color:#e6db74">     * ONLY to inject the contents of $_POST.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The data IS NOT REQUIRED to come from $_POST, but MUST be the results of
+</span><span style="color:#e6db74">     * deserializing the request body content. Deserialization/parsing returns
+</span><span style="color:#e6db74">     * structured data, and, as such, this method ONLY accepts arrays or objects,
+</span><span style="color:#e6db74">     * or a null value if nothing was available to parse.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * As an example, if content negotiation determines that the request data
+</span><span style="color:#e6db74">     * is a JSON payload, this method could be used to create a request
+</span><span style="color:#e6db74">     * instance with the deserialized parameters.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * updated body parameters.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param null|array|object $data The deserialized body data. This will
+</span><span style="color:#e6db74">     *     typically be in an array or object.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException if an unsupported argument type is
+</span><span style="color:#e6db74">     *     provided.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withParsedBody</span>($data);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve attributes derived from the request.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The request &#34;attributes&#34; may be used to allow injection of any
+</span><span style="color:#e6db74">     * parameters derived from the request: e.g., the results of path
+</span><span style="color:#e6db74">     * match operations; the results of decrypting cookies; the results of
+</span><span style="color:#e6db74">     * deserializing non-form-encoded message bodies; etc. Attributes
+</span><span style="color:#e6db74">     * will be application and request specific, and CAN be mutable.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return mixed[] Attributes derived from the request.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getAttributes</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve a single derived request attribute.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Retrieves a single derived request attribute as described in
+</span><span style="color:#e6db74">     * getAttributes(). If the attribute has not been previously set, returns
+</span><span style="color:#e6db74">     * the default value as provided.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method obviates the need for a hasAttribute() method, as it allows
+</span><span style="color:#e6db74">     * specifying a default value to return if the attribute is not found.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see getAttributes()
+</span><span style="color:#e6db74">     * @param string $name The attribute name.
+</span><span style="color:#e6db74">     * @param mixed $default Default value to return if the attribute does not exist.
+</span><span style="color:#e6db74">     * @return mixed
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getAttribute</span>($name, $default <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified derived request attribute.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method allows setting a single derived request attribute as
+</span><span style="color:#e6db74">     * described in getAttributes().
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * updated attribute.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see getAttributes()
+</span><span style="color:#e6db74">     * @param string $name The attribute name.
+</span><span style="color:#e6db74">     * @param mixed $value The value of the attribute.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withAttribute</span>($name, $value);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance that removes the specified derived request attribute.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method allows removing a single derived request attribute as
+</span><span style="color:#e6db74">     * described in getAttributes().
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that removes
+</span><span style="color:#e6db74">     * the attribute.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see getAttributes()
+</span><span style="color:#e6db74">     * @param string $name The attribute name.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withoutAttribute</span>($name);
+}
+</code></pre></div><h3 id="33-psrhttpmessageresponseinterface">
+  3.3 <code>Psr\Http\Message\ResponseInterface</code>
+  <a class="anchor" href="#33-psrhttpmessageresponseinterface">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Http\Message</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Representation of an outgoing, server-side response.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Per the HTTP specification, this interface includes properties for
+</span><span style="color:#e6db74"> * each of the following:
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * - Protocol version
+</span><span style="color:#e6db74"> * - Status code and reason phrase
+</span><span style="color:#e6db74"> * - Headers
+</span><span style="color:#e6db74"> * - Message body
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Responses are considered immutable; all methods that might change state MUST
+</span><span style="color:#e6db74"> * be implemented such that they retain the internal state of the current
+</span><span style="color:#e6db74"> * message and return an instance that contains the changed state.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">ResponseInterface</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">MessageInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Gets the response status code.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The status code is a 3-digit integer result code of the server&#39;s attempt
+</span><span style="color:#e6db74">     * to understand and satisfy the request.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return int Status code.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getStatusCode</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified status code and, optionally, reason phrase.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If no reason phrase is specified, implementations MAY choose to default
+</span><span style="color:#e6db74">     * to the RFC 7231 or IANA recommended reason phrase for the response&#39;s
+</span><span style="color:#e6db74">     * status code.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST be implemented in such a way as to retain the
+</span><span style="color:#e6db74">     * immutability of the message, and MUST return an instance that has the
+</span><span style="color:#e6db74">     * updated status and reason phrase.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://tools.ietf.org/html/rfc7231#section-6
+</span><span style="color:#e6db74">     * @see http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+</span><span style="color:#e6db74">     * @param int $code The 3-digit integer result code to set.
+</span><span style="color:#e6db74">     * @param string $reasonPhrase The reason phrase to use with the
+</span><span style="color:#e6db74">     *     provided status code; if none is provided, implementations MAY
+</span><span style="color:#e6db74">     *     use the defaults as suggested in the HTTP specification.
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException For invalid status code arguments.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withStatus</span>($code, $reasonPhrase <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;</span>);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Gets the response reason phrase associated with the status code.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Because a reason phrase is not a required element in a response
+</span><span style="color:#e6db74">     * status line, the reason phrase value MAY be empty. Implementations MAY
+</span><span style="color:#e6db74">     * choose to return the default RFC 7231 recommended reason phrase (or those
+</span><span style="color:#e6db74">     * listed in the IANA HTTP Status Code Registry) for the response&#39;s
+</span><span style="color:#e6db74">     * status code.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://tools.ietf.org/html/rfc7231#section-6
+</span><span style="color:#e6db74">     * @see http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+</span><span style="color:#e6db74">     * @return string Reason phrase; must return an empty string if none present.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getReasonPhrase</span>();
+}
+</code></pre></div><h3 id="34-psrhttpmessagestreaminterface">
+  3.4 <code>Psr\Http\Message\StreamInterface</code>
+  <a class="anchor" href="#34-psrhttpmessagestreaminterface">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Http\Message</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Describes a data stream.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Typically, an instance will wrap a PHP stream; this interface provides
+</span><span style="color:#e6db74"> * a wrapper around the most common operations, including serialization of
+</span><span style="color:#e6db74"> * the entire stream to a string.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">StreamInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Reads all data from the stream into a string, from the beginning to end.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST attempt to seek to the beginning of the stream before
+</span><span style="color:#e6db74">     * reading data and read the stream until the end is reached.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Warning: This could attempt to load a large amount of data into memory.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST NOT raise an exception in order to conform with PHP&#39;s
+</span><span style="color:#e6db74">     * string casting operations.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://php.net/manual/en/language.oop5.magic.php#object.tostring
+</span><span style="color:#e6db74">     * @return string
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __toString();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Closes the stream and any underlying resources.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return void
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">close</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Separates any underlying resources from the stream.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * After the stream has been detached, the stream is in an unusable state.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return resource|null Underlying PHP stream, if any
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">detach</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Get the size of the stream if known.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return int|null Returns the size in bytes if known, or null if unknown.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getSize</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns the current position of the file read/write pointer
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return int Position of the file pointer
+</span><span style="color:#e6db74">     * @throws \RuntimeException on error.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">tell</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns true if the stream is at the end of the stream.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">eof</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns whether or not the stream is seekable.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isSeekable</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Seek to a position in the stream.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://www.php.net/manual/en/function.fseek.php
+</span><span style="color:#e6db74">     * @param int $offset Stream offset
+</span><span style="color:#e6db74">     * @param int $whence Specifies how the cursor position will be calculated
+</span><span style="color:#e6db74">     *     based on the seek offset. Valid values are identical to the built-in
+</span><span style="color:#e6db74">     *     PHP $whence values for `fseek()`.  SEEK_SET: Set position equal to
+</span><span style="color:#e6db74">     *     offset bytes SEEK_CUR: Set position to current location plus offset
+</span><span style="color:#e6db74">     *     SEEK_END: Set position to end-of-stream plus offset.
+</span><span style="color:#e6db74">     * @throws \RuntimeException on failure.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">seek</span>($offset, $whence <span style="color:#f92672">=</span> <span style="color:#a6e22e">SEEK_SET</span>);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Seek to the beginning of the stream.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If the stream is not seekable, this method will raise an exception;
+</span><span style="color:#e6db74">     * otherwise, it will perform a seek(0).
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see seek()
+</span><span style="color:#e6db74">     * @see http://www.php.net/manual/en/function.fseek.php
+</span><span style="color:#e6db74">     * @throws \RuntimeException on failure.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">rewind</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns whether or not the stream is writable.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isWritable</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Write data to the stream.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $string The string that is to be written.
+</span><span style="color:#e6db74">     * @return int Returns the number of bytes written to the stream.
+</span><span style="color:#e6db74">     * @throws \RuntimeException on failure.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">write</span>($string);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns whether or not the stream is readable.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isReadable</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Read data from the stream.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param int $length Read up to $length bytes from the object and return
+</span><span style="color:#e6db74">     *     them. Fewer than $length bytes may be returned if underlying stream
+</span><span style="color:#e6db74">     *     call returns fewer bytes.
+</span><span style="color:#e6db74">     * @return string Returns the data read from the stream, or an empty string
+</span><span style="color:#e6db74">     *     if no bytes are available.
+</span><span style="color:#e6db74">     * @throws \RuntimeException if an error occurs.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">read</span>($length);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns the remaining contents in a string
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return string
+</span><span style="color:#e6db74">     * @throws \RuntimeException if unable to read.
+</span><span style="color:#e6db74">     * @throws \RuntimeException if error occurs while reading.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getContents</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Get stream metadata as an associative array or retrieve a specific key.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The keys returned are identical to the keys returned from PHP&#39;s
+</span><span style="color:#e6db74">     * stream_get_meta_data() function.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://php.net/manual/en/function.stream-get-meta-data.php
+</span><span style="color:#e6db74">     * @param string $key Specific metadata to retrieve.
+</span><span style="color:#e6db74">     * @return array|mixed|null Returns an associative array if no key is
+</span><span style="color:#e6db74">     *     provided. Returns a specific key value if a key is provided and the
+</span><span style="color:#e6db74">     *     value is found, or null if the key is not found.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getMetadata</span>($key <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>);
+}
+</code></pre></div><h3 id="35-psrhttpmessageuriinterface">
+  3.5 <code>Psr\Http\Message\UriInterface</code>
+  <a class="anchor" href="#35-psrhttpmessageuriinterface">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Http\Message</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Value object representing a URI.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * This interface is meant to represent URIs according to RFC 3986 and to
+</span><span style="color:#e6db74"> * provide methods for most common operations. Additional functionality for
+</span><span style="color:#e6db74"> * working with URIs can be provided on top of the interface or externally.
+</span><span style="color:#e6db74"> * Its primary use is for HTTP requests, but may also be used in other
+</span><span style="color:#e6db74"> * contexts.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Instances of this interface are considered immutable; all methods that
+</span><span style="color:#e6db74"> * might change state MUST be implemented such that they retain the internal
+</span><span style="color:#e6db74"> * state of the current instance and return an instance that contains the
+</span><span style="color:#e6db74"> * changed state.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Typically the Host header will also be present in the request message.
+</span><span style="color:#e6db74"> * For server-side requests, the scheme will typically be discoverable in the
+</span><span style="color:#e6db74"> * server parameters.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * @see http://tools.ietf.org/html/rfc3986 (the URI specification)
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">UriInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the scheme component of the URI.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If no scheme is present, this method MUST return an empty string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The value returned MUST be normalized to lowercase, per RFC 3986
+</span><span style="color:#e6db74">     * Section 3.1.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The trailing &#34;:&#34; character is not part of the scheme and MUST NOT be
+</span><span style="color:#e6db74">     * added.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see https://tools.ietf.org/html/rfc3986#section-3.1
+</span><span style="color:#e6db74">     * @return string The URI scheme.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getScheme</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the authority component of the URI.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If no authority information is present, this method MUST return an empty
+</span><span style="color:#e6db74">     * string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The authority syntax of the URI is:
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * &lt;pre&gt;
+</span><span style="color:#e6db74">     * [user-info@]host[:port]
+</span><span style="color:#e6db74">     * &lt;/pre&gt;
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If the port component is not set or is the standard port for the current
+</span><span style="color:#e6db74">     * scheme, it SHOULD NOT be included.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see https://tools.ietf.org/html/rfc3986#section-3.2
+</span><span style="color:#e6db74">     * @return string The URI authority, in &#34;[user-info@]host[:port]&#34; format.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getAuthority</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the user information component of the URI.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If no user information is present, this method MUST return an empty
+</span><span style="color:#e6db74">     * string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If a user is present in the URI, this will return that value;
+</span><span style="color:#e6db74">     * additionally, if the password is also present, it will be appended to the
+</span><span style="color:#e6db74">     * user value, with a colon (&#34;:&#34;) separating the values.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The trailing &#34;@&#34; character is not part of the user information and MUST
+</span><span style="color:#e6db74">     * NOT be added.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return string The URI user information, in &#34;username[:password]&#34; format.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getUserInfo</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the host component of the URI.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If no host is present, this method MUST return an empty string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The value returned MUST be normalized to lowercase, per RFC 3986
+</span><span style="color:#e6db74">     * Section 3.2.2.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://tools.ietf.org/html/rfc3986#section-3.2.2
+</span><span style="color:#e6db74">     * @return string The URI host.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getHost</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the port component of the URI.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If a port is present, and it is non-standard for the current scheme,
+</span><span style="color:#e6db74">     * this method MUST return it as an integer. If the port is the standard port
+</span><span style="color:#e6db74">     * used with the current scheme, this method SHOULD return null.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If no port is present, and no scheme is present, this method MUST return
+</span><span style="color:#e6db74">     * a null value.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If no port is present, but a scheme is present, this method MAY return
+</span><span style="color:#e6db74">     * the standard port for that scheme, but SHOULD return null.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return null|int The URI port.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getPort</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the path component of the URI.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The path can either be empty or absolute (starting with a slash) or
+</span><span style="color:#e6db74">     * rootless (not starting with a slash). Implementations MUST support all
+</span><span style="color:#e6db74">     * three syntaxes.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Normally, the empty path &#34;&#34; and absolute path &#34;/&#34; are considered equal as
+</span><span style="color:#e6db74">     * defined in RFC 7230 Section 2.7.3. But this method MUST NOT automatically
+</span><span style="color:#e6db74">     * do this normalization because in contexts with a trimmed base path, e.g.
+</span><span style="color:#e6db74">     * the front controller, this difference becomes significant. It&#39;s the task
+</span><span style="color:#e6db74">     * of the user to handle both &#34;&#34; and &#34;/&#34;.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The value returned MUST be percent-encoded, but MUST NOT double-encode
+</span><span style="color:#e6db74">     * any characters. To determine what characters to encode, please refer to
+</span><span style="color:#e6db74">     * RFC 3986, Sections 2 and 3.3.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * As an example, if the value should include a slash (&#34;/&#34;) not intended as
+</span><span style="color:#e6db74">     * delimiter between path segments, that value MUST be passed in encoded
+</span><span style="color:#e6db74">     * form (e.g., &#34;%2F&#34;) to the instance.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see https://tools.ietf.org/html/rfc3986#section-2
+</span><span style="color:#e6db74">     * @see https://tools.ietf.org/html/rfc3986#section-3.3
+</span><span style="color:#e6db74">     * @return string The URI path.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getPath</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the query string of the URI.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If no query string is present, this method MUST return an empty string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The leading &#34;?&#34; character is not part of the query and MUST NOT be
+</span><span style="color:#e6db74">     * added.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The value returned MUST be percent-encoded, but MUST NOT double-encode
+</span><span style="color:#e6db74">     * any characters. To determine what characters to encode, please refer to
+</span><span style="color:#e6db74">     * RFC 3986, Sections 2 and 3.4.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * As an example, if a value in a key/value pair of the query string should
+</span><span style="color:#e6db74">     * include an ampersand (&#34;&amp;&#34;) not intended as a delimiter between values,
+</span><span style="color:#e6db74">     * that value MUST be passed in encoded form (e.g., &#34;%26&#34;) to the instance.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see https://tools.ietf.org/html/rfc3986#section-2
+</span><span style="color:#e6db74">     * @see https://tools.ietf.org/html/rfc3986#section-3.4
+</span><span style="color:#e6db74">     * @return string The URI query string.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getQuery</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the fragment component of the URI.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If no fragment is present, this method MUST return an empty string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The leading &#34;#&#34; character is not part of the fragment and MUST NOT be
+</span><span style="color:#e6db74">     * added.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The value returned MUST be percent-encoded, but MUST NOT double-encode
+</span><span style="color:#e6db74">     * any characters. To determine what characters to encode, please refer to
+</span><span style="color:#e6db74">     * RFC 3986, Sections 2 and 3.5.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see https://tools.ietf.org/html/rfc3986#section-2
+</span><span style="color:#e6db74">     * @see https://tools.ietf.org/html/rfc3986#section-3.5
+</span><span style="color:#e6db74">     * @return string The URI fragment.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getFragment</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified scheme.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST retain the state of the current instance, and return
+</span><span style="color:#e6db74">     * an instance that contains the specified scheme.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Implementations MUST support the schemes &#34;http&#34; and &#34;https&#34; case
+</span><span style="color:#e6db74">     * insensitively, and MAY accommodate other schemes if required.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * An empty scheme is equivalent to removing the scheme.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $scheme The scheme to use with the new instance.
+</span><span style="color:#e6db74">     * @return static A new instance with the specified scheme.
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException for invalid schemes.
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException for unsupported schemes.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withScheme</span>($scheme);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified user information.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST retain the state of the current instance, and return
+</span><span style="color:#e6db74">     * an instance that contains the specified user information.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Password is optional, but the user information MUST include the
+</span><span style="color:#e6db74">     * user; an empty string for the user is equivalent to removing user
+</span><span style="color:#e6db74">     * information.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $user The user name to use for authority.
+</span><span style="color:#e6db74">     * @param null|string $password The password associated with $user.
+</span><span style="color:#e6db74">     * @return static A new instance with the specified user information.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withUserInfo</span>($user, $password <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified host.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST retain the state of the current instance, and return
+</span><span style="color:#e6db74">     * an instance that contains the specified host.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * An empty host value is equivalent to removing the host.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $host The hostname to use with the new instance.
+</span><span style="color:#e6db74">     * @return static A new instance with the specified host.
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException for invalid hostnames.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withHost</span>($host);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified port.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST retain the state of the current instance, and return
+</span><span style="color:#e6db74">     * an instance that contains the specified port.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Implementations MUST raise an exception for ports outside the
+</span><span style="color:#e6db74">     * established TCP and UDP port ranges.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * A null value provided for the port is equivalent to removing the port
+</span><span style="color:#e6db74">     * information.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param null|int $port The port to use with the new instance; a null value
+</span><span style="color:#e6db74">     *     removes the port information.
+</span><span style="color:#e6db74">     * @return static A new instance with the specified port.
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException for invalid ports.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withPort</span>($port);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified path.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST retain the state of the current instance, and return
+</span><span style="color:#e6db74">     * an instance that contains the specified path.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The path can either be empty or absolute (starting with a slash) or
+</span><span style="color:#e6db74">     * rootless (not starting with a slash). Implementations MUST support all
+</span><span style="color:#e6db74">     * three syntaxes.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If an HTTP path is intended to be host-relative rather than path-relative
+</span><span style="color:#e6db74">     * then it must begin with a slash (&#34;/&#34;). HTTP paths not starting with a slash
+</span><span style="color:#e6db74">     * are assumed to be relative to some base path known to the application or
+</span><span style="color:#e6db74">     * consumer.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Users can provide both encoded and decoded path characters.
+</span><span style="color:#e6db74">     * Implementations ensure the correct encoding as outlined in getPath().
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $path The path to use with the new instance.
+</span><span style="color:#e6db74">     * @return static A new instance with the specified path.
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException for invalid paths.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withPath</span>($path);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified query string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST retain the state of the current instance, and return
+</span><span style="color:#e6db74">     * an instance that contains the specified query string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Users can provide both encoded and decoded query characters.
+</span><span style="color:#e6db74">     * Implementations ensure the correct encoding as outlined in getQuery().
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * An empty query string value is equivalent to removing the query string.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $query The query string to use with the new instance.
+</span><span style="color:#e6db74">     * @return static A new instance with the specified query string.
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException for invalid query strings.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withQuery</span>($query);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return an instance with the specified URI fragment.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST retain the state of the current instance, and return
+</span><span style="color:#e6db74">     * an instance that contains the specified URI fragment.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Users can provide both encoded and decoded fragment characters.
+</span><span style="color:#e6db74">     * Implementations ensure the correct encoding as outlined in getFragment().
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * An empty fragment value is equivalent to removing the fragment.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $fragment The fragment to use with the new instance.
+</span><span style="color:#e6db74">     * @return static A new instance with the specified fragment.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">withFragment</span>($fragment);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Return the string representation as a URI reference.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Depending on which components of the URI are present, the resulting
+</span><span style="color:#e6db74">     * string is either a full URI or relative reference according to RFC 3986,
+</span><span style="color:#e6db74">     * Section 4.1. The method concatenates the various components of the URI,
+</span><span style="color:#e6db74">     * using the appropriate delimiters:
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * - If a scheme is present, it MUST be suffixed by &#34;:&#34;.
+</span><span style="color:#e6db74">     * - If an authority is present, it MUST be prefixed by &#34;//&#34;.
+</span><span style="color:#e6db74">     * - The path can be concatenated without delimiters. But there are two
+</span><span style="color:#e6db74">     *   cases where the path has to be adjusted to make the URI reference
+</span><span style="color:#e6db74">     *   valid as PHP does not allow to throw an exception in __toString():
+</span><span style="color:#e6db74">     *     - If the path is rootless and an authority is present, the path MUST
+</span><span style="color:#e6db74">     *       be prefixed by &#34;/&#34;.
+</span><span style="color:#e6db74">     *     - If the path is starting with more than one &#34;/&#34; and no authority is
+</span><span style="color:#e6db74">     *       present, the starting slashes MUST be reduced to one.
+</span><span style="color:#e6db74">     * - If a query is present, it MUST be prefixed by &#34;?&#34;.
+</span><span style="color:#e6db74">     * - If a fragment is present, it MUST be prefixed by &#34;#&#34;.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://tools.ietf.org/html/rfc3986#section-4.1
+</span><span style="color:#e6db74">     * @return string
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __toString();
+}
+</code></pre></div><h3 id="36-psrhttpmessageuploadedfileinterface">
+  3.6 <code>Psr\Http\Message\UploadedFileInterface</code>
+  <a class="anchor" href="#36-psrhttpmessageuploadedfileinterface">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Http\Message</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Value object representing a file uploaded through an HTTP request.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Instances of this interface are considered immutable; all methods that
+</span><span style="color:#e6db74"> * might change state MUST be implemented such that they retain the internal
+</span><span style="color:#e6db74"> * state of the current instance and return an instance that contains the
+</span><span style="color:#e6db74"> * changed state.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">UploadedFileInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve a stream representing the uploaded file.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method MUST return a StreamInterface instance, representing the
+</span><span style="color:#e6db74">     * uploaded file. The purpose of this method is to allow utilizing native PHP
+</span><span style="color:#e6db74">     * stream functionality to manipulate the file upload, such as
+</span><span style="color:#e6db74">     * stream_copy_to_stream() (though the result will need to be decorated in a
+</span><span style="color:#e6db74">     * native PHP stream wrapper to work with such functions).
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If the moveTo() method has been called previously, this method MUST raise
+</span><span style="color:#e6db74">     * an exception.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return StreamInterface Stream representation of the uploaded file.
+</span><span style="color:#e6db74">     * @throws \RuntimeException in cases when no stream is available.
+</span><span style="color:#e6db74">     * @throws \RuntimeException in cases when no stream can be created.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getStream</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Move the uploaded file to a new location.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Use this method as an alternative to move_uploaded_file(). This method is
+</span><span style="color:#e6db74">     * guaranteed to work in both SAPI and non-SAPI environments.
+</span><span style="color:#e6db74">     * Implementations must determine which environment they are in, and use the
+</span><span style="color:#e6db74">     * appropriate method (move_uploaded_file(), rename(), or a stream
+</span><span style="color:#e6db74">     * operation) to perform the operation.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * $targetPath may be an absolute path, or a relative path. If it is a
+</span><span style="color:#e6db74">     * relative path, resolution should be the same as used by PHP&#39;s rename()
+</span><span style="color:#e6db74">     * function.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The original file or stream MUST be removed on completion.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If this method is called more than once, any subsequent calls MUST raise
+</span><span style="color:#e6db74">     * an exception.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * When used in an SAPI environment where $_FILES is populated, when writing
+</span><span style="color:#e6db74">     * files via moveTo(), is_uploaded_file() and move_uploaded_file() SHOULD be
+</span><span style="color:#e6db74">     * used to ensure permissions and upload status are verified correctly.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If you wish to move to a stream, use getStream(), as SAPI operations
+</span><span style="color:#e6db74">     * cannot guarantee writing to stream destinations.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://php.net/is_uploaded_file
+</span><span style="color:#e6db74">     * @see http://php.net/move_uploaded_file
+</span><span style="color:#e6db74">     * @param string $targetPath Path to which to move the uploaded file.
+</span><span style="color:#e6db74">     * @throws \InvalidArgumentException if the $targetPath specified is invalid.
+</span><span style="color:#e6db74">     * @throws \RuntimeException on any error during the move operation.
+</span><span style="color:#e6db74">     * @throws \RuntimeException on the second or subsequent call to the method.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">moveTo</span>($targetPath);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the file size.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Implementations SHOULD return the value stored in the &#34;size&#34; key of
+</span><span style="color:#e6db74">     * the file in the $_FILES array if available, as PHP calculates this based
+</span><span style="color:#e6db74">     * on the actual size transmitted.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return int|null The file size in bytes or null if unknown.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getSize</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the error associated with the uploaded file.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The return value MUST be one of PHP&#39;s UPLOAD_ERR_XXX constants.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If the file was uploaded successfully, this method MUST return
+</span><span style="color:#e6db74">     * UPLOAD_ERR_OK.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Implementations SHOULD return the value stored in the &#34;error&#34; key of
+</span><span style="color:#e6db74">     * the file in the $_FILES array.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see http://php.net/manual/en/features.file-upload.errors.php
+</span><span style="color:#e6db74">     * @return int One of PHP&#39;s UPLOAD_ERR_XXX constants.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getError</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the filename sent by the client.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Do not trust the value returned by this method. A client could send
+</span><span style="color:#e6db74">     * a malicious filename with the intention to corrupt or hack your
+</span><span style="color:#e6db74">     * application.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Implementations SHOULD return the value stored in the &#34;name&#34; key of
+</span><span style="color:#e6db74">     * the file in the $_FILES array.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return string|null The filename sent by the client or null if none
+</span><span style="color:#e6db74">     *     was provided.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getClientFilename</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieve the media type sent by the client.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Do not trust the value returned by this method. A client could send
+</span><span style="color:#e6db74">     * a malicious media type with the intention to corrupt or hack your
+</span><span style="color:#e6db74">     * application.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Implementations SHOULD return the value stored in the &#34;type&#34; key of
+</span><span style="color:#e6db74">     * the file in the $_FILES array.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return string|null The media type sent by the client or null if none
+</span><span style="color:#e6db74">     *     was provided.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getClientMediaType</span>();
+}
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#references">References</a></li>
+      </ul>
+    </li>
+    <li><a href="#1-명세서">1. 명세서</a>
+      <ul>
+        <li><a href="#11-messages">1.1 Messages</a></li>
+        <li><a href="#12-http-headers">1.2 HTTP Headers</a></li>
+        <li><a href="#13-streams">1.3 Streams</a></li>
+        <li><a href="#14-request-targets-and-uris">1.4 Request Targets and URIs</a></li>
+        <li><a href="#15-server-side-requests">1.5 Server-side Requests</a></li>
+        <li><a href="#16-uploaded-files">1.6 Uploaded files</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-package">2. Package</a></li>
+    <li><a href="#3-interfaces">3. Interfaces</a>
+      <ul>
+        <li><a href="#31-psrhttpmessagemessageinterface">3.1 <code>Psr\Http\Message\MessageInterface</code></a></li>
+        <li><a href="#32-psrhttpmessagerequestinterface">3.2 <code>Psr\Http\Message\RequestInterface</code></a></li>
+        <li><a href="#33-psrhttpmessageresponseinterface">3.3 <code>Psr\Http\Message\ResponseInterface</code></a></li>
+        <li><a href="#34-psrhttpmessagestreaminterface">3.4 <code>Psr\Http\Message\StreamInterface</code></a></li>
+        <li><a href="#35-psrhttpmessageuriinterface">3.5 <code>Psr\Http\Message\UriInterface</code></a></li>
+        <li><a href="#36-psrhttpmessageuploadedfileinterface">3.6 <code>Psr\Http\Message\UploadedFileInterface</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

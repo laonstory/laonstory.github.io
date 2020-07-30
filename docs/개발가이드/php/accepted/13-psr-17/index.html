@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="HTTP Factories #  이 문서는 PSR-7에 호환하는 HTTP 객체를 만드는 팩토리의 공통 표준을 설명합니다.
+PSR-7은 HTTP 객체를 만드는 방법에 대한 권장 사항을 포함하지 않았기 때문에 PSR-7의 특정 구현과 관련되지 않은 구성 요소 내에 새로운 HTTP 객체를 생성해야 할 때 어려움을 겪습니다.
+이 문서에 설명 된 인터페이스는 PSR-7 객체를 인스턴스화 할 수 있는 방법을 설명합니다.
+이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="HTTP Factories #  이 문서는 PSR-7에 호환하는 HTTP 객체를 만드는 팩토리의 공통 표준을 설명합니다.
+PSR-7은 HTTP 객체를 만드는 방법에 대한 권장 사항을 포함하지 않았기 때문에 PSR-7의 특정 구현과 관련되지 않은 구성 요소 내에 새로운 HTTP 객체를 생성해야 할 때 어려움을 겪습니다.
+이 문서에 설명 된 인터페이스는 PSR-7 객체를 인스턴스화 할 수 있는 방법을 설명합니다.
+이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/13-psr-17/" />
+
+<title>13 P S R 17 | Laonstory GuideBook</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/en.search.min.3e383c83219ec4150ecf5a5f1b2c5854327af5ba771ae455be1680107223e7da.js" integrity="sha256-Pjg8gyGexBUOz1pfGyxYVDJ69bp3GuRVvhaAEHIj59o="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Laonstory GuideBook</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/" class="collapsed ">개발가이드</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/" class="collapsed ">Php</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/01-psr-1/" class="">01 P S R 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/02-psr-3/" class="">02 P S R 3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/03-psr-4/" class="">03 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/04-psr-4/" class="">04 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/05-psr-6/" class="">05 P S R 6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/06-psr-7/" class="">06 P S R 7</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/07-psr-11/" class="">07 P S R 11</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/08-psr-12/" class="">08 P S R 12</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/09-psr-13/" class="">09 P S R 13</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/10-psr-14/" class="">10 P S R 14</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/11-psr-15/" class="">11 P S R 15</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/12-psr-16/" class="">12 P S R 16</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/13-psr-17/" class="active">13 P S R 17</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/14-psr-18/" class="">14 P S R 18</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/javascript/javascript/" class="">Javascript</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/" class="">React Jsx</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>13 P S R 17</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-명세서">1. 명세서</a></li>
+    <li><a href="#2-interfaces">2. Interfaces</a>
+      <ul>
+        <li><a href="#21-requestfactoryinterface">2.1 RequestFactoryInterface</a></li>
+        <li><a href="#22-responsefactoryinterface">2.2 ResponseFactoryInterface</a></li>
+        <li><a href="#23-serverrequestfactoryinterface">2.3 ServerRequestFactoryInterface</a></li>
+        <li><a href="#24-streamfactoryinterface">2.4 StreamFactoryInterface</a></li>
+        <li><a href="#25-uploadedfilefactoryinterface">2.5 UploadedFileFactoryInterface</a></li>
+        <li><a href="#26-urifactoryinterface">2.6 UriFactoryInterface</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="http-factories">
+  HTTP Factories
+  <a class="anchor" href="#http-factories">#</a>
+</h1>
+<p>이 문서는 <a href="https://www.php-fig.org/psr/psr-7/">PSR-7</a>에 호환하는 HTTP 객체를 만드는 팩토리의 공통 표준을 설명합니다.</p>
+<p>PSR-7은 HTTP 객체를 만드는 방법에 대한 권장 사항을 포함하지 않았기 때문에 PSR-7의 특정 구현과 관련되지 않은 구성 요소 내에 새로운 HTTP 객체를 생성해야 할 때 어려움을 겪습니다.</p>
+<p>이 문서에 설명 된 인터페이스는 PSR-7 객체를 인스턴스화 할 수 있는 방법을 설명합니다.</p>
+<p>이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다.
+이것은 <a href="https://tools.ietf.org/html/rfc2119">RFC 2119</a>에 설명 된대로 해석해야 합니다.
+<code>역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다</code></p>
+<h2 id="1-명세서">
+  1. 명세서
+  <a class="anchor" href="#1-%eb%aa%85%ec%84%b8%ec%84%9c">#</a>
+</h2>
+<p>HTTP 팩토리는 PSR-7에 정의 된대로 새 HTTP 객체를 만드는 방법입니다.
+HTTP 팩토리는 패키지가 제공하는 각 객체 유형에 대해 이러한 인터페이스를 구현해야합니다 (MUST).</p>
+<h2 id="2-interfaces">
+  2. Interfaces
+  <a class="anchor" href="#2-interfaces">#</a>
+</h2>
+<p>다음 인터페이스들은 단일 클래스 내에서 또는 별도의 클래스들 내에서 함께 구현 될 수있습니다 (MAY).</p>
+<h3 id="21-requestfactoryinterface">
+  2.1 RequestFactoryInterface
+  <a class="anchor" href="#21-requestfactoryinterface">#</a>
+</h3>
+<p>클라이언트 요청을 생성하는 기능</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace Psr\Http\Message;
+
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\UriInterface;
+
+interface RequestFactoryInterface
+{
+    /**
+     * Create a new request.
+     *
+     * @param string $method The HTTP method associated with the request.
+     * @param UriInterface|string $uri The URI associated with the request. 
+     */
+    public function createRequest(string $method, $uri): RequestInterface;
+}
+</code></pre></div><h3 id="22-responsefactoryinterface">
+  2.2 ResponseFactoryInterface
+  <a class="anchor" href="#22-responsefactoryinterface">#</a>
+</h3>
+<p>응답을 생성하는 하는 기능</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace Psr\Http\Message;
+
+use Psr\Http\Message\ResponseInterface;
+
+interface ResponseFactoryInterface
+{
+    /**
+     * Create a new response.
+     *
+     * @param int $code The HTTP status code. Defaults to 200.
+     * @param string $reasonPhrase The reason phrase to associate with the status code
+     *     in the generated response. If none is provided, implementations MAY use
+     *     the defaults as suggested in the HTTP specification.
+     */
+    public function createResponse(int $code = 200, string $reasonPhrase = &#39;&#39;): ResponseInterface;
+}
+</code></pre></div><h3 id="23-serverrequestfactoryinterface">
+  2.3 ServerRequestFactoryInterface
+  <a class="anchor" href="#23-serverrequestfactoryinterface">#</a>
+</h3>
+<p>서버 요청을 생성하는 기능</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace Psr\Http\Message;
+
+use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\UriInterface;
+
+interface ServerRequestFactoryInterface
+{
+    /**
+     * Create a new server request.
+     *
+     * Note that server parameters are taken precisely as given - no parsing/processing
+     * of the given values is performed. In particular, no attempt is made to
+     * determine the HTTP method or URI, which must be provided explicitly.
+     *
+     * @param string $method The HTTP method associated with the request.
+     * @param UriInterface|string $uri The URI associated with the request. 
+     * @param array $serverParams An array of Server API (SAPI) parameters with
+     *     which to seed the generated request instance.
+     */
+    public function createServerRequest(string $method, $uri, array $serverParams = []): ServerRequestInterface;
+}
+</code></pre></div><h3 id="24-streamfactoryinterface">
+  2.4 StreamFactoryInterface
+  <a class="anchor" href="#24-streamfactoryinterface">#</a>
+</h3>
+<p>요청 및 응답을 위한 스트림을 생성하는 기능</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace Psr\Http\Message;
+
+use Psr\Http\Message\StreamInterface;
+
+interface StreamFactoryInterface
+{
+    /**
+     * Create a new stream from a string.
+     *
+     * The stream SHOULD be created with a temporary resource.
+     *
+     * @param string $content String content with which to populate the stream.
+     */
+    public function createStream(string $content = &#39;&#39;): StreamInterface;
+
+    /**
+     * Create a stream from an existing file.
+     *
+     * The file MUST be opened using the given mode, which may be any mode
+     * supported by the `fopen` function.
+     *
+     * The `$filename` MAY be any string supported by `fopen()`.
+     *
+     * @param string $filename The filename or stream URI to use as basis of stream.
+     * @param string $mode The mode with which to open the underlying filename/stream.
+     *
+     * @throws \RuntimeException If the file cannot be opened.
+     * @throws \InvalidArgumentException If the mode is invalid.
+     */
+    public function createStreamFromFile(string $filename, string $mode = &#39;r&#39;): StreamInterface;
+
+    /**
+     * Create a new stream from an existing resource.
+     *
+     * The stream MUST be readable and may be writable.
+     *
+     * @param resource $resource The PHP resource to use as the basis for the stream.
+     */
+    public function createStreamFromResource($resource): StreamInterface;
+}
+</code></pre></div><p>이 인터페이스의 구현은 문자열에서 리소스를 만들 때 임시 스트림을 사용해야합니다 (SHOULD).
+이렇게하는 권장 방법은 다음과 같습니다 (RECOMMENDED).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$resource = fopen(&#39;php://temp&#39;, &#39;r+&#39;);
+</code></pre></div><h3 id="25-uploadedfilefactoryinterface">
+  2.5 UploadedFileFactoryInterface
+  <a class="anchor" href="#25-uploadedfilefactoryinterface">#</a>
+</h3>
+<p>업로드 된 파일의 스트림을 만들 수 있는 기능</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace Psr\Http\Message;
+
+use Psr\Http\Message\StreamInterface;
+use Psr\Http\Message\UploadedFileInterface;
+
+interface UploadedFileFactoryInterface
+{
+    /**
+     * Create a new uploaded file.
+     *
+     * If a size is not provided it will be determined by checking the size of
+     * the stream.
+     *
+     * @link http://php.net/manual/features.file-upload.post-method.php
+     * @link http://php.net/manual/features.file-upload.errors.php
+     *
+     * @param StreamInterface $stream The underlying stream representing the
+     *     uploaded file content.
+     * @param int $size The size of the file in bytes.
+     * @param int $error The PHP file upload error.
+     * @param string $clientFilename The filename as provided by the client, if any.
+     * @param string $clientMediaType The media type as provided by the client, if any.
+     *
+     * @throws \InvalidArgumentException If the file resource is not readable.
+     */
+    public function createUploadedFile(
+        StreamInterface $stream,
+        int $size = null,
+        int $error = \UPLOAD_ERR_OK,
+        string $clientFilename = null,
+        string $clientMediaType = null
+    ): UploadedFileInterface;
+}
+</code></pre></div><h3 id="26-urifactoryinterface">
+  2.6 UriFactoryInterface
+  <a class="anchor" href="#26-urifactoryinterface">#</a>
+</h3>
+<p>클라이언트 및 서버 요청에 대한 URI를 생성하는 기능</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">namespace Psr\Http\Message;
+
+use Psr\Http\Message\UriInterface;
+
+interface UriFactoryInterface
+{
+    /**
+     * Create a new URI.
+     *
+     * @param string $uri The URI to parse.
+     *
+     * @throws \InvalidArgumentException If the given URI cannot be parsed.
+     */
+    public function createUri(string $uri = &#39;&#39;) : UriInterface;
+}
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-명세서">1. 명세서</a></li>
+    <li><a href="#2-interfaces">2. Interfaces</a>
+      <ul>
+        <li><a href="#21-requestfactoryinterface">2.1 RequestFactoryInterface</a></li>
+        <li><a href="#22-responsefactoryinterface">2.2 ResponseFactoryInterface</a></li>
+        <li><a href="#23-serverrequestfactoryinterface">2.3 ServerRequestFactoryInterface</a></li>
+        <li><a href="#24-streamfactoryinterface">2.4 StreamFactoryInterface</a></li>
+        <li><a href="#25-uploadedfilefactoryinterface">2.5 UploadedFileFactoryInterface</a></li>
+        <li><a href="#26-urifactoryinterface">2.6 UriFactoryInterface</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

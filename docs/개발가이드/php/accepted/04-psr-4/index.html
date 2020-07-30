@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PSR-4 Autoloader #  이 단어들 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 은 RFC 2119에 설명 된대로 해석해야 합니다. 역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다
+1. 개요 #  이 PSR은 Class autoloading 에서 파일 경로에 대한 사양(specification)을 설명합니다. 이 PSR은 완벽하게 상호 운용이 가능하며 PSR-0을 포함한 다른 오토로딩 사양과 함께 사용할 수 있습니다. 또한 이 PSR은 사양에 따라 오토로드되는 파일을 저장할 위치를 설명합니다.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="PSR-4 Autoloader #  이 단어들 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 은 RFC 2119에 설명 된대로 해석해야 합니다. 역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다
+1. 개요 #  이 PSR은 Class autoloading 에서 파일 경로에 대한 사양(specification)을 설명합니다. 이 PSR은 완벽하게 상호 운용이 가능하며 PSR-0을 포함한 다른 오토로딩 사양과 함께 사용할 수 있습니다. 또한 이 PSR은 사양에 따라 오토로드되는 파일을 저장할 위치를 설명합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/04-psr-4/" />
+
+<title>04 P S R 4 | Laonstory GuideBook</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/en.search.min.3e383c83219ec4150ecf5a5f1b2c5854327af5ba771ae455be1680107223e7da.js" integrity="sha256-Pjg8gyGexBUOz1pfGyxYVDJ69bp3GuRVvhaAEHIj59o="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Laonstory GuideBook</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/" class="collapsed ">개발가이드</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/" class="collapsed ">Php</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/01-psr-1/" class="">01 P S R 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/02-psr-3/" class="">02 P S R 3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/03-psr-4/" class="">03 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/04-psr-4/" class="active">04 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/05-psr-6/" class="">05 P S R 6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/06-psr-7/" class="">06 P S R 7</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/07-psr-11/" class="">07 P S R 11</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/08-psr-12/" class="">08 P S R 12</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/09-psr-13/" class="">09 P S R 13</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/10-psr-14/" class="">10 P S R 14</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/11-psr-15/" class="">11 P S R 15</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/12-psr-16/" class="">12 P S R 16</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/13-psr-17/" class="">13 P S R 17</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/14-psr-18/" class="">14 P S R 18</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/javascript/javascript/" class="">Javascript</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/" class="">React Jsx</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>04 P S R 4</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-개요">1. 개요</a></li>
+    <li><a href="#2-명세서">2. 명세서</a></li>
+    <li><a href="#3-예제">3. 예제</a></li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="psr-4-autoloader">
+  PSR-4 Autoloader
+  <a class="anchor" href="#psr-4-autoloader">#</a>
+</h1>
+<p>이 단어들 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 은 <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>에 설명 된대로 해석해야 합니다.
+<code>역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다</code></p>
+<h2 id="1-개요">
+  1. 개요
+  <a class="anchor" href="#1-%ea%b0%9c%ec%9a%94">#</a>
+</h2>
+<p>이 PSR은 Class <a href="http://php.net/autoload">autoloading</a> 에서 파일 경로에 대한 사양(specification)을 설명합니다.
+이 PSR은 완벽하게 상호 운용이 가능하며 <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md">PSR-0</a>을 포함한 다른 오토로딩 사양과 함께 사용할 수 있습니다.
+또한 이 PSR은 사양에 따라 오토로드되는 파일을 저장할 위치를 설명합니다.</p>
+<h2 id="2-명세서">
+  2. 명세서
+  <a class="anchor" href="#2-%eb%aa%85%ec%84%b8%ec%84%9c">#</a>
+</h2>
+<ol>
+<li>
+<p>&ldquo;Class&quot;라는 용어는 Class, Interface, Trait 등의 기타 유사한 구조를 말합니다.</p>
+</li>
+<li>
+<p>정규화 된 클래스 이름의 형식은 다음과 같습니다.</p>
+<pre><code> \&lt;NamespaceName&gt;(\&lt;SubNamespaceNames&gt;)*\&lt;ClassName&gt;
+</code></pre>
+<ol>
+<li>
+<p>정규화 된 Class 이름은 &ldquo;공급자 네임스페이스&quot;라고도하는 최상위 네임스페이스를 가져야만 합니다(MUST).</p>
+</li>
+<li>
+<p>정규화 된 Class 이름은 하나 이상의 하위 네임스페이스를 가질 수 있습니다 (MAY).</p>
+</li>
+<li>
+<p>정규화된 Class 이름은 마지막 클래스 이름(terminating class name)을 가져야합니다 (MUST). <code>역자주: 좀 더 좋은 의미의 표현을 찾지 못하였습니다</code></p>
+</li>
+<li>
+<p>밑줄은 정규화 된 클래스 이름의 어느 부분에도 특별한 의미가 없습니다.</p>
+</li>
+<li>
+<p>정규화 된 클래스 이름의 알파벳 문자는 대소문자의 조합 일 수 있습니다 (MAY).</p>
+</li>
+<li>
+<p>모든 클래스 이름은 대소문자를 구분하여 참조해야합니다 (MUST).</p>
+</li>
+</ol>
+</li>
+<li>
+<p>정규화 된 클래스 이름에 해당하는 파일을 로드 할 때 &hellip;</p>
+<ol>
+<li>
+<p>정규화 된 클래스 이름에서 최초의 네임스페이스 구분 기호를 제외하고 연속된 하나 이상의 상위 네임스페이스와 하위 네임스페이스로 구성된 ( &ldquo;네임스페이스 접두사&rdquo;)는 적어도 하나의 &ldquo;기본 디렉토리&quot;에 대응합니다.
+<code>역자주: 표현을 더 다듬어야 할 듯 하지만 네임스페이스의 조합은 하나의 디렉토리와 매치가 된다는 의미로 이해하시면 될 것 같습니다</code></p>
+</li>
+<li>
+<p>&ldquo;네임스페이스 접두사&rdquo; 다음의 이어지는 하위 네임스페이스 이름은 &ldquo;기본 디렉토리&rdquo; 내의 하위 디렉토리에 해당하며 네임스페이스 구분 기호는 디렉토리 구분 기호를 나타냅니다.
+      하위 디렉토리 이름은 하위 네임스페이스 이름의 대소문자와 일치해야합니다.</p>
+</li>
+<li>
+<p>마지막에 존재하는 Class 이름은 <code>.php</code> 로 끝나는 파일 이름과 같아야 합니다. <code>역자주: \Vendor\Packages\Class =&gt; Class.php</code>
+       파일 이름은 Class 이름의 대소문자와 일치해야합니다(MUST).</p>
+</li>
+</ol>
+</li>
+<li>
+<p>오토로더 구현체는 예외(exception)를 throw해서는 안되며(MUST NOT), 모든 레벨의 오류를 발생해서는 안되며(MUST NOT), 값을 반환해서는 안됩니다 (SHOULD NOT).</p>
+</li>
+</ol>
+<h2 id="3-예제">
+  3. 예제
+  <a class="anchor" href="#3-%ec%98%88%ec%a0%9c">#</a>
+</h2>
+<p>아래의 표는 주어진 정규화 된 Class 이름, 네임스페이스 접두사 및 기본 디렉토리에 해당하는 파일 경로를 보여줍니다.</p>
+<table>
+<thead>
+<tr>
+<th>정규화된 Class 이름</th>
+<th>Namespace 접두사</th>
+<th>기본 디렉토리</th>
+<th>결과 파일 경로</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>\Acme\Log\Writer\File_Writer</td>
+<td>Acme\Log\Writer</td>
+<td>./acme-log-writer/lib/</td>
+<td>./acme-log-writer/lib/File_Writer.php</td>
+</tr>
+<tr>
+<td>\Aura\Web\Response\Status</td>
+<td>Aura\Web</td>
+<td>/path/to/aura-web/src/</td>
+<td>/path/to/aura-web/src/Response/Status.php</td>
+</tr>
+<tr>
+<td>\Symfony\Core\Request</td>
+<td>Symfony\Core</td>
+<td>./vendor/Symfony/Core/</td>
+<td>./vendor/Symfony/Core/Request.php</td>
+</tr>
+<tr>
+<td>\Zend\Acl</td>
+<td>Zend</td>
+<td>/usr/includes/Zend/</td>
+<td>/usr/includes/Zend/Acl.php</td>
+</tr>
+</tbody>
+</table>
+<p>명세를 따르는 Autoloader의 구현 예제는 <a href="https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader-examples.md">examples file</a>을 참조하십시오.
+예제 구현체는 명세(specification)의 일부로 간주되어서는 안되며(MUST NOT) 언제든지 변경 될 수 있습니다.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-개요">1. 개요</a></li>
+    <li><a href="#2-명세서">2. 명세서</a></li>
+    <li><a href="#3-예제">3. 예제</a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

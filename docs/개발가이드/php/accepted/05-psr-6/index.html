@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Caching Interface #  캐싱은 모든 프로젝트의 성능을 향상시키는 일반적인 방법이며, 많은 프레임워크 및 라이브러리는 캐싱 라이브러리를 기본 기능 중 하나로 만들게 됩니다. 이로 인해 많은 라이브러리가 다양한 수준의 기능을 갖춘 자체 캐싱 라이브러리를 사용하게 되었습니다. 이러한 상황으로 인해 개발자는 필요한 기능을 제공 할 수도 있고 제공하지 못할 수도 있는 여러 시스템을 배워야합니다. 또한 라이브러리를 캐싱하는 개발자는 제한된 수의 프레임워크 만 지원하거나 많은 수의 어댑터 클래스를 만드는 것 중에서 선택해야합니다.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="Caching Interface #  캐싱은 모든 프로젝트의 성능을 향상시키는 일반적인 방법이며, 많은 프레임워크 및 라이브러리는 캐싱 라이브러리를 기본 기능 중 하나로 만들게 됩니다. 이로 인해 많은 라이브러리가 다양한 수준의 기능을 갖춘 자체 캐싱 라이브러리를 사용하게 되었습니다. 이러한 상황으로 인해 개발자는 필요한 기능을 제공 할 수도 있고 제공하지 못할 수도 있는 여러 시스템을 배워야합니다. 또한 라이브러리를 캐싱하는 개발자는 제한된 수의 프레임워크 만 지원하거나 많은 수의 어댑터 클래스를 만드는 것 중에서 선택해야합니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/05-psr-6/" />
+
+<title>05 P S R 6 | Laonstory GuideBook</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/en.search.min.3e383c83219ec4150ecf5a5f1b2c5854327af5ba771ae455be1680107223e7da.js" integrity="sha256-Pjg8gyGexBUOz1pfGyxYVDJ69bp3GuRVvhaAEHIj59o="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Laonstory GuideBook</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/" class="collapsed ">개발가이드</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/" class="collapsed ">Php</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/01-psr-1/" class="">01 P S R 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/02-psr-3/" class="">02 P S R 3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/03-psr-4/" class="">03 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/04-psr-4/" class="">04 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/05-psr-6/" class="active">05 P S R 6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/06-psr-7/" class="">06 P S R 7</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/07-psr-11/" class="">07 P S R 11</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/08-psr-12/" class="">08 P S R 12</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/09-psr-13/" class="">09 P S R 13</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/10-psr-14/" class="">10 P S R 14</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/11-psr-15/" class="">11 P S R 15</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/12-psr-16/" class="">12 P S R 16</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/13-psr-17/" class="">13 P S R 17</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/14-psr-18/" class="">14 P S R 18</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/javascript/javascript/" class="">Javascript</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/" class="">React Jsx</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>05 P S R 6</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#목표">목표</a></li>
+    <li><a href="#정의">정의</a></li>
+    <li><a href="#data">Data</a></li>
+    <li><a href="#key-concepts">Key Concepts</a>
+      <ul>
+        <li><a href="#pool">Pool</a></li>
+        <li><a href="#items">Items</a></li>
+      </ul>
+    </li>
+    <li><a href="#error-handling">Error handling</a></li>
+    <li><a href="#interfaces">Interfaces</a>
+      <ul>
+        <li><a href="#cacheiteminterface">CacheItemInterface</a></li>
+        <li><a href="#cacheitempoolinterface">CacheItemPoolInterface</a></li>
+        <li><a href="#cacheexception">CacheException</a></li>
+        <li><a href="#invalidargumentexception">InvalidArgumentException</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="caching-interface">
+  Caching Interface
+  <a class="anchor" href="#caching-interface">#</a>
+</h1>
+<p>캐싱은 모든 프로젝트의 성능을 향상시키는 일반적인 방법이며, 많은 프레임워크 및 라이브러리는 캐싱 라이브러리를 기본 기능 중 하나로 만들게 됩니다.
+이로 인해 많은 라이브러리가 다양한 수준의 기능을 갖춘 자체 캐싱 라이브러리를 사용하게 되었습니다.
+이러한 상황으로 인해 개발자는 필요한 기능을 제공 할 수도 있고 제공하지 못할 수도 있는 여러 시스템을 배워야합니다.
+또한 라이브러리를 캐싱하는 개발자는 제한된 수의 프레임워크 만 지원하거나 많은 수의 어댑터 클래스를 만드는 것 중에서 선택해야합니다.</p>
+<p>캐싱 시스템을 위한 공통 인터페이스는 이러한 문제를 해결할 것 입니다.
+라이브러리 및 프레임워크 개발자는 의도한대로 동작하는 캐싱 시스템에 의존 할 수 있습니다.
+캐싱 시스템의 개발자는 전체 어댑터 모음보다는 단일 인터페이스 세트 만 구현하면됩니다.</p>
+<p>이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다.
+이것은 <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>에 설명 된대로 해석해야 합니다.
+<code>역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다</code></p>
+<h2 id="목표">
+  목표
+  <a class="anchor" href="#%eb%aa%a9%ed%91%9c">#</a>
+</h2>
+<p>이 PSR의 목표는 개발자가 빈틈없는 캐시 라이브러리를 만들 수 있도록 하여 맞춤 개발이 필요없이 기존 프레임 워크와 시스템에 통합 될 수 있도록 하는 것입니다.</p>
+<h2 id="정의">
+  정의
+  <a class="anchor" href="#%ec%a0%95%ec%9d%98">#</a>
+</h2>
+<ul>
+<li>
+<p><strong>호출 라이브러리(Calling Library)</strong> - 실제로 캐시 서비스가 필요한 라이브러리 또는 코드.
+ 이 라이브러리는이 표준의 인터페이스를 구현하는 캐싱 서비스를 활용할 것이며, 그렇지 않으면 이러한 캐싱 서비스의 구현에 대한 알지 못합니다. <code>역자주: 인터페이스를 구현한 캐싱 서비스를 사용만하고 구현을 하지 않는다.</code></p>
+</li>
+<li>
+<p><strong>구현 라이브러리(Implementing Library)</strong> - 이 라이브러리는 모든 호출 라이브러리에 캐싱 서비스를 제공하기 위해이 표준을 구현합니다.
+구현 라이브러리는 <code>Cache\CacheItemPoolInterface</code> 및 <code>Cache\CacheItemInterface</code> 인터페이스를 구현하는 클래스를 제공해야합니다.
+라이브러리 구현은 전체 초 단위로 아래에 설명 된 최소 TTL 기능을 지원해야만 합니다 (MUST).</p>
+</li>
+<li>
+<p><strong>TTL</strong> - TTL (Time To Live)은 해당 항목이 저장하고 보관하는 것으로 간주되는 시간입니다.
+TTL은 일반적으로 초 단위의 시간을 나타내는 정수 또는 DateInterval 개체로 정의됩니다.</p>
+</li>
+<li>
+<p><strong>만료(Expiration)</strong> - 항목이 만료로 설정되는 실제 시간입니다.
+이것은 일반적으로 개체가 저장된 시간에 TTL을 추가하여 계산됩니다.
+이것은 일반적으로 개체가 저장된 시간에 TTL을 추가하여 계산되지만 DateTime 개체로 명시 적으로 설정할 수도 있습니다.
+1:30:00에 저장된 300 초 TTL을 가진 항목의 만료 시간은 1:35:00입니다.
+구현 라이브러리는 요청한 만료 시간 전에 항목을 만료시킬 수도 있지만(MAY) 만료 시간에 도달하면 만료 된 것으로 간주해야합니다(MUST).
+호출 라이브러리가 항목을 저장요청을 하지만 만료 시간을 지정하지 않거나 만료 시간 또는 TTL을 null로 지정되어 있다면 구현 라이브러리는 설정한 기본 기간을 사용할 수 있습니다 (MAY).
+기본 기간이 설정되지 않은 경우 구현 라이브러리는 해당 항목을 영원히 캐시하는 요청으로 해석하거나 기본 구현이 지원하는 동안 저장하는 것으로 해석해야합니다(MUST).</p>
+</li>
+<li>
+<p><strong>Key</strong> - 캐시 된 항목을 고유하게 식별하는 적어도 하나의 문자로 구성된 문자열입니다.
+구현 라이브러리는<code>A-Z</code>,<code>a-z</code>,<code>0-9</code>,<code>_</code> 및<code>.</code> 문자로 구성된 키를 UTF-8 인코딩과 길이가 64 문자 이하의 순서로 지원해야합니다 (MUST).
+구현 라이브러리은 추가 문자와 인코딩 또는 더 긴 길이를 지원할 수 있지만 최소한 그 최소값을 지원해야합니다(MAY).
+라이브러리는 적절하게 키 문자열을 이스케이프 처리해야하지만 원래의 수정되지 않은 키 문자열을 반환 할 수 있어야합니다(MUST).
+다음 문자는 미래의 확장을 위해 예약되어 있으며, 구현 라이브러리에서 지원해서는 안됩니다(MUST NOT) :<code>{} () / \ @ :</code></p>
+</li>
+<li>
+<p><strong>Hit</strong> - 호출 라이브러리가 키로 Item을 요청하고 해당 키에 대해 일치하는 값이 발견되고 그 값이 만료되지 않았으며 값이 다른 이유로 무효하지 않은 경우 캐시 히트(Hit)가 발생합니다.
+호출 라이브러리는 모든 <code>get()</code> 호출에 대해 <code>isHit()</code>를 확인해야합니다 (SHOULD).</p>
+</li>
+<li>
+<p><strong>Miss</strong> - 캐시 미스는 캐시 히트와 반대입니다.
+호출 라이브러리가 키로 항목을 요청하고 해당 키에 해당 값이 없거나 값이 발견되었지만 만료되었거나 값이 다른 이유로 유효하지 않은 경우 캐시 미스가 발생합니다.
+만료 된 값은 항상 캐시 미스로 간주되어야합니다 (MUST).</p>
+</li>
+<li>
+<p><strong>지연됨(Deferred)</strong> - 지연된 캐시 저장은 캐시 항목이 풀에 의해 즉시 유지되지 않을 수 있음을 나타냅니다.
+풀 객체는 일부 저장소 엔진에서 지원하는 대량 세트 연산을 이용하기 위해 지연된 캐시 항목을 유지하는 것을 지연시킬 수 있습니다.
+풀은 지연 캐시 항목이 결국 유지되고 데이터가 손실되지 않도록 보장해야하며 호출 라이브러리가 지속되도록 요청하기 전에이를 유지해야합니다.
+호출 라이브러리가 <code>commit()</code> 메소드를 호출 할 때 모든 미해결 지연 항목을 유지해야합니다 (MUST).
+구현 라이브러리는 객체 소멸자, <code>save()</code>, timeout 또는 max-items check 또는 다른 적절한 논리에서 모두 지속되는 것과 같이 지연된 항목을 언제 유지할 것인지를 결정하는 데 적합한 논리를 사용할 수 있습니다 (MAY).
+지연된 캐시 항목에 대한 요청은 지연되었지만 아직 지속되지 않은 항목을 반환해야합니다 (MUST).</p>
+</li>
+</ul>
+<h2 id="data">
+  Data
+  <a class="anchor" href="#data">#</a>
+</h2>
+<p>구현 라이브러리는 다음을 포함하여 모든 직렬화 가능한 PHP 데이터 유형을 지원해야합니다.</p>
+<ul>
+<li><strong>Strings</strong> - PHP 호환 인코딩의 임의의 크기를 갖는 문자열.</li>
+<li><strong>Integers</strong> - PHP가 지원하는 모든 크기의 정수 (최대 64 비트).</li>
+<li><strong>Floats</strong> - 부호가 있는(signed) 모든 부동소수점 값.</li>
+<li><strong>Boolean</strong> - True 와 False.</li>
+<li><strong>Null</strong> - 진짜 Null 값. <code>역자주: 진짜라는 표현을 하는 이유는 PSR-16의 Null과는 다른 의미라서 입니다</code></li>
+<li><strong>Arrays</strong> - 인덱스된 임의의 깊이를 가진 연관 및 다차원 배열</li>
+<li><strong>Object</strong> - <code>$o == unserialize(serialize($o))</code> 와 같이 무손실 직렬화 및 직렬화 해제를 지원하는 객체.
+객체는 PHP의 Serializable 인터페이스, 적절한 경우 <code>__sleep()</code> 또는 <code>__wakeup()</code> 매직 메서드 또는 유사한 언어 기능을 활용할 수 있습니다(MAY).</li>
+</ul>
+<p>구현 라이브러리에 전달 된 모든 데이터는 전달 된 그대로 정확하게 반환되어야합니다(MUST).
+여기에는 가변 유형이 포함됩니다. 즉, 만약 (int) 5가 저장된 값이었던 경우 (string) 5를 반환하는 것은 오류입니다.
+구현 라이브러리는 PHP의 <code>serialize()</code>/<code>unserialize()</code> 함수를 내부적으로 사용할 수 있지만 꼭 그렇게 할 필요는 없습니다(MAY).
+이들과의 호환성은 수용 가능한 객체 값의 기준선으로 사용됩니다.</p>
+<p>어떠한 이유로든 저장된 정확한 값을 반환 할 수없는 경우 구현 라이브러리는 데이터가 손상되지 않게 캐시 미스로 응답해야합니다(MUST).</p>
+<h2 id="key-concepts">
+  Key Concepts
+  <a class="anchor" href="#key-concepts">#</a>
+</h2>
+<h3 id="pool">
+  Pool
+  <a class="anchor" href="#pool">#</a>
+</h3>
+<p>풀은 캐싱 시스템의 항목 모음을 나타냅니다.
+풀은 포함 된 모든 항목의 논리적 저장소입니다.
+캐시 가능한 모든 항목은 풀에서 항목 객체로 검색되고 캐시 된 객체의 전체 유니버스와의 모든 상호 작용은 풀을 통해 발생합니다.</p>
+<h3 id="items">
+  Items
+  <a class="anchor" href="#items">#</a>
+</h3>
+<p>Item은 풀 내의 단일 키 / 값 쌍을 나타냅니다.
+키는 Item에 대한 주요 고유 식별자이며 변경할 수 없어야합니다 (MUST).
+언제든지 값을 변경할 수 있습니다 (MAY).</p>
+<h2 id="error-handling">
+  Error handling
+  <a class="anchor" href="#error-handling">#</a>
+</h2>
+<p>캐싱은 종종 애플리케이션 성능의 중요한 부분이지만 애플리케이션 기능의 중요한 부분이되어서는 안됩니다.
+따라서 캐시 시스템의 오류로 인해 프로그램이 실패(failure)하지 않아야합니다 (SHOULD NOT).
+이런 이유로, 구현 라이브러리는 인터페이스에 의해 정의 된 것과 다른 예외를 던져서는 안되며, 기본 데이터 저장소에 의해 발생된 된 오류나 예외를 버리고 문제를 일으키지 않아야합니다 (SHOULD).</p>
+<p>구현 라이브러리는 그러한 오류를 기록하거나 적절한 경우 이를 관리자에게 보고해야합니다 (SHOULD).</p>
+<p>호출 라이브러리가 하나 이상의 항목을 삭제하도록 요청하거나 풀을 지우도록 요청한 경우 지정된 키가 존재하지 않으면 오류 상태로 간주해서는 안됩니다(MUST NOT).
+다음의 조건(키가 존재하지 않거나 풀이 비어 있음)도 동일하며 오류 조건은 없습니다.</p>
+<h2 id="interfaces">
+  Interfaces
+  <a class="anchor" href="#interfaces">#</a>
+</h2>
+<h3 id="cacheiteminterface">
+  CacheItemInterface
+  <a class="anchor" href="#cacheiteminterface">#</a>
+</h3>
+<p><code>CacheItemInterface</code>는 캐시 시스템 내부의 항목을 정의합니다.
+각 Item 객체는 구현 시스템에 따라 설정 될 수 있는 특정 키와 연결되어야하며(MUST) 일반적으로 <code>Cache\CacheItemPoolInterface</code> 객체에 의해 전달됩니다.</p>
+<p><code>Cache\CacheItemInterface</code> 객체는 캐시 항목의 저장 및 검색을 캡슐화합니다.
+각 <code>Cache\CacheItemInterface</code>는 <code>Cache\CacheItemPoolInterface</code> 오브젝트에 의해 생성되며, 필요한 모든 설정을 담당 할 뿐만 아니라 오브젝트를 고유 키와 연관시킵니다.
+<code>Cache\CacheItemInterface</code> 객체는 이 문서의 데이터 섹션에 정의 된 모든 유형의 PHP 값을 저장하고 검색 할 수 있어야 합니다.</p>
+<p>호출 라이브러리는 Item 객체 자체를 인스턴스화해서는 안됩니다.
+<code>getItem()</code> 메소드를 통해 Pool 객체에서만 요청할 수 있습니다.
+라이브러리 호출은 하나의 구현 라이브러리에 의해 생성 된 항목이 다른 구현 라이브러리의 풀과 호환 가능하다고 가정해서는 안됩니다 (SHOULD NOT).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Cache</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * CacheItemInterface defines an interface for interacting with objects inside a cache.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">CacheItemInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns the key for the current cache item.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The key is loaded by the Implementing Library, but should be available to
+</span><span style="color:#e6db74">     * the higher level callers when needed.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return string
+</span><span style="color:#e6db74">     *   The key string for this cache item.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getKey</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Retrieves the value of the item from the cache associated with this object&#39;s key.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The value returned must be identical to the value originally stored by set().
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * If isHit() returns false, this method MUST return null. Note that null
+</span><span style="color:#e6db74">     * is a legitimate cached value, so the isHit() method SHOULD be used to
+</span><span style="color:#e6db74">     * differentiate between &#34;null value was found&#34; and &#34;no value was found.&#34;
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return mixed
+</span><span style="color:#e6db74">     *   The value corresponding to this cache item&#39;s key, or null if not found.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">get</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Confirms if the cache item lookup resulted in a cache hit.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Note: This method MUST NOT have a race condition between calling isHit()
+</span><span style="color:#e6db74">     * and calling get().
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     *   True if the request resulted in a cache hit. False otherwise.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">isHit</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Sets the value represented by this cache item.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * The $value argument may be any item that can be serialized by PHP,
+</span><span style="color:#e6db74">     * although the method of serialization is left up to the Implementing
+</span><span style="color:#e6db74">     * Library.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param mixed $value
+</span><span style="color:#e6db74">     *   The serializable value to be stored.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     *   The invoked object.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">set</span>($value);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Sets the expiration time for this cache item.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param \DateTimeInterface|null $expiration
+</span><span style="color:#e6db74">     *   The point in time after which the item MUST be considered expired.
+</span><span style="color:#e6db74">     *   If null is passed explicitly, a default value MAY be used. If none is set,
+</span><span style="color:#e6db74">     *   the value should be stored permanently or for as long as the
+</span><span style="color:#e6db74">     *   implementation allows.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     *   The called object.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">expiresAt</span>($expiration);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Sets the expiration time for this cache item.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param int|\DateInterval|null $time
+</span><span style="color:#e6db74">     *   The period of time from the present after which the item MUST be considered
+</span><span style="color:#e6db74">     *   expired. An integer parameter is understood to be the time in seconds until
+</span><span style="color:#e6db74">     *   expiration. If null is passed explicitly, a default value MAY be used.
+</span><span style="color:#e6db74">     *   If none is set, the value should be stored permanently or for as long as the
+</span><span style="color:#e6db74">     *   implementation allows.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return static
+</span><span style="color:#e6db74">     *   The called object.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">expiresAfter</span>($time);
+
+}
+</code></pre></div><h3 id="cacheitempoolinterface">
+  CacheItemPoolInterface
+  <a class="anchor" href="#cacheitempoolinterface">#</a>
+</h3>
+<p><code>Cache\CacheItemPoolInterface</code>의 기본 목적은 호출 라이브러리에서 키를 승인하고 연관된 <code>Cache\CacheItemInterface</code> 오브젝트를 리턴하는 것입니다.
+또한 전체 캐시 컬렉션과의 상호 작용의 주요 지점이기도합니다.
+풀(Pool)의 모든 구성 및 초기화는 구현 라이브러리에 맡깁니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Cache</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * CacheItemPoolInterface generates CacheItemInterface objects.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">CacheItemPoolInterface</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns a Cache Item representing the specified key.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * This method must always return a CacheItemInterface object, even in case of
+</span><span style="color:#e6db74">     * a cache miss. It MUST NOT return null.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $key
+</span><span style="color:#e6db74">     *   The key for which to return the corresponding Cache Item.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @throws InvalidArgumentException
+</span><span style="color:#e6db74">     *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
+</span><span style="color:#e6db74">     *   MUST be thrown.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return CacheItemInterface
+</span><span style="color:#e6db74">     *   The corresponding Cache Item.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getItem</span>($key);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Returns a traversable set of cache items.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string[] $keys
+</span><span style="color:#e6db74">     *   An indexed array of keys of items to retrieve.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @throws InvalidArgumentException
+</span><span style="color:#e6db74">     *   If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
+</span><span style="color:#e6db74">     *   MUST be thrown.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return array|\Traversable
+</span><span style="color:#e6db74">     *   A traversable collection of Cache Items keyed by the cache keys of
+</span><span style="color:#e6db74">     *   each item. A Cache item will be returned for each key, even if that
+</span><span style="color:#e6db74">     *   key is not found. However, if no keys are specified then an empty
+</span><span style="color:#e6db74">     *   traversable MUST be returned instead.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getItems</span>(<span style="color:#66d9ef">array</span> $keys <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>());
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Confirms if the cache contains specified cache item.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * Note: This method MAY avoid retrieving the cached value for performance reasons.
+</span><span style="color:#e6db74">     * This could result in a race condition with CacheItemInterface::get(). To avoid
+</span><span style="color:#e6db74">     * such situation use CacheItemInterface::isHit() instead.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $key
+</span><span style="color:#e6db74">     *   The key for which to check existence.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @throws InvalidArgumentException
+</span><span style="color:#e6db74">     *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
+</span><span style="color:#e6db74">     *   MUST be thrown.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     *   True if item exists in the cache, false otherwise.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hasItem</span>($key);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Deletes all items in the pool.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     *   True if the pool was successfully cleared. False if there was an error.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">clear</span>();
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Removes the item from the pool.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string $key
+</span><span style="color:#e6db74">     *   The key to delete.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @throws InvalidArgumentException
+</span><span style="color:#e6db74">     *   If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
+</span><span style="color:#e6db74">     *   MUST be thrown.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     *   True if the item was successfully removed. False if there was an error.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">deleteItem</span>($key);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Removes multiple items from the pool.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param string[] $keys
+</span><span style="color:#e6db74">     *   An array of keys that should be removed from the pool.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @throws InvalidArgumentException
+</span><span style="color:#e6db74">     *   If any of the keys in $keys are not a legal value a \Psr\Cache\InvalidArgumentException
+</span><span style="color:#e6db74">     *   MUST be thrown.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     *   True if the items were successfully removed. False if there was an error.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">deleteItems</span>(<span style="color:#66d9ef">array</span> $keys);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Persists a cache item immediately.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param CacheItemInterface $item
+</span><span style="color:#e6db74">     *   The cache item to save.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     *   True if the item was successfully persisted. False if there was an error.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">save</span>(<span style="color:#a6e22e">CacheItemInterface</span> $item);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Sets a cache item to be persisted later.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param CacheItemInterface $item
+</span><span style="color:#e6db74">     *   The cache item to save.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     *   False if the item could not be queued or if a commit was attempted and failed. True otherwise.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">saveDeferred</span>(<span style="color:#a6e22e">CacheItemInterface</span> $item);
+
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Persists any deferred cache items.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return bool
+</span><span style="color:#e6db74">     *   True if all not-yet-saved items were successfully saved or there were none. False otherwise.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">commit</span>();
+}
+</code></pre></div><h3 id="cacheexception">
+  CacheException
+  <a class="anchor" href="#cacheexception">#</a>
+</h3>
+<p>이 예외 인터페이스는 캐시 서버에 연결하거나 제공된 잘못된 자격 증명과 같은 <em>캐시 설정</em>을 포함하여 치명적인 오류가 발생할 때 사용하기위한 것입니다.
+구현 라이브러리에 의해 던져진 예외는 이 인터페이스를 구현해야합니다 (MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Cache</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Exception interface for all exceptions thrown by an Implementing Library.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">CacheException</span>
+{
+}
+</code></pre></div><h3 id="invalidargumentexception">
+  InvalidArgumentException
+  <a class="anchor" href="#invalidargumentexception">#</a>
+</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Psr\Cache</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Exception interface for invalid cache arguments.
+</span><span style="color:#e6db74"> *
+</span><span style="color:#e6db74"> * Any time an invalid argument is passed into a method it must throw an
+</span><span style="color:#e6db74"> * exception class which implements Psr\Cache\InvalidArgumentException.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">interface</span> <span style="color:#a6e22e">InvalidArgumentException</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">CacheException</span>
+{
+}
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#목표">목표</a></li>
+    <li><a href="#정의">정의</a></li>
+    <li><a href="#data">Data</a></li>
+    <li><a href="#key-concepts">Key Concepts</a>
+      <ul>
+        <li><a href="#pool">Pool</a></li>
+        <li><a href="#items">Items</a></li>
+      </ul>
+    </li>
+    <li><a href="#error-handling">Error handling</a></li>
+    <li><a href="#interfaces">Interfaces</a>
+      <ul>
+        <li><a href="#cacheiteminterface">CacheItemInterface</a></li>
+        <li><a href="#cacheitempoolinterface">CacheItemPoolInterface</a></li>
+        <li><a href="#cacheexception">CacheException</a></li>
+        <li><a href="#invalidargumentexception">InvalidArgumentException</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

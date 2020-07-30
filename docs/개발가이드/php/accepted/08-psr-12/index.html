@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en" dir=>
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Extended Coding Style Guide #  이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다. 이것은 RFC 2119에 설명 된대로 해석해야 합니다. 역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다
+개요 #  이 규칙은 코딩 스타일 가이드인 PSR-2를 확장 및 대체하며, 기본 코딩 표준 인 PSR-1을 준수해야합니다.
+PSR-2와 마찬가지로 이 사양의 목적은 다른 작성자의 코드를 읽을 때 이해하기 어려운 것을 줄이는 것입니다.">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:title" content="" />
+<meta property="og:description" content="Extended Coding Style Guide #  이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다. 이것은 RFC 2119에 설명 된대로 해석해야 합니다. 역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다
+개요 #  이 규칙은 코딩 스타일 가이드인 PSR-2를 확장 및 대체하며, 기본 코딩 표준 인 PSR-1을 준수해야합니다.
+PSR-2와 마찬가지로 이 사양의 목적은 다른 작성자의 코드를 읽을 때 이해하기 어려운 것을 줄이는 것입니다." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://laonstory.github.io/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/08-psr-12/" />
+
+<title>08 P S R 12 | Laonstory GuideBook</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.6cd8553a6854f4812343f0f0c8baca31271e686434f381fbe3c7226f66639176.css" integrity="sha256-bNhVOmhU9IEjQ/DwyLrKMSceaGQ084H748cib2ZjkXY=">
+<script defer src="/en.search.min.3e383c83219ec4150ecf5a5f1b2c5854327af5ba771ae455be1680107223e7da.js" integrity="sha256-Pjg8gyGexBUOz1pfGyxYVDJ69bp3GuRVvhaAEHIj59o="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body dir=>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>Laonstory GuideBook</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/" class="collapsed ">개발가이드</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/" class="collapsed ">Php</a>
+  
+
+          
+  
+  
+  
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/01-psr-1/" class="">01 P S R 1</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/02-psr-3/" class="">02 P S R 3</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/03-psr-4/" class="">03 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/04-psr-4/" class="">04 P S R 4</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/05-psr-6/" class="">05 P S R 6</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/06-psr-7/" class="">06 P S R 7</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/07-psr-11/" class="">07 P S R 11</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/08-psr-12/" class="active">08 P S R 12</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/09-psr-13/" class="">09 P S R 13</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/10-psr-14/" class="">10 P S R 14</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/11-psr-15/" class="">11 P S R 15</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/12-psr-16/" class="">12 P S R 16</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/13-psr-17/" class="">13 P S R 17</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/php/accepted/14-psr-18/" class="">14 P S R 18</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/javascript/javascript/" class="">Javascript</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+    <a href="/docs/%EA%B0%9C%EB%B0%9C%EA%B0%80%EC%9D%B4%EB%93%9C/react_jsx/react_jsx/" class="">React Jsx</a>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+        </li>
+      
+    
+  </ul>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>08 P S R 12</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#개요">개요</a>
+      <ul>
+        <li><a href="#이전-버전">이전 버전</a></li>
+        <li><a href="#예제">예제</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-일반">2. 일반</a>
+      <ul>
+        <li><a href="#21-기본-코딩-표준">2.1 기본 코딩 표준</a></li>
+        <li><a href="#22-files">2.2 Files</a></li>
+        <li><a href="#23-lines">2.3 Lines</a></li>
+        <li><a href="#24-들여쓰기">2.4 들여쓰기</a></li>
+        <li><a href="#25-keyword와-type">2.5 Keyword와 Type</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-declare-선언문-네임-스페이스-및-import-선언문">3. Declare 선언문, 네임 스페이스 및 Import 선언문</a></li>
+    <li><a href="#4-클래스-프로퍼티-메소드">4. 클래스, 프로퍼티, 메소드</a>
+      <ul>
+        <li><a href="#41-확장과-구현">4.1 확장과 구현</a></li>
+        <li><a href="#42-특성-trait-사용">4.2 특성-trait 사용</a></li>
+        <li><a href="#43-속성-property-과-상수-constant">4.3 속성-property 과 상수-constant</a></li>
+        <li><a href="#44-메소드와-함수">4.4 메소드와 함수</a></li>
+        <li><a href="#45-메서드-및-함수-인수">4.5 메서드 및 함수 인수</a></li>
+        <li><a href="#46-abstract-final-과-static">4.6 <code>abstract</code>, <code>final</code>, 과 <code>static</code></a></li>
+        <li><a href="#47-메서드와-함수-호출">4.7 메서드와 함수 호출</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-제어구조">5. 제어구조</a>
+      <ul>
+        <li><a href="#51-if-elseif-else">5.1 <code>if</code>, <code>elseif</code>, <code>else</code></a></li>
+        <li><a href="#52-switch-case">5.2 <code>switch</code>, <code>case</code></a></li>
+        <li><a href="#53-while-do-while">5.3 <code>while</code>, <code>do while</code></a></li>
+        <li><a href="#54-for">5.4 <code>for</code></a></li>
+        <li><a href="#55-foreach">5.5 <code>foreach</code></a></li>
+        <li><a href="#56-try-catch-finally">5.6 <code>try</code>, <code>catch</code>, <code>finally</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#6-연산자">6. 연산자</a>
+      <ul>
+        <li><a href="#61-단항-연산자">6.1. 단항 연산자</a></li>
+        <li><a href="#62-이진-연산자">6.2. 이진 연산자</a></li>
+        <li><a href="#63-삼항-ternary-연산자">6.3. 삼항-Ternary 연산자</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-클로저-closures">7. 클로저-Closures</a></li>
+    <li><a href="#8-익명-클래스">8. 익명 클래스</a></li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="extended-coding-style-guide">
+  Extended Coding Style Guide
+  <a class="anchor" href="#extended-coding-style-guide">#</a>
+</h1>
+<p>이 문서에서 핵심이 되는 단어는 &ldquo;MUST&rdquo;, &ldquo;MUST NOT&rdquo;, &ldquo;REQUIRED&rdquo;, &ldquo;SHALL&rdquo;, &ldquo;SHALL NOT&rdquo;, &ldquo;SHOULD&rdquo;, &ldquo;SHOULD NOT&rdquo;, &ldquo;RECOMMENDED&rdquo;, &ldquo;MAY&rdquo;, &ldquo;OPTIONAL&rdquo; 입니다.
+이것은 <a href="http://tools.ietf.org/html/rfc2119">RFC 2119</a>에 설명 된대로 해석해야 합니다.
+<code>역자주: 위의 키워드는 아래의 번역문에 괄호안에 표시하였습니다</code></p>
+<h2 id="개요">
+  개요
+  <a class="anchor" href="#%ea%b0%9c%ec%9a%94">#</a>
+</h2>
+<p>이 규칙은 코딩 스타일 가이드인 <a href="http://www.php-fig.org/psr/psr-2/">PSR-2</a>를 확장 및 대체하며, 기본 코딩 표준 인 <a href="http://www.php-fig.org/psr/psr-1/">PSR-1</a>을 준수해야합니다.</p>
+<p><a href="http://www.php-fig.org/psr/psr-2/">PSR-2</a>와 마찬가지로 이 사양의 목적은 다른 작성자의 코드를 읽을 때 이해하기 어려운 것을 줄이는 것입니다.
+이것은 PHP 코드의 형식을 지정하는 방법에 대한 규칙과 기대 사항을 공유하여 열거합니다.
+이 PSR은 코딩 스타일 도구가 구현할 수 있는 설정 방법을 제공하기 위해 노력하고, 프로젝트에서 이 PSR의 준수를 선언함을 통해 개발자는 서로 다른 프로젝트와 쉽게 연동 할 수 있습니다.
+다양한 저자가 여러 프로젝트에서 협업을 할 때, 모든 프로젝트에서 한가지의 가이드라인을 사용하는 것이 도움이 됩니다.
+따라서 이 가이드로 얻는 혜택은 규칙 자체가 아니라 이러한 규칙을 공유하는 것을 통해 얻을 수 있습니다.</p>
+<p><a href="http://www.php-fig.org/psr/psr-2/">PSR-2</a>는 2012 년에 승인되었으며 그 이후로 PHP에 많은 발전이 있었으므로 코딩 스타일 지침에 영향을 미쳤습니다.
+<a href="http://www.php-fig.org/psr/psr-2/">PSR-2</a>는 문서 작성 당시 존재했던 PHP 기능은 대부분 포함하고 있지만, 새로운 기능들은 매우 다양하게 해석 될 수 있습니다.
+따라서 이 PSR은 새로운 기능을 사용하여 보다 현대적인 관점에서 PSR-2의 내용을 명확하게 하고 PSR-2에 관한 오류의 개정본을 만듭니다.</p>
+<h3 id="이전-버전">
+  이전 버전
+  <a class="anchor" href="#%ec%9d%b4%ec%a0%84-%eb%b2%84%ec%a0%84">#</a>
+</h3>
+<p>이 문서 전체의 내용 중, 프로젝트에서 사용하는 PHP 버전에 없는 지침은 무시할 수 있습니다 (MAY).</p>
+<h3 id="예제">
+  예제
+  <a class="anchor" href="#%ec%98%88%ec%a0%9c">#</a>
+</h3>
+<p>이 예제는 아래의 규칙 중 일부를 간략하게 설명합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">declare</span>(<span style="color:#a6e22e">strict_types</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>);
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\</span>{<span style="color:#a6e22e">ClassA</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">A</span>, <span style="color:#a6e22e">ClassB</span>, <span style="color:#a6e22e">ClassC</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">C</span>};
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\SomeNamespace\ClassD</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">D</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Vendor\Package\</span>{<span style="color:#a6e22e">functionA</span>, <span style="color:#a6e22e">functionB</span>, <span style="color:#a6e22e">functionC</span>};
+
+<span style="color:#66d9ef">use</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">Vendor\Package\</span>{<span style="color:#a6e22e">ConstantA</span>, <span style="color:#a6e22e">ConstantB</span>, <span style="color:#a6e22e">ConstantC</span>};
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Bar</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">FooInterface</span>
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">sampleFunction</span>(<span style="color:#a6e22e">int</span> $a, <span style="color:#a6e22e">int</span> $b <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>)<span style="color:#f92672">:</span> <span style="color:#66d9ef">array</span>
+    {
+        <span style="color:#66d9ef">if</span> ($a <span style="color:#f92672">===</span> $b) {
+            <span style="color:#a6e22e">bar</span>();
+        } <span style="color:#66d9ef">elseif</span> ($a <span style="color:#f92672">&gt;</span> $b) {
+            $foo<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">bar</span>($arg1);
+        } <span style="color:#66d9ef">else</span> {
+            <span style="color:#a6e22e">BazClass</span><span style="color:#f92672">::</span><span style="color:#a6e22e">bar</span>($arg2, $arg3);
+        }
+    }
+
+    <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">bar</span>()
+    {
+        <span style="color:#75715e">// method body
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><h2 id="2-일반">
+  2. 일반
+  <a class="anchor" href="#2-%ec%9d%bc%eb%b0%98">#</a>
+</h2>
+<h3 id="21-기본-코딩-표준">
+  2.1 기본 코딩 표준
+  <a class="anchor" href="#21-%ea%b8%b0%eb%b3%b8-%ec%bd%94%eb%94%a9-%ed%91%9c%ec%a4%80">#</a>
+</h3>
+<p>코드는 <a href="http://www.php-fig.org/psr/psr-1/">PSR-1</a>에 요약 된 모든 규칙을 따라야합니다.</p>
+<p>PSR-1의 &lsquo;<em>StudlyCaps</em>&lsquo;라는 용어는 <em>PascalCase</em>로 해석해야하며(MUST) 첫 단어가 첫 문자를 포함하여 대문자로 표시해야합니다.</p>
+<h3 id="22-files">
+  2.2 Files
+  <a class="anchor" href="#22-files">#</a>
+</h3>
+<p>모든 PHP 파일은 Unix LF (linefeed) 줄만 사용해야합니다 (MUST).</p>
+<p>모든 PHP 파일은 단일 LF로 끝나는 비어 있지 않은 라인으로 끝나야합니다 (MUST).</p>
+<p>PHP code만 존재하는 파일에서는 닫는 <code>?&gt;</code>태그를 생략해야합니다 (MUST).</p>
+<h3 id="23-lines">
+  2.3 Lines
+  <a class="anchor" href="#23-lines">#</a>
+</h3>
+<p>라인 길이에 엄격한 제한이 있어서는 안됩니다(MUST NOT).</p>
+<p>한줄에 들어가는 글자수에 대한 가벼운 제한은 120자여야 합니다. (MUST).</p>
+<p>한줄은 80자를 넘지 않아야합니다 (SHOULD NOT). 그보다 긴 줄은 각각 80자 이하의 여러 줄으로 나눠야합니다 (SHOULD).</p>
+<p>HEREDOC/NOWDOC 구문을 제외하고 줄의 끝에 공백이 있으면 안됩니다(MUST NOT).</p>
+<p>명시적으로 금지 된 경우를 제외하고 가독성을 높이고 관련 코드 블록을 표시하기 위해 빈 줄을 추가 할 수 있습니다 (MAY).</p>
+<p>한 줄에 하나 이상의 문장이 있어서는 안됩니다 (MUST NOT).</p>
+<h3 id="24-들여쓰기">
+  2.4 들여쓰기
+  <a class="anchor" href="#24-%eb%93%a4%ec%97%ac%ec%93%b0%ea%b8%b0">#</a>
+</h3>
+<p>코드는 4개의 스페이스로 들여쓰기를 사용해야만하며(MUST), 탭을 사용하지 않아야만 합니다 (MUST NOT).</p>
+<h3 id="25-keyword와-type">
+  2.5 Keyword와 Type
+  <a class="anchor" href="#25-keyword%ec%99%80-type">#</a>
+</h3>
+<p>모든 PHP 예약 키워드와 타입 <a href="http://php.net/manual/en/reserved.keywords.php">[1]</a><a href="http://php.net/manual/en/reserved.other-reserved-words.php">[2]</a>은 소문자 여야만합니다 (MUST).</p>
+<p>향후 PHP 버전에 추가되는 모든 새로운 유형과 키워드는 반드시 소문자 여야만합니다 (MUST).</p>
+<p>반드시 <code>boolean</code> 대신 <code>bool</code>, <code>integer</code> 대신 <code>int</code> 등 짧은 형태의 타입 키워드를 사용해야합니다 (MUST).</p>
+<h2 id="3-declare-선언문-네임-스페이스-및-import-선언문">
+  3. Declare 선언문, 네임 스페이스 및 Import 선언문
+  <a class="anchor" href="#3-declare-%ec%84%a0%ec%96%b8%eb%ac%b8-%eb%84%a4%ec%9e%84-%ec%8a%a4%ed%8e%98%ec%9d%b4%ec%8a%a4-%eb%b0%8f-import-%ec%84%a0%ec%96%b8%eb%ac%b8">#</a>
+</h2>
+<p>PHP 파일의 머릿글은 여러 블록으로 구성 될 수 있습니다.
+이미 존재한다면, 아래의 각 블록은 하나의 빈 행으로 분리해야하며 빈 행을 포함해서는 안됩니다 (MUST NOT).
+관련이 없는 블록은 생략 할 수 있지만(MUST) 각 블록은 아래에 나열된 순서여야 합니다.</p>
+<ol>
+<li><code>&lt;?php</code>로 태그 열기.</li>
+<li>파일 수준의 docblock.</li>
+<li>하나 이상의 declare 선언문.</li>
+<li>파일의 네임 스페이스 선언.</li>
+<li>하나 이상의 클래스 기반 <code>use</code> import 문.</li>
+<li>하나 이상의 함수 기반 <code>use</code> import 문.</li>
+<li>하나 이상의 상수 기반 <code>use</code> import 문.</li>
+<li>파일의 나머지 코드.</li>
+</ol>
+<p>파일에 HTML과 PHP가 섞여 있다면 위 섹션 중 하나라도 여전히 사용할 수 있습니다.
+그럴땐 파일의 최상단에는 declare 문이 있어야 하며 (MUST), 나머지 부분은 닫는 PHP 태그와 HTML과 PHP가 섞인 코드가 있어야합니다.</p>
+<p>열기 태그 <code>&lt;?php</code>가 파일의 첫 번째 줄에 있을 때, PHP 열기 및 닫기 태그 외부에 마크업을 포함하는 파일이 아니라면 다른 문장이 없는 자체 라인 상에 있어야 합니다(MUST).
+<code>역자주: 설명이 어려우니 그냥 아래에 나오는 예제를 참고하세요</code></p>
+<p>Import 문은 항상 정규화된 형식이어야 하므로 백 슬래시로 시작해서는 안됩니다 (MUST).</p>
+<p>다음은 모든 블록의 전체 목록의 예제를 보여줍니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * This file contains an example of coding styles.
+</span><span style="color:#e6db74"> */</span>
+
+<span style="color:#66d9ef">declare</span>(<span style="color:#a6e22e">strict_types</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>);
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\</span>{<span style="color:#a6e22e">ClassA</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">A</span>, <span style="color:#a6e22e">ClassB</span>, <span style="color:#a6e22e">ClassC</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">C</span>};
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\SomeNamespace\ClassD</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">D</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\AnotherNamespace\ClassE</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">E</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Vendor\Package\</span>{<span style="color:#a6e22e">functionA</span>, <span style="color:#a6e22e">functionB</span>, <span style="color:#a6e22e">functionC</span>};
+<span style="color:#66d9ef">use</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">Another\Vendor\functionD</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">Vendor\Package\</span>{<span style="color:#a6e22e">CONSTANT_A</span>, <span style="color:#a6e22e">CONSTANT_B</span>, <span style="color:#a6e22e">CONSTANT_C</span>};
+<span style="color:#66d9ef">use</span> <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">Another\Vendor\CONSTANT_D</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * FooBar is an example class.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FooBar</span>
+{
+    <span style="color:#75715e">// ... additional PHP code ...
+</span><span style="color:#75715e"></span>}
+
+</code></pre></div><p>두 단계 이상의 복합 네임 스페이스는 사용해서는 안됩니다 (MUST NOT). 그러므로 허용하는 최대 복합 단계는 다음과 같습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\SomeNamespace\</span>{
+    <span style="color:#a6e22e">SubnamespaceOne\ClassA</span>,
+    <span style="color:#a6e22e">SubnamespaceOne\ClassB</span>,
+    <span style="color:#a6e22e">SubnamespaceTwo\ClassY</span>,
+    <span style="color:#a6e22e">ClassZ</span>,
+};
+</code></pre></div><p>그리고 다음은 허용되지 않습니다(MUST NOT).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\SomeNamespace\</span>{
+    <span style="color:#a6e22e">SubnamespaceOne\AnotherNamespace\ClassA</span>,
+    <span style="color:#a6e22e">SubnamespaceOne\ClassB</span>,
+    <span style="color:#a6e22e">ClassZ</span>,
+};
+</code></pre></div><p>PHP를 열고 닫는 태그 외부에서 마크 업을 포함하는 파일에 엄격한 유형을 선언하고자 할 때, 선언문은 파일의 첫 번째 줄에 있어야하며 (MUST), 여는 PHP 태그와 strict types 선언과 닫는 태그를 포함해야합니다.</p>
+<p>예 :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span> <span style="color:#66d9ef">declare</span>(<span style="color:#a6e22e">strict_types</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>) <span style="color:#75715e">?&gt;</span>
+&lt;<span style="color:#f92672">html</span>&gt;
+&lt;<span style="color:#f92672">body</span>&gt;
+    <span style="color:#75715e">&lt;?php</span>
+        <span style="color:#75715e">// ... additional PHP code ...
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">?&gt;</span>
+&lt;/<span style="color:#f92672">body</span>&gt;
+&lt;/<span style="color:#f92672">html</span>&gt;
+</code></pre></div><p>Declare 문은 공백을 포함하지 않아야하며(MUST) <code>declare(strict_types=1)</code> (선택 항목 인 세미콜론 종결자 포함)이어야합니다(MUST).</p>
+<p>블록 선언문은 허용되며 반드시 아래와 같은 형식이여야합니다(MUST). 중괄호와 간격의 위치 참고 :</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">declare(ticks=1) {
+    // some code
+}
+</code></pre></div><h2 id="4-클래스-프로퍼티-메소드">
+  4. 클래스, 프로퍼티, 메소드
+  <a class="anchor" href="#4-%ed%81%b4%eb%9e%98%ec%8a%a4-%ed%94%84%eb%a1%9c%ed%8d%bc%ed%8b%b0-%eb%a9%94%ec%86%8c%eb%93%9c">#</a>
+</h2>
+<p>&ldquo;클래스&quot;라는 용어는 모든 클래스, 인터페이스 및 특성-trait을 나타냅니다.</p>
+<p>닫는 중괄호는 같은 줄의 주석이나 명령문 다음에 와서는 안됩니다(MUST NOT).</p>
+<p>새 클래스를 인스턴스화 할 때 생성자에 전달 된 인수가 없는 경우에도 항상 괄호가 있어야합니다(MUST).
+<code>역자주 : new Foo; 같은걸 하지 말라는 의미</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">new Foo();
+</code></pre></div><h3 id="41-확장과-구현">
+  4.1 확장과 구현
+  <a class="anchor" href="#41-%ed%99%95%ec%9e%a5%ea%b3%bc-%ea%b5%ac%ed%98%84">#</a>
+</h3>
+<p><code>extends</code>와 <code>implements</code> 키워드는 클래스 이름과 같은 줄에 선언해야합니다 (MUST).</p>
+<p>해당 클래스의 여는 중괄호는 같은 줄에 있어야합니다(MUST). 클래스의 닫는 중괄호는 본문 뒤의 다음 줄로 가야합니다(MUST).</p>
+<p>여는 중괄호는 반드시(MUST) 같은 줄에 있어야하며 앞에 빈 줄을 붙여서는 안됩니다.</p>
+<p>닫는 중괄호는 반드시(MUST) 같은 줄에 있어야하며 빈 줄을 앞에 두어서는 안됩니다(MUST NOT).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">FooClass</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">BarClass</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">Bar</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">OtherVendor\OtherPackage\BazClass</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">ParentClass</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">\ArrayAccess</span>, <span style="color:#a6e22e">\Countable</span>
+{
+    <span style="color:#75715e">// constants, properties, methods
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p><code>implements</code>의 목록과 인터페이스의 경우, <code>extends</code>는 여러 줄에 걸쳐 나뉘어 질 수 있으며(MAY), 각 줄은 한 번의 들여쓰기를 합니다.
+그렇게 할 때 목록의 첫 번째 항목은 다음 줄에 있어야하며 한 줄에 하나의 인터페이스만 있어야합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">FooClass</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">BarClass</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">Bar</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">OtherVendor\OtherPackage\BazClass</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">ParentClass</span> <span style="color:#66d9ef">implements</span>
+    <span style="color:#a6e22e">\ArrayAccess</span>,
+    <span style="color:#a6e22e">\Countable</span>,
+    <span style="color:#a6e22e">\Serializable</span>
+{
+    <span style="color:#75715e">// constants, properties, methods
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="42-특성-trait-사용">
+  4.2 특성-trait 사용
+  <a class="anchor" href="#42-%ed%8a%b9%ec%84%b1-trait-%ec%82%ac%ec%9a%a9">#</a>
+</h3>
+<p>특성-trait을 구현하기 위해 클래스 내에서 사용되는 <code>use</code> 키워드는 클래스를 여는 중괄호 다음 줄에 선언해야합니다 (MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\FirstTrait</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span>
+{
+    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">FirstTrait</span>;
+}
+</code></pre></div><p>클래스로 가져온 각각의 특성-trait은 반드시 한 줄에 하나씩 포함해야하며(MUST), 각 포함내역은 반드시 고유한 <code>use</code> import 문을 가져야합니다 (MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\FirstTrait</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\SecondTrait</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\ThirdTrait</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span>
+{
+    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">FirstTrait</span>;
+    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">SecondTrait</span>;
+    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">ThirdTrait</span>;
+}
+</code></pre></div><p>클래스에 <code>use</code> import 문 다음에 아무것도 없는 경우, 클래스를 닫는 중괄호는 마지막 <code>use</code> import 문 다음에 있어야합니다 (MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\FirstTrait</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span>
+{
+    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">FirstTrait</span>;
+}
+</code></pre></div><p>그렇지 않으면 마지막 <code>use</code> import 문 다음에 빈 줄이 있어야합니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Vendor\Package\FirstTrait</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span>
+{
+    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">FirstTrait</span>;
+
+    <span style="color:#66d9ef">private</span> $property;
+}
+</code></pre></div><p><code>insteadof</code> 와 <code>as</code>연산자를 사용할 때는 들여쓰기, 간격 및 새 줄을 반드시(MUST) 다음과 같이 사용해야합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Talker</span>
+{
+    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">A</span>, <span style="color:#a6e22e">B</span>, <span style="color:#a6e22e">C</span> {
+        <span style="color:#a6e22e">B</span><span style="color:#f92672">::</span><span style="color:#a6e22e">smallTalk</span> <span style="color:#a6e22e">insteadof</span> <span style="color:#a6e22e">A</span>;
+        <span style="color:#a6e22e">A</span><span style="color:#f92672">::</span><span style="color:#a6e22e">bigTalk</span> <span style="color:#a6e22e">insteadof</span> <span style="color:#a6e22e">C</span>;
+        <span style="color:#a6e22e">C</span><span style="color:#f92672">::</span><span style="color:#a6e22e">mediumTalk</span> <span style="color:#66d9ef">as</span> <span style="color:#a6e22e">FooBar</span>;
+    }
+}
+</code></pre></div><h3 id="43-속성-property-과-상수-constant">
+  4.3 속성-property 과 상수-constant
+  <a class="anchor" href="#43-%ec%86%8d%ec%84%b1-property-%ea%b3%bc-%ec%83%81%ec%88%98-constant">#</a>
+</h3>
+<p>모든 속성-property에서 가시성을 반드시(MUST) 선언해야합니다.</p>
+<p><code>역자주: 가시성은 다른 언어에서 접근제어자 등으로 부르는 public, protected, private 를 의미합니다</code></p>
+<p>프로젝트의 PHP 최소 버전이 상수의 가시성 (PHP 7.1.0 이상)을 지원하는 경우 모든 상수에 대한 가시성을 반드시(MUST) 선언해야합니다.</p>
+<p><code>var</code> 키워드는 속성-property를 선언하는데 사용해서는 안됩니다 (MUST NOT).</p>
+<p>선언문마다 하나 이상의 속성-property이 선언해서는 안됩니다(MUST NOT).</p>
+<p>protected나 private 가시성을 나타내기 위해 속성 이름 앞에 하나의 밑줄을 사용해서는 안됩니다 (MUST NOT). 즉, 밑줄 접두사는 명시적인 의미가 없습니다.</p>
+<p>형식 선언과 속성-property 이름 사이에 공백이 있어야합니다(MUST).</p>
+<p>속성-property 선언은 다음과 같아야 합니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span>
+{
+    <span style="color:#66d9ef">public</span> $foo <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#a6e22e">int</span> $bar <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h3 id="44-메소드와-함수">
+  4.4 메소드와 함수
+  <a class="anchor" href="#44-%eb%a9%94%ec%86%8c%eb%93%9c%ec%99%80-%ed%95%a8%ec%88%98">#</a>
+</h3>
+<p>모든 메소드에서 가시성을 선언해야합니다 (MUST).</p>
+<p>메소드 이름은 protected나 private 가시성을 나타내기 위해 하나의 밑줄로 접두어를 붙여서는 안됩니다 (MUST NOT). 즉, 밑줄 접두사는 명시적인 의미가 없습니다.</p>
+<p>메서드와 함수 이름은 메서드 이름 다음에 공백으로 선언해서는 안됩니다 (MUST NOT). 여는 중괄호는 반드시(MUST) 같은 줄에 있어야하며 닫는 중괄호는 반드시(MUST) 그 다음 줄에 있어야합니다. 여는 괄호 뒤에 공백이 있으면 안되며(MUST NOT) 닫는 괄호 앞에 공백이 있어서는 안됩니다(MUST NOT).</p>
+<p>메소드 선언은 다음과 같습니다. 괄호, 쉼표, 공백 및 중괄호의 배치에 유의하십시오.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span>
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fooBarBaz</span>($arg1, <span style="color:#f92672">&amp;</span>$arg2, $arg3 <span style="color:#f92672">=</span> [], <span style="color:#f92672">&amp;...</span>$arg4)
+    {
+        <span style="color:#75715e">// method body
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><p>함수 선언은 다음과 같습니다. 괄호, 쉼표, 공백 및 중괄호의 배치에 유의하십시오.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">fooBarBaz</span>($arg1, <span style="color:#f92672">&amp;</span>$arg2, $arg3 <span style="color:#f92672">=</span> [], <span style="color:#f92672">&amp;...</span>$arg4)
+{
+    <span style="color:#75715e">// function body
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="45-메서드-및-함수-인수">
+  4.5 메서드 및 함수 인수
+  <a class="anchor" href="#45-%eb%a9%94%ec%84%9c%eb%93%9c-%eb%b0%8f-%ed%95%a8%ec%88%98-%ec%9d%b8%ec%88%98">#</a>
+</h3>
+<p>인수 목록에는 각 쉼표 앞에 공백이 있으면 안되며(MUST NOT) 각 쉼표 뒤에 하나의 공백이 있어야합니다(MUST).</p>
+<p>기본값을 가진 메소드 및 함수 인수는 가변 길이 인수 목록의 앞이면서 인수 목록의 끝에 있어야합니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span>
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">foo</span>(<span style="color:#a6e22e">int</span> $arg1, <span style="color:#f92672">&amp;</span>$arg2, $arg3 <span style="color:#f92672">=</span> [], <span style="color:#f92672">&amp;...</span>$arg4)
+    {
+        <span style="color:#75715e">// method body
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><p>인수 목록은 여러 줄에 걸쳐 나뉘어 질 수 있으며(MAY), 각 줄은 한 번 들여 쓰일 수 있습니다.
+그렇게 할 때 목록의 첫 번째 항목은 다음 줄에 있어야하며(MUST) 한 줄에 하나의 인수 만 있어야합니다(MUST).</p>
+<p>인수 목록이 여러 줄에 걸쳐 분할되어 있으면 닫는 괄호와 여는 중괄호는 공백을 한개 사용하여 같은 줄에 함께 있어야합니다 (MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span>
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">aVeryLongMethodName</span>(
+        <span style="color:#a6e22e">ClassTypeHint</span> $arg1,
+        <span style="color:#f92672">&amp;</span>$arg2,
+        <span style="color:#66d9ef">array</span> $arg3 <span style="color:#f92672">=</span> []
+    ) {
+        <span style="color:#75715e">// method body
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><p>반환형식(return type) 선언이 있으면 콜론 뒤에 공백이 하나 있어야하며(MUST) 그 다음에 형식 선언이옵니다.
+콜론과 반환형식 선언은 두 문자 사이에 공백이 없는 인수 목록을 닫는 괄호와 같은 줄에 있어야합니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">declare</span>(<span style="color:#a6e22e">strict_types</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>);
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReturnTypeVariations</span>
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">functionName</span>(<span style="color:#a6e22e">int</span> $arg1, $arg2)<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span>
+    {
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;foo&#39;</span>;
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">anotherFunction</span>(
+        <span style="color:#a6e22e">string</span> $foo,
+        <span style="color:#a6e22e">string</span> $bar,
+        <span style="color:#a6e22e">int</span> $baz
+    )<span style="color:#f92672">:</span> <span style="color:#a6e22e">string</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;foo&#39;</span>;
+    }
+}
+</code></pre></div><p>nullable type 선언에서는 물음표와 type 사이에 공백이 없어야합니다(MUST NOT).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">declare</span>(<span style="color:#a6e22e">strict_types</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>);
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ReturnTypeVariations</span>
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">functionName</span>(<span style="color:#f92672">?</span><span style="color:#a6e22e">string</span> $arg1, <span style="color:#f92672">?</span><span style="color:#a6e22e">int</span> <span style="color:#f92672">&amp;</span>$arg2)<span style="color:#f92672">:</span> <span style="color:#f92672">?</span><span style="color:#a6e22e">string</span>
+    {
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;foo&#39;</span>;
+    }
+}
+</code></pre></div><p>인수 앞에 참조 연산자 <code>&amp;</code>를 사용하면 앞의 예시와 같이 뒤에 공백이 있어서는 안됩니다(MUST NOT).</p>
+<p>가변 3 도트 연산자와 인자 이름 사이에는 공백이 없어야합니다(MUST NOT).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">public function process(string $algorithm, ...$parts)
+{
+    // processing
+}
+</code></pre></div><p>참조 연산자와 가변 3 도트 연산자를 결합 할 때 두 연산자 사이에 공백이 없어야합니다(MUST NOT).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">public function process(string $algorithm, <span style="color:#960050;background-color:#1e0010">&amp;</span>...$parts)
+{
+    // processing
+}
+</code></pre></div><h3 id="46-abstract-final-과-static">
+  4.6 <code>abstract</code>, <code>final</code>, 과 <code>static</code>
+  <a class="anchor" href="#46-abstract-final-%ea%b3%bc-static">#</a>
+</h3>
+<p><code>abstract</code>와 <code>final</code> 선언이 있을 경우, 가시성 선언 앞에 와야합니다 (MUST).</p>
+<p><code>static</code> 선언이 있을 경우, 가시성 선언 뒤에 와야합니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">Vendor\Package</span>;
+
+<span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ClassName</span>
+{
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">static</span> $foo;
+
+    <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">zim</span>();
+
+    <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">bar</span>()
+    {
+        <span style="color:#75715e">// method body
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><h3 id="47-메서드와-함수-호출">
+  4.7 메서드와 함수 호출
+  <a class="anchor" href="#47-%eb%a9%94%ec%84%9c%eb%93%9c%ec%99%80-%ed%95%a8%ec%88%98-%ed%98%b8%ec%b6%9c">#</a>
+</h3>
+<p>메서드나 함수를 호출 할 때 메서드나 함수 이름과 여는 괄호 사이에 공백이 없어야합니다(MUST NOT). 여는 괄호 뒤에 공백이 있으면 안되며(MUST NOT) 닫는 괄호 앞에 공백이 있어서는 안됩니다(MUST NOT). 인수 목록에는 각 쉼표 앞에 공백이 있으면 안되며(MUST NOT) 각 쉼표 뒤에 하나의 공백이 있어야합니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#a6e22e">bar</span>();
+<span style="color:#a6e22e">bar</span>(<span style="color:#f92672">...</span>[<span style="color:#e6db74">&#39;foo&#39;</span>,<span style="color:#e6db74">&#39;bar&#39;</span>]);
+$foo<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">bar</span>($arg1);
+<span style="color:#a6e22e">Foo</span><span style="color:#f92672">::</span><span style="color:#a6e22e">bar</span>($arg2, $arg3);
+</code></pre></div><p>인수 목록은 여러 줄에 걸쳐 나뉘어 질 수 있으며(MAY), 각 줄은 한 번 들여쓰기를 합니다.
+그렇게 할 때 목록의 첫 번째 항목은 다음 줄에 있어야하며(MUST) 한 줄에 하나의 인수 만 있어야합니다(MUST).
+(익명함수나 배열의 경우처럼) 여러 줄로 분할되는 단일 인수는 인수 목록 자체를 분할하는 이것에는 해당하지 않습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+$foo<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">bar</span>(
+    $longArgument,
+    $longerArgument,
+    $muchLongerArgument
+);
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#a6e22e">somefunction</span>($foo, $bar, [
+  <span style="color:#75715e">// ...
+</span><span style="color:#75715e"></span>], $baz);
+
+$app<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;/hello/{name}&#39;</span>, <span style="color:#66d9ef">function</span> ($name) <span style="color:#66d9ef">use</span> ($app) {
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;Hello &#39;</span> <span style="color:#f92672">.</span> $app<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">escape</span>($name);
+});
+</code></pre></div><h2 id="5-제어구조">
+  5. 제어구조
+  <a class="anchor" href="#5-%ec%a0%9c%ec%96%b4%ea%b5%ac%ec%a1%b0">#</a>
+</h2>
+<p>제어 구조의 일반적인 스타일 규칙은 다음과 같습니다.</p>
+<ul>
+<li>제어 구조 키워드 다음에 하나의 공백이 있어야합니다(MUST).</li>
+<li>여는 괄호 뒤에 공백이 있으면 안됩니다(MUST NOT).</li>
+<li>닫는 괄호 앞에 공백이 없어야 합니다(MUST NOT).</li>
+<li>닫는 괄호와 여는 중괄호 사이에 하나의 공백이 있어야 합니다(MUST).</li>
+<li>본문은 한 번 들여쓰기해야합니다(MUST).</li>
+<li>닫는 중괄호는 몸체 뒤의 다음 줄에 있어야합니다(MUST).</li>
+</ul>
+<p>각 구조의 본문은 중괄호로 묶어야합니다(MUST). 이것은 구조가 어떻게 보이는지 표준화하고 새로운 라인을 본문에 추가 할 때 오류가 발생할 가능성을 줄입니다.</p>
+<h3 id="51-if-elseif-else">
+  5.1 <code>if</code>, <code>elseif</code>, <code>else</code>
+  <a class="anchor" href="#51-if-elseif-else">#</a>
+</h3>
+<p><code>if</code> 구조는 다음과 같습니다. 괄호, 공백 및 중괄호의 배치에 유의하십시오. <code>else</code>와 <code>elseif</code>는 이전 본문의 닫는 중괄호와 같은 줄에 있습니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">if</span> ($expr1) {
+    <span style="color:#75715e">// if body
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">elseif</span> ($expr2) {
+    <span style="color:#75715e">// elseif body
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">else</span> {
+    <span style="color:#75715e">// else body;
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p><code>else if</code> 키워드 대신 <code>elseif</code> 키워드를 사용하여 모든 제어 키워드가 하나의 단어처럼 보이도록 해야 합니다 (SHOULD).
+<code>역자주: phpstorm과 같은 ide에서 else if로 사용하고 코드 자동정렬을 할 경우 else { if(){} } 같은 형태로 분할 해버리기도 합니다. 이때는 설정을 수정할 수도 있지만 저는 elseif 로 사용하시는 것을 권장합니다</code></p>
+<p>괄호 안의 표현은 여러 줄에 걸쳐 나뉘어 질 수 있으며(MAY), 그 다음 줄은 적어도 한 번 들여 쓰일 수 있습니다.
+그렇게 할 때 첫 번째 조건은 반드시(MUST) 다음 줄에 있어야합니다.
+닫는 괄호와 여는 중괄호는 한개 공백과 함께 한 줄에 함께 있어야합니다 (MUST).
+조건 사이의 부울-boolean 연산자는 항상 줄의 시작 또는 끝에 있어야하며 둘 다를 혼합해서는 안됩니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">if</span> (
+    $expr1
+    <span style="color:#f92672">&amp;&amp;</span> $expr2
+) {
+    <span style="color:#75715e">// if body
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">elseif</span> (
+    $expr3
+    <span style="color:#f92672">&amp;&amp;</span> $expr4
+) {
+    <span style="color:#75715e">// elseif body
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="52-switch-case">
+  5.2 <code>switch</code>, <code>case</code>
+  <a class="anchor" href="#52-switch-case">#</a>
+</h3>
+<p><code>switch</code> 구조체는 다음과 같습니다. 괄호, 공백 및 중괄호의 배치에 유의하십시오.
+<code>case</code> 문은 <code>switch</code>에서 한 번 들여쓰기해야하며(MUST) <code>break</code> 키워드 (또는 다른 종료 키워드)는 <code>case</code> 본문과 같은 수준에서 들여쓰기해야합니다 (MUST).
+비어 있지 않은 <code>case</code> 본문에서 다음 case를 의도적으로 실행시킬 경우(fall-through) <code>// no break</code>와 같은 주석이 있어야합니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">switch</span> ($expr) {
+    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span>
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#39;First case, with a break&#39;</span>;
+        <span style="color:#66d9ef">break</span>;
+    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#39;Second case, which falls through&#39;</span>;
+        <span style="color:#75715e">// no break `역자주: 다음case를 실행시키기 위해 의도적으로 break를 넣지 않은 경우 반드시 추가해야하는 주석`
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">:</span>
+    <span style="color:#66d9ef">case</span> <span style="color:#ae81ff">4</span><span style="color:#f92672">:</span>
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#39;Third case, return instead of break&#39;</span>;
+        <span style="color:#66d9ef">return</span>;
+    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
+        <span style="color:#66d9ef">echo</span> <span style="color:#e6db74">&#39;Default case&#39;</span>;
+        <span style="color:#66d9ef">break</span>;
+}
+</code></pre></div><p>괄호 안의 표현은 여러 행에 걸쳐 나뉘어 질 수 있으며(MAY), 그 다음 행은 적어도 한 번 들여쓰기를 합니다.
+그럴 경우 첫 번째 조건은 반드시 다음 줄에 있어야 합니다(MUST).
+닫는 괄호와 여는 중괄호는 하나의 공백과 함께 한 줄에 함께 있어야 합니다 (MUST).
+조건 사이의 부울-boolean 연산자는 항상 줄의 시작 또는 끝에 있어야하며 둘 다를 혼합해서는 안됩니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">switch</span> (
+    $expr1
+    <span style="color:#f92672">&amp;&amp;</span> $expr2
+) {
+    <span style="color:#75715e">// structure body
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="53-while-do-while">
+  5.3 <code>while</code>, <code>do while</code>
+  <a class="anchor" href="#53-while-do-while">#</a>
+</h3>
+<p><code>while</code> 문은 다음과 같습니다. 괄호, 공백 및 중괄호의 배치에 유의하십시오.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">while</span> ($expr) {
+    <span style="color:#75715e">// structure body
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>괄호 안의 표현은 여러 행에 걸쳐 나뉘어 질 수 있으며(MAY), 그 다음 행은 적어도 한 번 들여쓰기를 합니다.
+그럴 경우 첫 번째 조건은 반드시 다음 줄에 있어야 합니다(MUST).
+닫는 괄호와 여는 중괄호는 하나의 공백과 함께 한 줄에 함께 있어야합니다 (MUST).
+조건 사이의 부울-boolean 연산자는 항상 줄의 시작 또는 끝에 있어야하며 둘 다를 혼합해서는 안됩니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">while</span> (
+    $expr1
+    <span style="color:#f92672">&amp;&amp;</span> $expr2
+) {
+    <span style="color:#75715e">// structure body
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>비슷하게, <code>do while</code> 문은 다음과 같이 보입니다. 괄호, 공백 및 중괄호의 배치에 유의하십시오.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">do</span> {
+    <span style="color:#75715e">// structure body;
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">while</span> ($expr);
+</code></pre></div><p>괄호 안의 표현은 여러 행에 걸쳐 나뉘어 질 수 있으며(MAY), 그 다음 행은 적어도 한 번 들여쓰기를 합니다.
+그럴 경우 첫 번째 조건은 반드시 다음 줄에 있어야 합니다(MUST).
+조건들 사이의 부울 연산자는 언제나 둘의 혼합이 아닌 라인의 시작 또는 끝 부분에 있어야합니다 (MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">do</span> {
+    <span style="color:#75715e">// structure body;
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">while</span> (
+    $expr1
+    <span style="color:#f92672">&amp;&amp;</span> $expr2
+);
+</code></pre></div><h3 id="54-for">
+  5.4 <code>for</code>
+  <a class="anchor" href="#54-for">#</a>
+</h3>
+<p><code>for</code> 문은 다음과 같이 보입니다. 괄호, 공백 및 중괄호의 배치에 유의하십시오.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">for</span> ($i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; $i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>; $i<span style="color:#f92672">++</span>) {
+    <span style="color:#75715e">// for body
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>괄호 안의 표현은 여러 행에 걸쳐 나뉘어 질 수 있으며(MAY), 그 다음 행은 적어도 한 번 들여쓰기를 합니다.
+그럴 경우 첫 번째 조건은 반드시 다음 줄에 있어야 합니다(MUST).
+닫는 괄호와 여는 중괄호는 하나의 공백과 함께 한 줄에 함께 있어야합니다 (MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">for</span> (
+    $i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    $i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">10</span>;
+    $i<span style="color:#f92672">++</span>
+) {
+    <span style="color:#75715e">// for body
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="55-foreach">
+  5.5 <code>foreach</code>
+  <a class="anchor" href="#55-foreach">#</a>
+</h3>
+<p><code>foreach</code> 문은 다음과 같이 보입니다. 괄호, 공백 및 중괄호의 배치에 유의하십시오.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">foreach</span> ($iterable <span style="color:#66d9ef">as</span> $key <span style="color:#f92672">=&gt;</span> $value) {
+    <span style="color:#75715e">// foreach body
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="56-try-catch-finally">
+  5.6 <code>try</code>, <code>catch</code>, <code>finally</code>
+  <a class="anchor" href="#56-try-catch-finally">#</a>
+</h3>
+<p><code>try-catch-finally</code> 블록은 다음과 같이 보입니다. 괄호, 공백 및 중괄호의 배치에 유의하십시오.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">try</span> {
+    <span style="color:#75715e">// try body
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">FirstThrowableType</span> $e) {
+    <span style="color:#75715e">// catch body
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">OtherThrowableType</span> <span style="color:#f92672">|</span> <span style="color:#a6e22e">AnotherThrowableType</span> $e) {
+    <span style="color:#75715e">// catch body
+</span><span style="color:#75715e"></span>} <span style="color:#66d9ef">finally</span> {
+    <span style="color:#75715e">// finally body
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h2 id="6-연산자">
+  6. 연산자
+  <a class="anchor" href="#6-%ec%97%b0%ec%82%b0%ec%9e%90">#</a>
+</h2>
+<p>연산자의 스타일 규칙은 arity (피연산자 수)별로 그룹화됩니다.</p>
+<p>연산자 주변에 공백이 허용되며, 가독성을 위해 여러 공백이 있을 수 있습니다(MAY).</p>
+<p>여기에 설명되지 않은 모든 연산자는 정의되지 않은 상태로 남아 있습니다.</p>
+<h3 id="61-단항-연산자">
+  6.1. 단항 연산자
+  <a class="anchor" href="#61-%eb%8b%a8%ed%95%ad-%ec%97%b0%ec%82%b0%ec%9e%90">#</a>
+</h3>
+<p>증가/감소 연산자, 논리 not 연산자, 변환 및 부정 연산자는 연산자와 피연산자 사이에 공백이 없어야합니다(MUST NOT).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$value++;
+--$value;
+$a = !$b;
+$c = +$d;
+$e = -$f;
+</code></pre></div><p>타입 캐스팅 연산자는 괄호 안에 공백이 없어야합니다(MUST NOT).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$intValue = (int) $input;
+</code></pre></div><h3 id="62-이진-연산자">
+  6.2. 이진 연산자
+  <a class="anchor" href="#62-%ec%9d%b4%ec%a7%84-%ec%97%b0%ec%82%b0%ec%9e%90">#</a>
+</h3>
+<p>모든 이진 <a href="http://php.net/manual/en/language.operators.arithmetic.php">arithmetic</a>, <a href="http://php.net/manual/en/language.operators.comparison.php">comparison</a>, <a href="http://php.net/manual/en/language.operators.assignment.php">assignment</a>, <a href="http://php.net/manual/en/language.operators.bitwise.php">bitwise</a>, <a href="http://php.net/manual/en/language.operators.logical.php">logical</a>, [문자열-string][] 및 <a href="http://php.net/manual/en/language.operators.type.php">type</a> 연산자의 앞뒤에는 최소한 하나 이상의 공백이 있어야 합니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">if ($a === $b) {
+    $foo = $bar ?? $a ?? $b;
+} elseif ($a &gt; $b) {
+    $foo = $a + $b * $c;
+} elseif ($a <span style="color:#960050;background-color:#1e0010">&lt;</span>=&gt; $c) {
+    $foo += $bar % $a <span style="color:#960050;background-color:#1e0010">&amp;</span> $b ** $c;
+}
+</code></pre></div><h3 id="63-삼항-ternary-연산자">
+  6.3. 삼항-Ternary 연산자
+  <a class="anchor" href="#63-%ec%82%bc%ed%95%ad-ternary-%ec%97%b0%ec%82%b0%ec%9e%90">#</a>
+</h3>
+<p>삼항 연산자라고도하는 조건부 연산자 <code>?</code> 및 <code>:</code>문자 앞뒤에는 하나 이상의 공백이 와야합니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$variable = $foo ? &#39;foo&#39; : &#39;bar&#39;;
+</code></pre></div><p>조건부 연산자의 중간 피연산자가 생략되면 연산자는 다른 이진 [비교-comparison][] 연산자와 동일한 스타일 규칙을 따라야합니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$variable = $foo ?: &#39;bar&#39;;
+</code></pre></div><h2 id="7-클로저-closures">
+  7. 클로저-Closures
+  <a class="anchor" href="#7-%ed%81%b4%eb%a1%9c%ec%a0%80-closures">#</a>
+</h2>
+<p>클로저는 <code>function</code> 키워드 뒤의 공백과 <code>use</code> 키워드 앞뒤에 공백으로 선언해야합니다 (MUST).</p>
+<p>여는 중괄호는 반드시(MUST) 같은 줄에 있어야하며 닫는 중괄호는 반드시(MUST) 그 다음 줄에 있어야합니다.</p>
+<p>인수 목록이나 변수 목록의 여는 괄호 다음에 공백이 있으면 안되며(MUST NOT), 인수 목록이나 변수 목록의 닫는 괄호 앞에 공백이 있으면 안됩니다(MUST NOT).</p>
+<p>인수 목록과 변수 목록에는 각 쉼표 앞에 공백이 있어서는 안되며(MUST NOT) 각 쉼표 뒤에 하나의 공백이 있어야합니다(MUST).</p>
+<p>기본값을 가진 클로저 인수는 인수 목록의 끝에 와야합니다 (MUST).</p>
+<p>반환유형(return type)이 있는 경우 일반 함수 및 메소드와 동일한 규칙을 따라야 하며 <code>use</code> 키워드가 존재한다면, 콜론은 두 문자 사이에 공백없이 <code>use</code> 리스트의 닫는 괄호에 따라와야합니다 (MUST).</p>
+<p>클로저 선언은 다음과 같습니다. 괄호, 쉼표, 공백 및 중괄호의 배치에 유의하십시오.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+$closureWithArgs <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> ($arg1, $arg2) {
+    <span style="color:#75715e">// body
+</span><span style="color:#75715e"></span>};
+
+$closureWithArgsAndVars <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> ($arg1, $arg2) <span style="color:#66d9ef">use</span> ($var1, $var2) {
+    <span style="color:#75715e">// body
+</span><span style="color:#75715e"></span>};
+
+$closureWithArgsVarsAndReturn <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> ($arg1, $arg2) <span style="color:#66d9ef">use</span> ($var1, $var2)<span style="color:#f92672">:</span> <span style="color:#a6e22e">bool</span> {
+    <span style="color:#75715e">// body
+</span><span style="color:#75715e"></span>};
+</code></pre></div><p>인수 목록과 변수 목록은 여러 행에 걸쳐 나뉘어 질 수 있으며(MAY), 각 행은 한 번 들여쓰기됩니다.</p>
+<p>그럴경우 목록의 첫 번째 항목은 다음 줄에 있어야하며(MUST), 한 줄에 하나의 인수 또는 변수 만 있어야합니다(MUST).</p>
+<p>마지막 리스트 (인수 또는 변수의 여부)가 여러 줄로 나뉘어 질 때 닫는 괄호와 여는 중괄호는 하나의 공백을 사용하여 같은 줄에 함께 있어야합니다 (MUST).</p>
+<p>다음은 인수 목록이 있거나 없는 클로저의 예와 여러 줄에 걸쳐있는 변수 목록입니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+$longArgs_noVars <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (
+    $longArgument,
+    $longerArgument,
+    $muchLongerArgument
+) {
+   <span style="color:#75715e">// body
+</span><span style="color:#75715e"></span>};
+
+$noArgs_longVars <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () <span style="color:#66d9ef">use</span> (
+    $longVar1,
+    $longerVar2,
+    $muchLongerVar3
+) {
+   <span style="color:#75715e">// body
+</span><span style="color:#75715e"></span>};
+
+$longArgs_longVars <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (
+    $longArgument,
+    $longerArgument,
+    $muchLongerArgument
+) <span style="color:#66d9ef">use</span> (
+    $longVar1,
+    $longerVar2,
+    $muchLongerVar3
+) {
+   <span style="color:#75715e">// body
+</span><span style="color:#75715e"></span>};
+
+$longArgs_shortVars <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> (
+    $longArgument,
+    $longerArgument,
+    $muchLongerArgument
+) <span style="color:#66d9ef">use</span> ($var1) {
+   <span style="color:#75715e">// body
+</span><span style="color:#75715e"></span>};
+
+$shortArgs_longVars <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> ($arg) <span style="color:#66d9ef">use</span> (
+    $longVar1,
+    $longerVar2,
+    $muchLongerVar3
+) {
+   <span style="color:#75715e">// body
+</span><span style="color:#75715e"></span>};
+</code></pre></div><p>형식 지정 규칙은 함수 또는 메소드 호출에서 클로저가 직접 인수로 사용될 때도 적용됩니다.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+$foo<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">bar</span>(
+    $arg1,
+    <span style="color:#66d9ef">function</span> ($arg2) <span style="color:#66d9ef">use</span> ($var1) {
+        <span style="color:#75715e">// body
+</span><span style="color:#75715e"></span>    },
+    $arg3
+);
+</code></pre></div><h2 id="8-익명-클래스">
+  8. 익명 클래스
+  <a class="anchor" href="#8-%ec%9d%b5%eb%aa%85-%ed%81%b4%eb%9e%98%ec%8a%a4">#</a>
+</h2>
+<p>익명 클래스는 위 섹션의 클로저와 동일한 지침과 원칙을 따라야합니다(MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+$instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">class</span> <span style="color:#960050;background-color:#1e0010">{};</span>
+</code></pre></div><p><code>implements</code> 인터페이스 목록이 감싸지 않는 한 여는 중괄호는 <code>class</code> 키워드와 같은 줄에 있을 수 있습니다(MAY). 인터페이스 목록이 감쌀 경우 중괄호는 마지막 인터페이스 바로 다음 행에 있어야합니다 (MUST).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#75715e">// Brace on the same line
+</span><span style="color:#75715e"></span>$instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">\Foo</span> <span style="color:#66d9ef">implements</span> <span style="color:#a6e22e">\HandleableInterface</span> {
+    <span style="color:#75715e">// Class content
+</span><span style="color:#75715e"></span>};
+
+<span style="color:#75715e">// Brace on the next line
+</span><span style="color:#75715e"></span>$instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">extends</span> <span style="color:#a6e22e">\Foo</span> <span style="color:#66d9ef">implements</span>
+    <span style="color:#a6e22e">\ArrayAccess</span>,
+    <span style="color:#a6e22e">\Countable</span>,
+    <span style="color:#a6e22e">\Serializable</span>
+{
+    <span style="color:#75715e">// Class content
+</span><span style="color:#75715e"></span>};
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">$intValue = (int) $input;
+</code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#개요">개요</a>
+      <ul>
+        <li><a href="#이전-버전">이전 버전</a></li>
+        <li><a href="#예제">예제</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-일반">2. 일반</a>
+      <ul>
+        <li><a href="#21-기본-코딩-표준">2.1 기본 코딩 표준</a></li>
+        <li><a href="#22-files">2.2 Files</a></li>
+        <li><a href="#23-lines">2.3 Lines</a></li>
+        <li><a href="#24-들여쓰기">2.4 들여쓰기</a></li>
+        <li><a href="#25-keyword와-type">2.5 Keyword와 Type</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-declare-선언문-네임-스페이스-및-import-선언문">3. Declare 선언문, 네임 스페이스 및 Import 선언문</a></li>
+    <li><a href="#4-클래스-프로퍼티-메소드">4. 클래스, 프로퍼티, 메소드</a>
+      <ul>
+        <li><a href="#41-확장과-구현">4.1 확장과 구현</a></li>
+        <li><a href="#42-특성-trait-사용">4.2 특성-trait 사용</a></li>
+        <li><a href="#43-속성-property-과-상수-constant">4.3 속성-property 과 상수-constant</a></li>
+        <li><a href="#44-메소드와-함수">4.4 메소드와 함수</a></li>
+        <li><a href="#45-메서드-및-함수-인수">4.5 메서드 및 함수 인수</a></li>
+        <li><a href="#46-abstract-final-과-static">4.6 <code>abstract</code>, <code>final</code>, 과 <code>static</code></a></li>
+        <li><a href="#47-메서드와-함수-호출">4.7 메서드와 함수 호출</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-제어구조">5. 제어구조</a>
+      <ul>
+        <li><a href="#51-if-elseif-else">5.1 <code>if</code>, <code>elseif</code>, <code>else</code></a></li>
+        <li><a href="#52-switch-case">5.2 <code>switch</code>, <code>case</code></a></li>
+        <li><a href="#53-while-do-while">5.3 <code>while</code>, <code>do while</code></a></li>
+        <li><a href="#54-for">5.4 <code>for</code></a></li>
+        <li><a href="#55-foreach">5.5 <code>foreach</code></a></li>
+        <li><a href="#56-try-catch-finally">5.6 <code>try</code>, <code>catch</code>, <code>finally</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#6-연산자">6. 연산자</a>
+      <ul>
+        <li><a href="#61-단항-연산자">6.1. 단항 연산자</a></li>
+        <li><a href="#62-이진-연산자">6.2. 이진 연산자</a></li>
+        <li><a href="#63-삼항-ternary-연산자">6.3. 삼항-Ternary 연산자</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-클로저-closures">7. 클로저-Closures</a></li>
+    <li><a href="#8-익명-클래스">8. 익명 클래스</a></li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
